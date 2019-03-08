@@ -7,6 +7,7 @@ namespace FtpAdminClient
 {
     public partial class MainForm : Form
     {
+        private AdminServer adminServer=null;
         private SortedDictionary<string, AdminServer> adminServerList = new SortedDictionary<string, AdminServer>();
         public MainForm()
         {
@@ -57,35 +58,58 @@ namespace FtpAdminClient
         private void refreshUI()
         {
             treeView1.Nodes.Clear();
+            AdminServer adminServer;
+            FtpServerInfo ftpServerInfo;
             foreach (string key in adminServerList.Keys)
             {
-                ContextMenuStrip docMenu = new ContextMenuStrip();
+                adminServer = adminServerList[key];
+                ftpServerInfo = adminServer.getInitialFtpServerInfo();
+                ContextMenuStrip adminTopMenu = new ContextMenuStrip();
+                ContextMenuStrip ftpServerAdminMenu = new ContextMenuStrip();
                 TreeNode adminServerNode = new TreeNode();
+                adminServerNode.ImageIndex = 0;
+                adminServerNode.SelectedImageIndex = 0;
                 adminServerNode.Text = key;
-                ToolStripMenuItem addFTP = new ToolStripMenuItem();
-                addFTP.Text = "Add FTP server";
-                docMenu.Items.Add(addFTP);
-
+               
                 ToolStripMenuItem disconnect = new ToolStripMenuItem();
-                disconnect.Text = "Disconnect from admin. server";
+                disconnect.Text = "Disconnect from the admin. server";
                 disconnect.Click += new EventHandler((sender, e)=>disconnectServer(key));
-                docMenu.Items.Add(disconnect);
+                adminTopMenu.Items.Add(disconnect);
 
-                adminServerNode.ContextMenuStrip = docMenu;
+                adminServerNode.ContextMenuStrip = adminTopMenu;
 
                 TreeNode ftpServerListNode = new TreeNode();
                 ftpServerListNode.Text = "FTP Server List";
+                ftpServerListNode.ImageIndex = 1;
+                ftpServerListNode.SelectedImageIndex = 1;
 
+                ToolStripMenuItem addFTP = new ToolStripMenuItem();
+                addFTP.Text = "Add a new FTP server";
+                addFTP.Image = imageList1.Images[3];
+                addFTP.Click += new EventHandler((sender, e) => showFTPParametersForm(ftpServerInfo)); 
+
+                ftpServerAdminMenu.Items.Add(addFTP);
+                ftpServerListNode.ContextMenuStrip = ftpServerAdminMenu;
                 adminServerNode.Nodes.Add(ftpServerListNode);
                 treeView1.Nodes.Add(adminServerNode);
             }
         }
 
-        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void showFTPParametersForm(FtpServerInfo ftpServerInfo)
         {
-            TreeNode node = e.Node;
-            if (node != null)
-                MessageBox.Show(this,node.Text,"Alert");
-        }       
+            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel1.RowStyles.Clear();
+            tableLayoutPanel1.ColumnCount = 2;
+
+            Label lbl = new Label();
+            TextBox Text1 = new TextBox();
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+
+            lbl.Text= "Server Description:";
+            tableLayoutPanel1.Controls.Add(lbl, 0, 0);
+            tableLayoutPanel1.Controls.Add(Text1, 1, 0);
+
+        }        
     }
 }
