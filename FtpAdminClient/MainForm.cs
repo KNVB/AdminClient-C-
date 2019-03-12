@@ -94,7 +94,7 @@ namespace FtpAdminClient
                 treeView1.Nodes.Add(adminServerNode);
             }
         }
-
+        /*
         private void showFTPParametersForm(FtpServerInfo ftpServerInfo)
         {
             tableLayoutPanel1.Controls.Clear();
@@ -110,6 +110,6 @@ namespace FtpAdminClient
             tableLayoutPanel1.Controls.Add(lbl, 0, 0);
             tableLayoutPanel1.Controls.Add(Text1, 1, 0);
 
-        }        
+        }    */    
     }
 }
