@@ -59,14 +59,14 @@
             this.addToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.serverToolStripMenuItem.Text = "Server";
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -74,7 +74,7 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -111,11 +111,10 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-root-server-96.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-server-96.png");
-            this.imageList1.Images.SetKeyName(2, "Home-Server-icon.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-plus-96.png");
-            this.imageList1.Images.SetKeyName(4, "icons8-cancel-96.png");
+            this.imageList1.Images.SetKeyName(0, "icons8-root-server-48.png");
+            this.imageList1.Images.SetKeyName(1, "1_-_Data_Center-512.png");
+            this.imageList1.Images.SetKeyName(2, "Button_Add_Icon_32.png");
+            this.imageList1.Images.SetKeyName(3, "Button_Delete_Icon_32.png");
             // 
             // MainForm
             // 

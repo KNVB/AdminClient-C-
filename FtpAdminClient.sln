@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FtpAdminClient", "FtpAdminClient\FtpAdminClient.csproj", "{54DCF2A0-A9B7-4743-B6A8-7442D2FFA565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectLibrary", "..\WindowsFormsApplication1\ObjectLibrary\ObjectLibrary.csproj", "{BD53FC41-7F7A-40BD-A2CD-B4EDFFC9FDAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectLibrary", "..\Test_FTPAdminClient_Object\ObjectLibrary\ObjectLibrary.csproj", "{BD53FC41-7F7A-40BD-A2CD-B4EDFFC9FDAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

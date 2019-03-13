@@ -7,7 +7,6 @@ namespace FtpAdminClient
 {
     public partial class MainForm : Form
     {
-        private AdminServer adminServer=null;
         private SortedDictionary<string, AdminServer> adminServerList = new SortedDictionary<string, AdminServer>();
         public MainForm()
         {
@@ -85,8 +84,8 @@ namespace FtpAdminClient
 
                 ToolStripMenuItem addFTP = new ToolStripMenuItem();
                 addFTP.Text = "Add a new FTP server";
-                addFTP.Image = imageList1.Images[3];
-                addFTP.Click += new EventHandler((sender, e) => showFTPParametersForm(ftpServerInfo)); 
+                addFTP.Image = imageList1.Images[2];
+            //    addFTP.Click += new EventHandler((sender, e) => showFTPParametersForm(ftpServerInfo)); 
 
                 ftpServerAdminMenu.Items.Add(addFTP);
                 ftpServerListNode.ContextMenuStrip = ftpServerAdminMenu;
