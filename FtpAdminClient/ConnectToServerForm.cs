@@ -24,9 +24,9 @@ namespace FtpAdminClient
         }
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.No;
             this.Close();
             this.Dispose();
+            this.DialogResult = DialogResult.No;
         }
 
         private bool isAllInputValid()

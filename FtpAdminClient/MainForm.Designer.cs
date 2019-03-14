@@ -1,4 +1,6 @@
-﻿namespace FtpAdminClient
+﻿using System.Windows.Forms;
+
+namespace FtpAdminClient
 {
     partial class MainForm
     {
@@ -29,7 +31,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.rootNode = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.ftpAdminClient = new FtpAdminClient();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,10 +103,14 @@
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ImageIndex = 2;
+            this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
+            rootNode.Name = "";
+            rootNode.Text = global::FtpAdminClient.Properties.Resources.Software_Name;
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            rootNode});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(133, 233);
             this.treeView1.TabIndex = 0;
@@ -111,10 +119,15 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-root-server-48.png");
-            this.imageList1.Images.SetKeyName(1, "1_-_Data_Center-512.png");
-            this.imageList1.Images.SetKeyName(2, "Button_Add_Icon_32.png");
-            this.imageList1.Images.SetKeyName(3, "Button_Delete_Icon_32.png");
+            this.imageList1.Images.SetKeyName(0, "win7_ico_shell32_dll-216.jpg");
+            this.imageList1.Images.SetKeyName(1, "icons8-root-server-24.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-root-server-48.png");
+            this.imageList1.Images.SetKeyName(3, "1_-_Data_Center-512.png");
+            this.imageList1.Images.SetKeyName(4, "Button_Add_Icon_32.png");
+            this.imageList1.Images.SetKeyName(5, "Button_Delete_Icon_32.png");
+            this.imageList1.Images.SetKeyName(6, "win7_ico_shell32_dll-170.jpg");
+            this.imageList1.Images.SetKeyName(7, "Admin-icon.png");
+            this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
             // 
             // MainForm
             // 
@@ -125,7 +138,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "FTP admin. client";
+            this.Text = "HK FTP Server Administrator";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -140,14 +153,17 @@
         }
 
         #endregion
-
+        private FtpAdminClient ftpAdminClient;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TreeNode rootNode;
+        internal System.Windows.Forms.ImageList imageList1;
+        
+
     }
 }
 
