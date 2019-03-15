@@ -7,16 +7,16 @@ namespace FtpAdminClient
 {
     public partial class ConnectToServerForm : Form
     {
-        public AdminServer adminServer { get; set; }
-        private SortedDictionary<string, AdminServer> adminServerList = null;
+        private FtpAdminClient ftpAdminClient;
         private int adminPortNo = -1;
         private string adminServerName = "";
         private string adminUserName = "", adminUserPassword = "";
-        public ConnectToServerForm(SortedDictionary<string, AdminServer> adminServerList)
+        public ConnectToServerForm(FtpAdminClient ftpAdminClient)
         {
             InitializeComponent();
-            adminServer = null;
-            this.adminServerList = adminServerList;
+            this.ftpAdminClient = ftpAdminClient;
+           /* adminServer = null;
+            this.adminServerList = adminServerList;*/
         }
         private void ConnectToServerForm_Load(object sender, EventArgs e)
         {
@@ -75,31 +75,25 @@ namespace FtpAdminClient
         {
             if (isAllInputValid())
             {
-                if (adminServerList.ContainsKey(adminServerName + ":" + adminPortNo))
+                Cursor.Current = Cursors.WaitCursor;
+                int result=ftpAdminClient.addRemoteServer(adminServerName, adminPortNo, adminUserName, adminUserPassword);
+                switch (result)
                 {
-                    MessageBox.Show(this, "The specified server have been added", "Alert");
-                }
-                else
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    adminServer = new AdminServer();
-                    if (adminServer.connect(adminServerName, adminPortNo))
-                    {
-                        if (adminServer.login(adminUserName, adminUserPassword))
-                        {
+                    case 0:
                             this.DialogResult = DialogResult.OK;
-                            Cursor.Current = Cursors.Default;
                             this.Close();
-                        }
-                        else
+                            break;
+                    case 1:
+                            MessageBox.Show(this, "The specified server have been added", "Alert");
+                            break;
+                    case 2:
+                            MessageBox.Show(this, "Invalid admin. server name or port no.", "Alert");
+                            break;
+                    case 3:
                             MessageBox.Show(this, "Invalid admin. user or password", "Alert");
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, "Invalid admin. server name or port no.", "Alert");
-                    }
-                    Cursor.Current = Cursors.Default;
+                            break;
                 }
+                Cursor.Current = Cursors.Default;
             }
         }
         private void password_KeyDown(object sender, KeyEventArgs e)

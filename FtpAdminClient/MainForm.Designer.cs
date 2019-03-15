@@ -31,19 +31,20 @@ namespace FtpAdminClient
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.rootNode = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name, 0, 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.ftpAdminClient = new FtpAdminClient();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.Panel1Tree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.Panel2Tree = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,29 +92,32 @@ namespace FtpAdminClient
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer.Panel1.Controls.Add(this.Panel1Tree);
             // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
+            this.splitContainer.Panel2.Controls.Add(this.Panel2Tree);
             this.splitContainer.Size = new System.Drawing.Size(284, 237);
             this.splitContainer.SplitterDistance = 137;
             this.splitContainer.TabIndex = 1;
             // 
-            // treeView1
+            // Panel1Tree
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            rootNode.Name = "";
-            rootNode.Text = global::FtpAdminClient.Properties.Resources.Software_Name;
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            rootNode});
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(133, 233);
-            this.treeView1.TabIndex = 0;
+            this.Panel1Tree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel1Tree.ImageIndex = 0;
+            this.Panel1Tree.ImageList = this.imageList1;
+            this.Panel1Tree.Location = new System.Drawing.Point(0, 0);
+            this.Panel1Tree.Name = "Panel1Tree";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "rootNode";
+            treeNode1.SelectedImageIndex = 0;
+            treeNode1.Text = global::FtpAdminClient.Properties.Resources.Software_Name;
+            this.Panel1Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.Panel1Tree.SelectedImageIndex = 0;
+            this.Panel1Tree.Size = new System.Drawing.Size(133, 233);
+            this.Panel1Tree.TabIndex = 0;
             // 
             // imageList1
             // 
@@ -123,11 +127,19 @@ namespace FtpAdminClient
             this.imageList1.Images.SetKeyName(1, "icons8-root-server-24.png");
             this.imageList1.Images.SetKeyName(2, "icons8-root-server-48.png");
             this.imageList1.Images.SetKeyName(3, "1_-_Data_Center-512.png");
-            this.imageList1.Images.SetKeyName(4, "Button_Add_Icon_32.png");
-            this.imageList1.Images.SetKeyName(5, "Button_Delete_Icon_32.png");
+            this.imageList1.Images.SetKeyName(4, "Button Add.png");
+            this.imageList1.Images.SetKeyName(5, "Button Close.png");
             this.imageList1.Images.SetKeyName(6, "win7_ico_shell32_dll-170.jpg");
             this.imageList1.Images.SetKeyName(7, "Admin-icon.png");
             this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
+            this.imageList1.Images.SetKeyName(9, "Button Delete.png");
+            // 
+            // Panel2Tree
+            // 
+            this.Panel2Tree.Location = new System.Drawing.Point(4, 4);
+            this.Panel2Tree.Name = "Panel2Tree";
+            this.Panel2Tree.Size = new System.Drawing.Size(121, 97);
+            this.Panel2Tree.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -145,6 +157,7 @@ namespace FtpAdminClient
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -153,17 +166,14 @@ namespace FtpAdminClient
         }
 
         #endregion
-        private FtpAdminClient ftpAdminClient;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.TreeNode rootNode;
+        private System.Windows.Forms.TreeView Panel1Tree;
         internal System.Windows.Forms.ImageList imageList1;
-        
-
+        private TreeView Panel2Tree;
     }
 }
 
