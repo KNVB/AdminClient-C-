@@ -76,22 +76,29 @@ namespace FtpAdminClient
             if (isAllInputValid())
             {
                 Cursor.Current = Cursors.WaitCursor;
-                int result=ftpAdminClient.addRemoteServer(adminServerName, adminPortNo, adminUserName, adminUserPassword);
-                switch (result)
+                try
                 {
-                    case 0:
+                    int result = ftpAdminClient.addRemoteServer(adminServerName, adminPortNo, adminUserName, adminUserPassword);
+                    switch (result)
+                    {
+                        case 0:
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
-                    case 1:
-                            MessageBox.Show(this, "The specified server have been added", "Alert");
+                        case 1:
+                            MessageBox.Show("The specified server have been added", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                    case 2:
-                            MessageBox.Show(this, "Invalid admin. server name or port no.", "Alert");
+                        case 2:
+                            MessageBox.Show( "Invalid admin. server name or port no.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                    case 3:
-                            MessageBox.Show(this, "Invalid admin. user or password", "Alert");
+                        case 3:
+                            MessageBox.Show("Invalid admin. user or password", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(this, err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Cursor.Current = Cursors.Default;
             }

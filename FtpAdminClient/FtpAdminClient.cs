@@ -32,27 +32,34 @@ namespace FtpAdminClient
         internal int addRemoteServer(string adminServerName, int adminPortNo, string adminUserName, string adminUserPassword)
         {
             int result = 0;
-            if (adminServerList.ContainsKey(adminServerName + ":" + adminPortNo))
-            {
-                result = 1;
-            }
-            else
-            {
-                AdminServer adminServer = new AdminServer();
-                if (adminServer.connect(adminServerName, adminPortNo))
+            try
+            { 
+                if (adminServerList.ContainsKey(adminServerName + ":" + adminPortNo))
                 {
-                    if (adminServer.login(adminUserName, adminUserPassword))
-                    {
-                        adminServerList.Add(adminServerName + ":" + adminPortNo, adminServer);
-                        lastServerKey = adminServerName + ":" + adminPortNo;
-                    }
-                    else
-                        result = 3;
+                    result = 1;
                 }
                 else
                 {
-                    result = 2;
+                    AdminServer adminServer = new AdminServer();
+                    if (adminServer.connect(adminServerName, adminPortNo))
+                    {
+                        if (adminServer.login(adminUserName, adminUserPassword))
+                        {
+                            adminServerList.Add(adminServerName + ":" + adminPortNo, adminServer);
+                            lastServerKey = adminServerName + ":" + adminPortNo;
+                        }
+                        else
+                            result = 3;
+                    }
+                    else
+                    {
+                        result = 2;
+                    }
                 }
+            }
+            catch (Exception err)
+            {
+                throw new Exception("An error occurs when login to admin. server:" + err.Message);
             }
             return result;
         }
