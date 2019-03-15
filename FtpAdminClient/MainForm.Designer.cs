@@ -40,11 +40,9 @@ namespace FtpAdminClient
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.Panel1Tree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.Panel2Tree = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +95,6 @@ namespace FtpAdminClient
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.splitContainer.Panel2.Controls.Add(this.Panel2Tree);
             this.splitContainer.Size = new System.Drawing.Size(284, 237);
             this.splitContainer.SplitterDistance = 137;
             this.splitContainer.TabIndex = 1;
@@ -134,13 +131,6 @@ namespace FtpAdminClient
             this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
             this.imageList1.Images.SetKeyName(9, "Button Delete.png");
             // 
-            // Panel2Tree
-            // 
-            this.Panel2Tree.Location = new System.Drawing.Point(4, 4);
-            this.Panel2Tree.Name = "Panel2Tree";
-            this.Panel2Tree.Size = new System.Drawing.Size(121, 97);
-            this.Panel2Tree.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -157,7 +147,6 @@ namespace FtpAdminClient
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -173,7 +162,6 @@ namespace FtpAdminClient
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TreeView Panel1Tree;
         internal System.Windows.Forms.ImageList imageList1;
-        private TreeView Panel2Tree;
     }
 }
 
