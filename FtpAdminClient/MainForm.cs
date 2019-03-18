@@ -10,7 +10,7 @@ namespace FtpAdminClient
 {
     public partial class MainForm : Form
     {
-        private FtpAdminClient ftpAdminClient;
+        internal FtpAdminClient ftpAdminClient;
         private TreeNode rootNode;
         public MainForm()
         {
@@ -24,7 +24,7 @@ namespace FtpAdminClient
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            popupConnectToServerDiaglog();
+            //popupConnectToServerDiaglog();
         }        
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -55,7 +55,28 @@ namespace FtpAdminClient
             if (dialogresult.Equals(DialogResult.OK))
             {
                 Utility.rebuildRemoteServerList(this, ftpAdminClient);
+                splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
+                settingList.Clear();
             }
-        }        
+        }
+
+        private void settingList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (settingList.SelectedItems.Count > 0)
+            {
+                switch (settingList.SelectedItems[0].Text)
+                {
+                    case "Add Remote Server":
+                        popupConnectToServerDiaglog();
+                        break;
+                }
+            }
+            
+        }
+
+        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            
+        }
     }    
 }

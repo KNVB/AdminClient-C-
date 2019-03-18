@@ -33,6 +33,7 @@ namespace FtpAdminClient
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name, 0, 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Add Remote Server", 4);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +41,9 @@ namespace FtpAdminClient
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.Panel1Tree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.settingList = new System.Windows.Forms.ListView();
+            this.header1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.header2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -97,7 +100,7 @@ namespace FtpAdminClient
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.splitContainer.Panel2.Controls.Add(this.listView1);
+            this.splitContainer.Panel2.Controls.Add(this.settingList);
             this.splitContainer.Size = new System.Drawing.Size(284, 237);
             this.splitContainer.SplitterDistance = 137;
             this.splitContainer.TabIndex = 1;
@@ -118,6 +121,7 @@ namespace FtpAdminClient
             this.Panel1Tree.SelectedImageIndex = 0;
             this.Panel1Tree.Size = new System.Drawing.Size(133, 233);
             this.Panel1Tree.TabIndex = 0;
+            this.Panel1Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Panel1Tree_AfterSelect);
             // 
             // imageList1
             // 
@@ -134,17 +138,33 @@ namespace FtpAdminClient
             this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
             this.imageList1.Images.SetKeyName(9, "Button Delete.png");
             // 
-            // listView1
+            // settingList
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(139, 233);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.settingList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.header1,
+            this.header2});
+            this.settingList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settingList.FullRowSelect = true;
+            this.settingList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.settingList.Location = new System.Drawing.Point(0, 0);
+            this.settingList.Name = "settingList";
+            this.settingList.Size = new System.Drawing.Size(139, 233);
+            this.settingList.SmallImageList = this.imageList1;
+            this.settingList.TabIndex = 0;
+            this.settingList.UseCompatibleStateImageBehavior = false;
+            this.settingList.View = System.Windows.Forms.View.Details;
+            this.settingList.Click+= new System.EventHandler(this.settingList_SelectedIndexChanged);
+            // 
+            // header1
+            // 
+            this.header1.Text = "Item";
+            this.header1.Width = 124;
+            // 
+            // header2
+            // 
+            this.header2.Text = "Description";
+            this.header2.Width = 65;
             // 
             // MainForm
             // 
@@ -178,7 +198,9 @@ namespace FtpAdminClient
         private System.Windows.Forms.SplitContainer splitContainer;
         internal System.Windows.Forms.TreeView Panel1Tree;
         internal System.Windows.Forms.ImageList imageList1;
-        internal ListView listView1;
+        internal ListView settingList;
+        private ColumnHeader header1;
+        private ColumnHeader header2;
     }
 }
 
