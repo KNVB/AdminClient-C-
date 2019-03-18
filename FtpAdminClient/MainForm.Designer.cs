@@ -40,9 +40,11 @@ namespace FtpAdminClient
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.Panel1Tree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +97,7 @@ namespace FtpAdminClient
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
+            this.splitContainer.Panel2.Controls.Add(this.listView1);
             this.splitContainer.Size = new System.Drawing.Size(284, 237);
             this.splitContainer.SplitterDistance = 137;
             this.splitContainer.TabIndex = 1;
@@ -131,6 +134,18 @@ namespace FtpAdminClient
             this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
             this.imageList1.Images.SetKeyName(9, "Button Delete.png");
             // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(139, 233);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -147,6 +162,7 @@ namespace FtpAdminClient
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -160,8 +176,9 @@ namespace FtpAdminClient
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.TreeView Panel1Tree;
+        internal System.Windows.Forms.TreeView Panel1Tree;
         internal System.Windows.Forms.ImageList imageList1;
+        internal ListView listView1;
     }
 }
 

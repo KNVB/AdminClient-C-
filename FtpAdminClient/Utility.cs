@@ -64,9 +64,47 @@ namespace FtpAdminClient
                 mainForm.AddToRootNode(remoteServerNode);
                 if (keys[i].Equals(ftpAdminClient.lastServerKey))
                 {
-                    mainForm.selectThisServerNode(remoteServerNode);
+                    selectThisRemoveServerNode(mainForm, remoteServerNode);
                 }
             }            
+        }
+        private static void selectThisRemoveServerNode(MainForm mainForm, TreeNode remoteServerNode)
+        {
+            ColumnHeader header1, header2;
+            ListViewItem listViewItem;
+            mainForm.Panel1Tree.SelectedNode = remoteServerNode;
+
+            header1 = new ColumnHeader();
+            header2 = new ColumnHeader();
+            mainForm.listView1.Items.Clear();
+
+            header1.Text = "Item";
+            header1.TextAlign = HorizontalAlignment.Left;
+
+            header2.Text = "Description";
+            header2.TextAlign = HorizontalAlignment.Left;
+
+            mainForm.listView1.Columns.Add(header1);
+            mainForm.listView1.Columns.Add(header2);
+            
+           
+            listViewItem = new ListViewItem();
+            listViewItem.ImageIndex = 7;
+            listViewItem.Text = "Administration";
+            listViewItem.SubItems.Add("Remote server administration");
+            mainForm.listView1.Items.Add(listViewItem);
+
+            listViewItem = new ListViewItem();
+            listViewItem.ImageIndex = 3;
+            listViewItem.Text = "FTP Server List";
+            listViewItem.SubItems.Add("All FTP server that under the remote server administration.");
+            mainForm.listView1.Items.Add(listViewItem);
+
+            /* 
+             * If new items are added to the ListView, 
+             * the columns will not resize unless AutoResizeColumns is called again.
+             */             
+            mainForm.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
     }

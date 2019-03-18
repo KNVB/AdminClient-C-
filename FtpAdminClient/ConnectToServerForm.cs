@@ -20,7 +20,7 @@ namespace FtpAdminClient
         }
         private void ConnectToServerForm_Load(object sender, EventArgs e)
         {
-
+            loginButton_Click(this, new EventArgs());
         }
         private void cancelButton_Click(object sender, EventArgs e)
         {

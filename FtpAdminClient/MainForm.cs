@@ -56,18 +56,6 @@ namespace FtpAdminClient
             {
                 Utility.rebuildRemoteServerList(this, ftpAdminClient);
             }
-        }
-        internal void selectThisServerNode(TreeNode remoteServerNode)
-        {
-            Panel1Tree.SelectedNode = remoteServerNode;
-            /*Panel2Tree.Nodes.Clear();
-            TreeNode temp;
-            foreach (TreeNode n in remoteServerNode.Nodes)
-            {
-                temp=(TreeNode)n.Clone();
-                temp.I
-                Panel2Tree.Nodes.Add(temp);
-            }*/
-        }
+        }        
     }    
 }
