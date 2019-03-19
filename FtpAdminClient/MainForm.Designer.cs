@@ -33,7 +33,6 @@ namespace FtpAdminClient
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name, 0, 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Add Remote Server", 4);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +41,6 @@ namespace FtpAdminClient
             this.Panel1Tree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.settingList = new System.Windows.Forms.ListView();
-            this.header1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.header2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -140,13 +137,8 @@ namespace FtpAdminClient
             // 
             // settingList
             // 
-            this.settingList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.header1,
-            this.header2});
             this.settingList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingList.FullRowSelect = true;
-            this.settingList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.settingList.Location = new System.Drawing.Point(0, 0);
             this.settingList.Name = "settingList";
             this.settingList.Size = new System.Drawing.Size(139, 233);
@@ -154,17 +146,7 @@ namespace FtpAdminClient
             this.settingList.TabIndex = 0;
             this.settingList.UseCompatibleStateImageBehavior = false;
             this.settingList.View = System.Windows.Forms.View.Details;
-            this.settingList.Click+= new System.EventHandler(this.settingList_SelectedIndexChanged);
-            // 
-            // header1
-            // 
-            this.header1.Text = "Item";
-            this.header1.Width = 124;
-            // 
-            // header2
-            // 
-            this.header2.Text = "Description";
-            this.header2.Width = 65;
+            this.settingList.Click += new System.EventHandler(this.settingList_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -175,7 +157,7 @@ namespace FtpAdminClient
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "HK FTP Server Administrator";
+            this.Text = Properties.Resources.Software_Name;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -199,8 +181,6 @@ namespace FtpAdminClient
         internal System.Windows.Forms.TreeView Panel1Tree;
         internal System.Windows.Forms.ImageList imageList1;
         internal ListView settingList;
-        private ColumnHeader header1;
-        private ColumnHeader header2;
     }
 }
 

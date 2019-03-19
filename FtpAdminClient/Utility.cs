@@ -8,45 +8,47 @@ namespace FtpAdminClient
 {
     internal static class Utility
     {
-        private static TreeNode buildAdministrationNode(AdminServer adminServer)
+        private static ItemNode buildAdministrationNode(AdminServer adminServer)
         {
-            TreeNode administrationNode = new TreeNode();
+            ItemNode administrationNode = new ItemNode();
             administrationNode.Text = "Administration";
             administrationNode.ImageIndex = 7;
             administrationNode.SelectedImageIndex = 7;
-            administrationNode.Name = adminServer.serverName + ":" + adminServer.portNo;
+            administrationNode.Name = "administration";
+            administrationNode.Description = "Remote server administration";
 
-            TreeNode adminUserListNode = new TreeNode();
+            ItemNode adminUserListNode = new ItemNode();
             adminUserListNode.Text = "Admin. Users";
             adminUserListNode.ImageIndex = 6;
             adminUserListNode.SelectedImageIndex = 6;
-            administrationNode.Name = adminServer.serverName + ":" + adminServer.portNo;
+            adminUserListNode.Name = "adminUser";
             administrationNode.Nodes.Add(adminUserListNode);
 
             return administrationNode;
         }
-        private static TreeNode buildFtpServerListNode(AdminServer adminServer)
+        private static ItemNode buildFtpServerListNode(AdminServer adminServer)
         {
-            TreeNode ftpServerListNode = new TreeNode();
+            ItemNode ftpServerListNode = new ItemNode();
             ftpServerListNode.Text = "FTP Server List";
-            ftpServerListNode.Name = adminServer.serverName + ":" + adminServer.portNo ;
+            ftpServerListNode.Name = "ftpServerList";
             ftpServerListNode.ImageIndex = 3;
             ftpServerListNode.SelectedImageIndex = 3;
+            ftpServerListNode.Description = "All FTP server that under the remote server administration.";
             return ftpServerListNode;
         }
-        private static TreeNode buildRemoteServerNode(AdminServer adminServer, MainForm mainForm)
+        private static ItemNode buildRemoteServerNode(AdminServer adminServer, MainForm mainForm)
         {
-            TreeNode remoteServerNode = new TreeNode();
+            ItemNode remoteServerNode = new ItemNode();
             string key = adminServer.serverName + ":" + adminServer.portNo;
 
             remoteServerNode.Text = key;
-            remoteServerNode.Name = key;
+            remoteServerNode.Name = "remoteServer";
             remoteServerNode.ImageIndex = 2;
             remoteServerNode.SelectedImageIndex = 2;
             ContextMenuStrip adminTopMenu = new ContextMenuStrip();
             ToolStripMenuItem disconnect = new ToolStripMenuItem();
             disconnect.Text = "Disconnect from the Remote admin. server";
-            disconnect.Click += new EventHandler((sender, e) => mainForm.disconnectServer(key));
+            disconnect.Click += new EventHandler((sender, e) => mainForm.disconnectServer(remoteServerNode));
             disconnect.Image = mainForm.imageList1.Images[5];
             adminTopMenu.Items.Add(disconnect);
 
@@ -56,9 +58,41 @@ namespace FtpAdminClient
             remoteServerNode.ContextMenuStrip = adminTopMenu;
             return remoteServerNode;
         }
+        internal static void initSettingListHeader(MainForm mainForm)
+        {
+            ColumnHeader header1, header2;
+            header1 = new ColumnHeader();
+            header2 = new ColumnHeader();
+           
+            header1.Text = "Item";
+            header1.TextAlign = HorizontalAlignment.Left;
+
+            header2.Text = "Description";
+            header2.TextAlign = HorizontalAlignment.Left;
+            mainForm.settingList.Columns.Clear();
+            mainForm.settingList.Columns.Add(header1);
+            mainForm.settingList.Columns.Add(header2);
+        }
+        internal static void initSettingList(MainForm mainForm)
+        {
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.ImageIndex = 4;
+            listViewItem.Text = "Add Remote Server";
+            listViewItem.Name = "addRemoteServer";
+
+            mainForm.settingList.Items.Clear();
+
+            initSettingListHeader(mainForm);
+            mainForm.settingList.Items.Add(listViewItem);
+            /* 
+             * If new items are added to the ListView, 
+             * the columns will not resize unless AutoResizeColumns is called again.
+             */
+            mainForm.settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
         internal static void rebuildRemoteServerList(MainForm mainForm, FtpAdminClient ftpAdminClient)
         {
-            TreeNode remoteServerNode;
+            ItemNode remoteServerNode;
             mainForm.clearRootNode();
             string[] keys = ftpAdminClient.adminServerList.Keys.ToArray();
             for (int i = 0; i < keys.Length; i++)

@@ -24,20 +24,21 @@ namespace FtpAdminClient
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //popupConnectToServerDiaglog();
+            Utility.initSettingList(this);
         }        
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             popupConnectToServerDiaglog();
         }
-        internal void AddToRootNode(TreeNode remoteServerNode)
+        internal void AddToRootNode(ItemNode remoteServerNode)
         {
             rootNode.Nodes.Add(remoteServerNode);
         }
-        internal void disconnectServer(string key)
+        internal void disconnectServer(ItemNode remoteServerNode)
         {
-            ftpAdminClient.disconnectServer(key);
-            rootNode.Nodes.RemoveByKey(key);
+            ftpAdminClient.disconnectServer(remoteServerNode.Text);
+            Panel1Tree.SelectedNode = remoteServerNode;
+            rootNode.Nodes.Remove(remoteServerNode);
         }
         internal void clearRootNode()
         {
@@ -48,15 +49,18 @@ namespace FtpAdminClient
             this.Close();
             this.Dispose();
         }
+        private void ftpServerHandler()
+        {
+
+        }
         private void popupConnectToServerDiaglog()
         {
             ConnectToServerForm ctsf = new ConnectToServerForm(ftpAdminClient);
             DialogResult dialogresult = ctsf.ShowDialog();
             if (dialogresult.Equals(DialogResult.OK))
             {
-                Utility.rebuildRemoteServerList(this, ftpAdminClient);
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                settingList.Clear();
+                Utility.rebuildRemoteServerList(this, ftpAdminClient);
             }
         }
 
@@ -64,19 +68,52 @@ namespace FtpAdminClient
         {
             if (settingList.SelectedItems.Count > 0)
             {
-                switch (settingList.SelectedItems[0].Text)
+                MessageBox.Show("settingList_" + settingList.SelectedItems[0].Name);
+                switch (settingList.SelectedItems[0].Name)
                 {
-                    case "Add Remote Server":
-                        popupConnectToServerDiaglog();
-                        break;
+                    case "addRemoteServer":
+                                           popupConnectToServerDiaglog();
+                                           break;
+                    case "ftpServerList":
+                                        ftpServerHandler();
+                                        break;
                 }
             }
-            
         }
 
         private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
+            ListViewItem listViewItem;
+            TreeNode node = e.Node;
+            MessageBox.Show("Panel1Tree_" + node.Name);
+            switch (node.Name)
+            {
+                case "ftpServerList":
+                                    ftpServerHandler();
+                                    break;
+                case "rootNode":
+                                Utility.initSettingList(this);
+                                break;
+                case "remoteServer":
+                                   
+                                    Utility.initSettingListHeader(this);
+                                    settingList.Items.Clear();
+                                    foreach (ItemNode childNode in node.Nodes)
+                                    {
+                                        listViewItem = new ListViewItem();
+                                        listViewItem.Text = childNode.Text;
+                                        listViewItem.Name = childNode.Name;
+                                        listViewItem.SubItems.Add(childNode.Description);
+                                        listViewItem.ImageIndex =childNode.ImageIndex;
+                                        settingList.Items.Add(listViewItem);
+                                    }
+                                    /* 
+                                    * If new items are added to the ListView, 
+                                    * the columns will not resize unless AutoResizeColumns is called again.
+                                    */
+                                    settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                                    break;
+            }
         }
     }    
 }
