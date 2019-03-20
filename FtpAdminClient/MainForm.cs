@@ -30,11 +30,11 @@ namespace FtpAdminClient
         {
             popupConnectToServerDiaglog();
         }
-        private void disconnectServer(ItemNode remoteServerNode)
+        private void disconnectServer(ItemNode adminServerNode)
         {
-            ftpAdminClient.disconnectServer(remoteServerNode.Text);
-            Panel1Tree.SelectedNode = remoteServerNode;
-            rootNode.Nodes.Remove(remoteServerNode);
+            ftpAdminClient.disconnectServer(adminServerNode.Text);
+            Panel1Tree.SelectedNode = adminServerNode;
+            rootNode.Nodes.Remove(adminServerNode);
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -60,8 +60,8 @@ namespace FtpAdminClient
                                 else
                                     Utility.initServerSettingList(settingList, ftpAdminClient.adminServerList);
                                 break;
-                case "remoteServer":
-                                    Utility.updateRemoteServerSettingList(settingList, node);
+                case "adminServer":
+                                    Utility.updateAdminServerSettingList(settingList, node);
                                     break;
             }
         }
@@ -72,26 +72,26 @@ namespace FtpAdminClient
             if (dialogresult.Equals(DialogResult.OK))
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                rebuildRemoteServerList();
+                rebuildAdminServerList();
             }
         }
-        private void rebuildRemoteServerList()
+        private void rebuildAdminServerList()
         {
-            ItemNode remoteServerNode;
+            ItemNode adminServerNode;
             rootNode.Nodes.Clear();
             foreach (string key in ftpAdminClient.adminServerList.Keys)
             {
-                remoteServerNode = Utility.buildRemoteServerNode(ftpAdminClient.adminServerList[key]);
+                adminServerNode = Utility.buildAdminServerNode(ftpAdminClient.adminServerList[key]);
                 ToolStripMenuItem disconnect = new ToolStripMenuItem();
-                disconnect.Text = "Disconnect from the Remote admin. server";
-                disconnect.Click += new EventHandler((sender, e) => disconnectServer(remoteServerNode));
+                disconnect.Text = "Disconnect from the admin. server";
+                disconnect.Click += new EventHandler((sender, e) => disconnectServer(adminServerNode));
                 disconnect.Image = imageList1.Images[5];
-                remoteServerNode.ContextMenuStrip.Items.Add(disconnect);
-                rootNode.Nodes.Add(remoteServerNode);
+                adminServerNode.ContextMenuStrip.Items.Add(disconnect);
+                rootNode.Nodes.Add(adminServerNode);
                 if (key== ftpAdminClient.lastServerKey)
                 {
-                    Panel1Tree.SelectedNode = remoteServerNode;
-                    remoteServerNode.Expand();
+                    Panel1Tree.SelectedNode = adminServerNode;
+                    adminServerNode.Expand();
                 }
             }
         }
@@ -103,16 +103,16 @@ namespace FtpAdminClient
                 ListViewItem listViewItem = settingList.SelectedItems[0];
                 switch (listViewItem.Name)
                 {
-                    case "addRemoteServer":
+                    case "addAdminServer":
                                            popupConnectToServerDiaglog();
                                            break;
                     case "ftpServerList":
                                         ftpServerHandler(((SettingListItem)listViewItem).serverKey);
                                         break;
-                    case "remoteServer":
+                    case "adminServer":
                                         string nodePath=rootNode.FullPath+"\\"+(((SettingListItem)listViewItem).serverKey);
                                         TreeNode node=Utility.searchNodeByPath(rootNode, nodePath);
-                                        Utility.updateRemoteServerSettingList(settingList, node);
+                                        Utility.updateAdminServerSettingList(settingList, node);
                                         splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                                         Panel1Tree.SelectedNode = node;
                                         break;

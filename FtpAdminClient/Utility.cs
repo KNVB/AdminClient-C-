@@ -15,13 +15,14 @@ namespace FtpAdminClient
             administrationNode.ImageIndex = 7;
             administrationNode.SelectedImageIndex = 7;
             administrationNode.Name = "administration";
-            administrationNode.Description = "Remote server administration";
+            administrationNode.Description = "Manage admin. server";
 
             ItemNode adminUserListNode = new ItemNode();
             adminUserListNode.Text = "Admin. Users";
             adminUserListNode.ImageIndex = 6;
             adminUserListNode.SelectedImageIndex = 6;
             adminUserListNode.Name = "adminUser";
+            adminUserListNode.Description = "Manage admin. user";
             administrationNode.Nodes.Add(adminUserListNode);
 
             return administrationNode;
@@ -36,22 +37,22 @@ namespace FtpAdminClient
             ftpServerListNode.Description = "All FTP server that under the remote server administration.";
             return ftpServerListNode;
         }
-        internal static ItemNode buildRemoteServerNode(AdminServer adminServer)
+        internal static ItemNode buildAdminServerNode(AdminServer adminServer)
         {
-            ItemNode remoteServerNode = new ItemNode();
+            ItemNode adminServerNode = new ItemNode();
             string key = adminServer.serverName + ":" + adminServer.portNo;
 
-            remoteServerNode.Text = key;
-            remoteServerNode.Name = "remoteServer";
-            remoteServerNode.ImageIndex = 2;
-            remoteServerNode.SelectedImageIndex = 2;
+            adminServerNode.Text = key;
+            adminServerNode.Name = "adminServer";
+            adminServerNode.ImageIndex = 2;
+            adminServerNode.SelectedImageIndex = 2;
 
             ContextMenuStrip adminTopMenu = new ContextMenuStrip();
-            remoteServerNode.Nodes.Add(buildAdministrationNode(adminServer));
-            remoteServerNode.Nodes.Add(buildFtpServerListNode(adminServer));
-            remoteServerNode.ContextMenuStrip = adminTopMenu;
+            adminServerNode.Nodes.Add(buildAdministrationNode(adminServer));
+            adminServerNode.Nodes.Add(buildFtpServerListNode(adminServer));
+            adminServerNode.ContextMenuStrip = adminTopMenu;
 
-            return remoteServerNode;
+            return adminServerNode;
         }
         internal static void initNormalSettingListHeader(ListView settingList)
         {
@@ -72,8 +73,8 @@ namespace FtpAdminClient
         {
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.ImageIndex = 4;
-            listViewItem.Text = "Add Remote Server";
-            listViewItem.Name = "addRemoteServer";
+            listViewItem.Text = "Add Admin. Server";
+            listViewItem.Name = "addAdminServer";
 
             settingList.Items.Clear();
 
@@ -99,7 +100,7 @@ namespace FtpAdminClient
                 listViewItem = new SettingListItem();
                 listViewItem.serverKey = key;
                 listViewItem.Text = key;
-                listViewItem.Name = "remoteServer";
+                listViewItem.Name = "adminServer";
                 listViewItem.ImageIndex = 2;
                 settingList.Items.Add(listViewItem);
             }
@@ -154,7 +155,7 @@ namespace FtpAdminClient
             }
             return null;
         }
-        internal static void updateRemoteServerSettingList(ListView settingList, TreeNode remoteServerNode)
+        internal static void updateAdminServerSettingList(ListView settingList, TreeNode remoteServerNode)
         {
             SettingListItem listViewItem;
             initNormalSettingListHeader(settingList);
