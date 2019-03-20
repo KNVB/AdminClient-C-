@@ -30,19 +30,11 @@ namespace FtpAdminClient
         {
             popupConnectToServerDiaglog();
         }
-        internal void AddToRootNode(ItemNode remoteServerNode)
-        {
-            rootNode.Nodes.Add(remoteServerNode);
-        }
-        internal void disconnectServer(ItemNode remoteServerNode)
+        private void disconnectServer(ItemNode remoteServerNode)
         {
             ftpAdminClient.disconnectServer(remoteServerNode.Text);
             Panel1Tree.SelectedNode = remoteServerNode;
             rootNode.Nodes.Remove(remoteServerNode);
-        }
-        internal void clearRootNode()
-        {
-            rootNode.Nodes.Clear();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -53,6 +45,26 @@ namespace FtpAdminClient
         {
 
         }
+        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = e.Node;
+            MessageBox.Show("Panel1Tree_" + node.FullPath);
+            switch (node.Name)
+            {
+                case "ftpServerList":
+                                    ftpServerHandler(node.FullPath.Split('\\')[1]);
+                                    break;
+                case "rootNode":
+                                if (ftpAdminClient.adminServerList.Count == 0)
+                                    Utility.initNormalSettingList(settingList);
+                                else
+                                    Utility.initServerSettingList(settingList, ftpAdminClient.adminServerList);
+                                break;
+                case "remoteServer":
+                                    Utility.updateRemoteServerSettingList(settingList, node);
+                                    break;
+            }
+        }
         private void popupConnectToServerDiaglog()
         {
             ConnectToServerForm ctsf = new ConnectToServerForm(ftpAdminClient);
@@ -60,10 +72,29 @@ namespace FtpAdminClient
             if (dialogresult.Equals(DialogResult.OK))
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                Utility.rebuildRemoteServerList(this, ftpAdminClient);
+                rebuildRemoteServerList();
             }
         }
-
+        private void rebuildRemoteServerList()
+        {
+            ItemNode remoteServerNode;
+            rootNode.Nodes.Clear();
+            foreach (string key in ftpAdminClient.adminServerList.Keys)
+            {
+                remoteServerNode = Utility.buildRemoteServerNode(ftpAdminClient.adminServerList[key]);
+                ToolStripMenuItem disconnect = new ToolStripMenuItem();
+                disconnect.Text = "Disconnect from the Remote admin. server";
+                disconnect.Click += new EventHandler((sender, e) => disconnectServer(remoteServerNode));
+                disconnect.Image = imageList1.Images[5];
+                remoteServerNode.ContextMenuStrip.Items.Add(disconnect);
+                rootNode.Nodes.Add(remoteServerNode);
+                if (key== ftpAdminClient.lastServerKey)
+                {
+                    Panel1Tree.SelectedNode = remoteServerNode;
+                    remoteServerNode.Expand();
+                }
+            }
+        }
         private void settingList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (settingList.SelectedItems.Count > 0)
@@ -90,26 +121,6 @@ namespace FtpAdminClient
             }
         }
 
-        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            
-            TreeNode node = e.Node;
-            MessageBox.Show("Panel1Tree_" + node.FullPath);
-            switch (node.Name)
-            {
-                case "ftpServerList":
-                                    ftpServerHandler(node.FullPath.Split('\\')[1]);
-                                    break;
-                case "rootNode":
-                                if (ftpAdminClient.adminServerList.Count==0)
-                                    Utility.initNormalSettingList(settingList);
-                                else
-                                    Utility.initServerSettingList(settingList, ftpAdminClient.adminServerList);
-                                break;
-                case "remoteServer":
-                                Utility.updateRemoteServerSettingList(settingList, node);
-                                break;
-            }
-        }
+       
     }    
 }

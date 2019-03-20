@@ -36,7 +36,7 @@ namespace FtpAdminClient
             ftpServerListNode.Description = "All FTP server that under the remote server administration.";
             return ftpServerListNode;
         }
-        private static ItemNode buildRemoteServerNode(AdminServer adminServer, MainForm mainForm)
+        internal static ItemNode buildRemoteServerNode(AdminServer adminServer)
         {
             ItemNode remoteServerNode = new ItemNode();
             string key = adminServer.serverName + ":" + adminServer.portNo;
@@ -45,17 +45,12 @@ namespace FtpAdminClient
             remoteServerNode.Name = "remoteServer";
             remoteServerNode.ImageIndex = 2;
             remoteServerNode.SelectedImageIndex = 2;
-            ContextMenuStrip adminTopMenu = new ContextMenuStrip();
-            ToolStripMenuItem disconnect = new ToolStripMenuItem();
-            disconnect.Text = "Disconnect from the Remote admin. server";
-            disconnect.Click += new EventHandler((sender, e) => mainForm.disconnectServer(remoteServerNode));
-            disconnect.Image = mainForm.imageList1.Images[5];
-            adminTopMenu.Items.Add(disconnect);
 
+            ContextMenuStrip adminTopMenu = new ContextMenuStrip();
             remoteServerNode.Nodes.Add(buildAdministrationNode(adminServer));
             remoteServerNode.Nodes.Add(buildFtpServerListNode(adminServer));
-
             remoteServerNode.ContextMenuStrip = adminTopMenu;
+
             return remoteServerNode;
         }
         internal static void initNormalSettingListHeader(ListView settingList)
@@ -73,9 +68,6 @@ namespace FtpAdminClient
             settingList.Columns.Add(header1);
             settingList.Columns.Add(header2);
         }
-
-        
-
         internal static void initNormalSettingList(ListView settingList)
         {
             ListViewItem listViewItem = new ListViewItem();
@@ -138,22 +130,7 @@ namespace FtpAdminClient
             settingList.Columns.Add(header2);
             settingList.Columns.Add(header3);
         }
-        internal static void rebuildRemoteServerList(MainForm mainForm, FtpAdminClient ftpAdminClient)
-        {
-            ItemNode remoteServerNode;
-            mainForm.clearRootNode();
-            string[] keys = ftpAdminClient.adminServerList.Keys.ToArray();
-            for (int i = 0; i < keys.Length; i++)
-            {
-                remoteServerNode = buildRemoteServerNode(ftpAdminClient.adminServerList[keys[i]], mainForm);
-                mainForm.AddToRootNode(remoteServerNode);
-                if (keys[i].Equals(ftpAdminClient.lastServerKey))
-                {
-                    mainForm.Panel1Tree.SelectedNode = remoteServerNode;
-                    remoteServerNode.Expand();
-                }
-            }            
-        }
+       
         internal static TreeNode searchNodeByPath(TreeNode rootNode, string nodePath)
         {
             TreeNode resultNode=null;

@@ -178,9 +178,9 @@ namespace FtpAdminClient
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
-        internal System.Windows.Forms.TreeView Panel1Tree;
-        internal System.Windows.Forms.ImageList imageList1;
-        internal ListView settingList;
+        private System.Windows.Forms.TreeView Panel1Tree;
+        private System.Windows.Forms.ImageList imageList1;
+        private ListView settingList;
     }
 }
 
