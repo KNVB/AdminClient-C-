@@ -54,31 +54,52 @@ namespace FtpAdminClient
 
             return adminServerNode;
         }
-        internal static void initNormalSettingListHeader(ListView settingList)
-        {
-            ColumnHeader header1, header2;
-            header1 = new ColumnHeader();
-            header2 = new ColumnHeader();
-           
-            header1.Text = "Item";
-            header1.TextAlign = HorizontalAlignment.Left;
 
-            header2.Text = "Description";
-            header2.TextAlign = HorizontalAlignment.Left;
-            settingList.Columns.Clear();
-            settingList.Columns.Add(header1);
-            settingList.Columns.Add(header2);
+        internal static void initAdminServerList(ListView settingList, SortedDictionary<string, AdminServer> adminServerList,string rootNodePath)
+        {
+            AdminServer adminServer;
+            SettingListItem listViewItem ;
+            initNormalSettingListHeader(settingList);
+            settingList.Items.Clear();
+            if (adminServerList.Count==0)
+            {
+                listViewItem = new SettingListItem();
+                listViewItem.ImageIndex = 4;
+                listViewItem.Text = "Add Admin. Server";
+                listViewItem.Name = "addAdminServer";
+
+                initNormalSettingListHeader(settingList);
+                settingList.Items.Add(listViewItem);
+            }
+            else
+            {
+                foreach (string key in adminServerList.Keys)
+                {
+                    adminServer = adminServerList[key];
+                    listViewItem = new SettingListItem();
+                    listViewItem.FullPath = rootNodePath+"\\"+ key;
+                    listViewItem.Text = key;
+                    listViewItem.Name = "adminServer";
+                    listViewItem.ImageIndex = 2;
+                    settingList.Items.Add(listViewItem);
+                }
+            }
+            /* 
+            * If new items are added to the ListView, 
+            * the columns will not resize unless AutoResizeColumns is called again.
+            */
+           settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        internal static void initNormalSettingList(ListView settingList)
+        internal static void initFTPServerList(ListView settingList)
         {
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.ImageIndex = 4;
-            listViewItem.Text = "Add Admin. Server";
-            listViewItem.Name = "addAdminServer";
+            listViewItem.Text = "Add FTP Server";
+            listViewItem.Name = "addFTPServer";
 
             settingList.Items.Clear();
 
-            initNormalSettingListHeader(settingList);
+            iniFTPServerListHeader(settingList);
             settingList.Items.Add(listViewItem);
             /* 
              * If new items are added to the ListView, 
@@ -86,38 +107,15 @@ namespace FtpAdminClient
              */
             settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        internal static void initServerSettingList(ListView settingList, SortedDictionary<string, AdminServer> adminServerList)
-        {
-            AdminServer adminServer;
-            SettingListItem listViewItem ;
-            
-            initServerSettingListHeader(settingList);
-            settingList.Items.Clear();
 
-            foreach(string key in adminServerList.Keys)
-            {
-                adminServer= adminServerList[key];
-                listViewItem = new SettingListItem();
-                listViewItem.serverKey = key;
-                listViewItem.Text = key;
-                listViewItem.Name = "adminServer";
-                listViewItem.ImageIndex = 2;
-                settingList.Items.Add(listViewItem);
-            }
-            /* 
-            * If new items are added to the ListView, 
-            * the columns will not resize unless AutoResizeColumns is called again.
-            */
-            settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-        internal static void initServerSettingListHeader(ListView settingList)
+        internal static void iniFTPServerListHeader(ListView settingList)
         {
-            ColumnHeader header1, header2,header3;
+            ColumnHeader header1, header2, header3;
             header1 = new ColumnHeader();
             header2 = new ColumnHeader();
-            header3=new ColumnHeader();
+            header3 = new ColumnHeader();
 
-            header1.Text = "Remote Server";
+            header1.Text = "FTP Server";
             header1.TextAlign = HorizontalAlignment.Left;
 
             header2.Text = "Users/Connection";
@@ -131,13 +129,27 @@ namespace FtpAdminClient
             settingList.Columns.Add(header2);
             settingList.Columns.Add(header3);
         }
-       
+        internal static void initNormalSettingListHeader(ListView settingList)
+        {
+            ColumnHeader header1, header2;
+            header1 = new ColumnHeader();
+            header2 = new ColumnHeader();
+           
+            header1.Text = "Name";
+            header1.TextAlign = HorizontalAlignment.Left;
+
+            header2.Text = "Description";
+            header2.TextAlign = HorizontalAlignment.Left;
+            settingList.Columns.Clear();
+            settingList.Columns.Add(header1);
+            settingList.Columns.Add(header2);
+        }
         internal static TreeNode searchNodeByPath(TreeNode rootNode, string nodePath)
         {
             TreeNode resultNode=null;
             foreach (TreeNode n in rootNode.Nodes)
             {
-                MessageBox.Show(n.FullPath + "," + nodePath + "," + (n.FullPath == nodePath).ToString());
+                //MessageBox.Show(n.FullPath + "," + nodePath + "," + (n.FullPath == nodePath).ToString());
                 if (n.FullPath==nodePath)
                 {
                     return n;
@@ -155,17 +167,18 @@ namespace FtpAdminClient
             }
             return null;
         }
-        internal static void updateAdminServerSettingList(ListView settingList, TreeNode remoteServerNode)
+        internal static void updateList(ListView settingList, TreeNode node)
         {
             SettingListItem listViewItem;
             initNormalSettingListHeader(settingList);
             settingList.Items.Clear();
-            foreach (ItemNode childNode in remoteServerNode.Nodes)
+            foreach (ItemNode childNode in node.Nodes)
             {
                 listViewItem = new SettingListItem();
-                listViewItem.serverKey = childNode.FullPath.Split('\\')[1];
+                //listViewItem.serverKey = childNode.FullPath.Split('\\')[1];
                 listViewItem.Text = childNode.Text;
                 listViewItem.Name = childNode.Name;
+                listViewItem.FullPath = childNode.FullPath;
                 listViewItem.SubItems.Add(childNode.Description);
                 listViewItem.ImageIndex = childNode.ImageIndex;
                 settingList.Items.Add(listViewItem);
@@ -175,6 +188,11 @@ namespace FtpAdminClient
             * the columns will not resize unless AutoResizeColumns is called again.
             */
             settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        internal static void updateAdminServerList(ListView settingList, TreeNode adminServerNode)
+        {
+            updateList(settingList, adminServerNode);
         }
     }
 }

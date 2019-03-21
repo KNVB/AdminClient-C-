@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUserForm.Designer.cs">
+      <DependentUpon>AdminUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectToServerForm.cs">
       <SubType>Form</SubType>
     </Compile>

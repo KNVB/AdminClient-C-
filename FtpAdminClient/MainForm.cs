@@ -24,7 +24,7 @@ namespace FtpAdminClient
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Utility.initNormalSettingList(settingList);
+            Utility.initAdminServerList(settingList,new SortedDictionary<string, AdminServer>(),"");
         }        
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -43,27 +43,39 @@ namespace FtpAdminClient
         }
         private void ftpServerHandler(string serverKey)
         {
-
+            AdminServer adminServer= ftpAdminClient.adminServerList[serverKey];
+            SortedDictionary<string, FtpServerInfo> ftpServerList= adminServer.getFTPServerList();
+            if (ftpServerList.Count==0)
+                Utility.initFTPServerList(settingList);
         }
         private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
-            MessageBox.Show("Panel1Tree_" + node.FullPath);
+            //MessageBox.Show("Panel1Tree_" + node.FullPath);
+
+            string serverKey = "";
+            if (node.FullPath.IndexOf("\\")>-1)
+                serverKey = node.FullPath.Split('\\')[1];
             switch (node.Name)
             {
+                case "adminUser":
+                                popupAdminUserDiaglog(serverKey);
+                                break;
                 case "ftpServerList":
-                                    ftpServerHandler(node.FullPath.Split('\\')[1]);
+                                    ftpServerHandler(serverKey);
                                     break;
                 case "rootNode":
-                                if (ftpAdminClient.adminServerList.Count == 0)
-                                    Utility.initNormalSettingList(settingList);
-                                else
-                                    Utility.initServerSettingList(settingList, ftpAdminClient.adminServerList);
+                                Utility.initAdminServerList(settingList, ftpAdminClient.adminServerList,node.FullPath);
                                 break;
-                case "adminServer":
-                                    Utility.updateAdminServerSettingList(settingList, node);
-                                    break;
+                default:
+                        Utility.updateList(settingList, node);
+                        break;
             }
+        }
+        private void popupAdminUserDiaglog(string serverKey)
+        {
+            AdminUserForm adminUserForm = new AdminUserForm(serverKey);
+            adminUserForm.ShowDialog();
         }
         private void popupConnectToServerDiaglog()
         {
@@ -99,24 +111,35 @@ namespace FtpAdminClient
         {
             if (settingList.SelectedItems.Count > 0)
             {
-                MessageBox.Show("settingList_" + settingList.SelectedItems[0].Name);
+                //MessageBox.Show("settingList_" + settingList.SelectedItems[0].Name);
                 ListViewItem listViewItem = settingList.SelectedItems[0];
+                TreeNode node;
+                string serverKey = "";
+                if (((SettingListItem)listViewItem).FullPath.IndexOf("\\") > -1)
+                    serverKey = ((SettingListItem)listViewItem).FullPath.Split('\\')[1];
                 switch (listViewItem.Name)
                 {
+                    case "adminUser":
+                                    popupAdminUserDiaglog(serverKey);
+                                    break;
                     case "addAdminServer":
                                            popupConnectToServerDiaglog();
                                            break;
                     case "ftpServerList":
-                                        ftpServerHandler(((SettingListItem)listViewItem).serverKey);
-                                        break;
-                    case "adminServer":
-                                        string nodePath=rootNode.FullPath+"\\"+(((SettingListItem)listViewItem).serverKey);
-                                        TreeNode node=Utility.searchNodeByPath(rootNode, nodePath);
-                                        Utility.updateAdminServerSettingList(settingList, node);
+                                       
+                                        ftpServerHandler(serverKey);
                                         splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
+                                        node = Utility.searchNodeByPath(rootNode, ((SettingListItem)listViewItem).FullPath);
                                         Panel1Tree.SelectedNode = node;
+                                        node.Expand();
                                         break;
-                                            
+                   default:
+                            node = Utility.searchNodeByPath(rootNode, ((SettingListItem)listViewItem).FullPath);
+                            Utility.updateList(settingList, node);
+                            splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
+                            Panel1Tree.SelectedNode = node;
+                            node.Expand();
+                            break;
                 }
             }
         }
