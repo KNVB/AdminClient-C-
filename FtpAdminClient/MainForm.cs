@@ -46,7 +46,7 @@ namespace FtpAdminClient
             AdminServer adminServer= ftpAdminClient.adminServerList[serverKey];
             SortedDictionary<string, FtpServerInfo> ftpServerList= adminServer.getFTPServerList();
             if (ftpServerList.Count==0)
-                Utility.initFTPServerList(settingList);
+                Utility.initFTPServerList(settingList,serverKey);
         }
         private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -76,6 +76,12 @@ namespace FtpAdminClient
         {
             AdminUserForm adminUserForm = new AdminUserForm(serverKey);
             adminUserForm.ShowDialog();
+        }
+        private void popupAddFTPServerDialog(string adminServerKey)
+        {
+            AdminServer adminServer = ftpAdminClient.adminServerList[adminServerKey];
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer);
+            addFtpForm.ShowDialog();
         }
         private void popupConnectToServerDiaglog()
         {
@@ -125,6 +131,9 @@ namespace FtpAdminClient
                     case "addAdminServer":
                                            popupConnectToServerDiaglog();
                                            break;
+                    case "addFTPServer":
+                                        popupAddFTPServerDialog(((SettingListItem)listViewItem).FullPath);
+                                        break;
                     case "ftpServerList":
                                        
                                         ftpServerHandler(serverKey);

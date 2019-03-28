@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddFtpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddFtpForm.Designer.cs">
+      <DependentUpon>AddFtpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="ItemNode.cs" />
     <Compile Include="SettingListItem.cs" />
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="AddFtpForm.resx">
+      <DependentUpon>AddFtpForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConnectToServerForm.resx">
       <DependentUpon>ConnectToServerForm.cs</DependentUpon>
     </EmbeddedResource>

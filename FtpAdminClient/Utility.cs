@@ -90,13 +90,13 @@ namespace FtpAdminClient
             */
            settingList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        internal static void initFTPServerList(ListView settingList)
+        internal static void initFTPServerList(ListView settingList, string serverKey)
         {
-            ListViewItem listViewItem = new ListViewItem();
+            SettingListItem listViewItem = new SettingListItem();
             listViewItem.ImageIndex = 4;
             listViewItem.Text = "Add FTP Server";
             listViewItem.Name = "addFTPServer";
-
+            listViewItem.FullPath= serverKey;
             settingList.Items.Clear();
 
             iniFTPServerListHeader(settingList);
