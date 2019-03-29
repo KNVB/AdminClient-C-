@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace FtpAdminClient
 {
-    internal static class Utility
+    internal static class Ui_Utility
     {
         private static ItemNode buildAdministrationNode(AdminServer adminServer)
         {

@@ -35,7 +35,7 @@ namespace FtpAdminClient
             adminServerName = serverName.Text.Trim();
             if (String.IsNullOrEmpty(adminServerName))
             {
-                Utility.popupAlertBox("Please enter the admin. server name or IP address.");
+                Ui_Utility.popupAlertBox("Please enter the admin. server name or IP address.");
                 serverName.Focus();
                 isValidate = false;
             }
@@ -43,7 +43,7 @@ namespace FtpAdminClient
             {
                 if (String.IsNullOrEmpty(portNo.Text))
                 {
-                    Utility.popupAlertBox("Please enter the admin. server port no. (0-65535).");
+                    Ui_Utility.popupAlertBox("Please enter the admin. server port no. (0-65535).");
                     portNo.Focus();
                     isValidate = false;
                 }
@@ -53,7 +53,7 @@ namespace FtpAdminClient
                     adminUserName = userName.Text.Trim();
                     if (String.IsNullOrEmpty(adminUserName))
                     {
-                        Utility.popupAlertBox("Please enter the admin. user name.");
+                        Ui_Utility.popupAlertBox("Please enter the admin. user name.");
                         userName.Focus();
                         isValidate = false;
                     }
@@ -62,7 +62,7 @@ namespace FtpAdminClient
                         adminUserPassword = password.Text.Trim();
                         if (String.IsNullOrEmpty(adminUserPassword))
                         {
-                            Utility.popupAlertBox("Please enter the admin. user password.");
+                            Ui_Utility.popupAlertBox("Please enter the admin. user password.");
                             password.Focus();
                             isValidate = false;
                         }

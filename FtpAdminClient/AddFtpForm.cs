@@ -12,8 +12,10 @@ namespace FtpAdminClient
 {
     public partial class AddFtpForm : Form
     {
-        AdminServer adminServer;
-        List<string> bindingAddressList =new List<string>();
+        private AdminServer adminServer;
+        public FtpServerInfo ftpServerInfo=null;
+        private int controlPortNo = -1;
+        private List<string> bindingAddressList =new List<string>();
         public AddFtpForm(AdminServer adminServer)
         {
             InitializeComponent();
@@ -33,16 +35,30 @@ namespace FtpAdminClient
         }
         private void addFTPServerButton_Click(object sender, EventArgs e)
         {
-            isAllInputValid();
+            if (isAllInputValid())
+            {
+                ftpServerInfo = new FtpServerInfo();
+                ftpServerInfo.description = serverDesc.Text;
+                ftpServerInfo.controlPort= controlPortNo;
+                ftpServerInfo.bindingAddresses = bindingAddressList;
+                if (supportPassiveMode.Text.Equals("No"))
+                    ftpServerInfo.passiveModeEnabled = false;
+                else
+                {
+                    ftpServerInfo.passiveModeEnabled = true;
+                    ftpServerInfo.passiveModePortRange = passiveModePortRange.Text;
+                }
+                this.Close();
+            }
         }
         private bool isAllInputValid()
         {
             bool result = true;
-            int controlPortNo=-1;
+            
             List<string> bindingAddressList = new List<string>();
             if (String.IsNullOrEmpty(serverDesc.Text) || (serverDesc.ForeColor == Color.Gray))
             {
-                Utility.popupAlertBox("Please enter the FTP server description.");
+                Ui_Utility.popupAlertBox("Please enter the FTP server description.");
                 serverDesc.Focus();
                 result = false;
             }
@@ -50,7 +66,7 @@ namespace FtpAdminClient
             {
                 if (!isBindingAddressSelected())
                 {
-                    Utility.popupAlertBox("Please select at least one binding address.");
+                    Ui_Utility.popupAlertBox("Please select at least one binding address.");
                     ipAddressList.Focus();
                     result = false;
                 }
@@ -59,7 +75,7 @@ namespace FtpAdminClient
                     controlPortNo = getControlPortNo();
                     if (controlPortNo == -1)
                     {
-                        Utility.popupAlertBox("Please enter an valid control port no.(0-65535).");
+                        Ui_Utility.popupAlertBox("Please enter an valid control port no.(0-65535).");
                         controlPort.Focus();
                         result = false;
                     }
@@ -67,11 +83,11 @@ namespace FtpAdminClient
                     {
                         if (supportPassiveMode.Text.Equals("Yes"))
                         {
-                            if (!isValidPassiveModePortRange())
+                            if (!Utility.isValidPassiveModePortRange(passiveModePortRange.Text))
                             {
                                 result = false;
-                                Utility.popupAlertBox("Please enter an valid port range  for passive mode");
-                                supportPassiveMode.Focus();
+                                Ui_Utility.popupAlertBox("Please enter an valid TCP port range for passive mode");
+                                passiveModePortRange.Focus();
                             }
                         }
                     }    
@@ -98,48 +114,7 @@ namespace FtpAdminClient
             }
             return (bindingAddressList.Count > 0);
         }
-        private bool isValidPassiveModePortRange()
-        {
-            int portNo;
-            bool result=true;
-            if (String.IsNullOrEmpty(passiveModePortRange.Text))
-                result = false;
-            else
-            {
-                if ((passiveModePortRange.Text.IndexOf(",") == -1) && (passiveModePortRange.Text.IndexOf("-") == -1))
-                {
-                    portNo = Utility.isValidTCPPortNo(passiveModePortRange.Text);
-                    if (portNo==-1)
-                        result = false;
-                }
-                else
-                {
-                    string[] ports = passiveModePortRange.Text.Split(',');
-                    foreach (string port in ports)
-                    {
-                        if (Utility.isValidTCPPortNo(port) == -1)
-                        {
-                            result = false;
-                            break;
-                        }
-                    }
-                    if (result == true)
-                    {
-                        ports = passiveModePortRange.Text.Split('-');
-                        foreach (string port in ports)
-                        {
-                            if (Utility.isValidTCPPortNo(port) == -1)
-                            {
-                                result = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-            return result;
-        }
+        
         private void passiveModePortRange_Enter(object sender, EventArgs e)
         {
             if (passiveModePortRange.Text == "e.g. 1000-1005,5000,6000")
