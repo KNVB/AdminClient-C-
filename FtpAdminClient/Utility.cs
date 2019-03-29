@@ -144,6 +144,11 @@ namespace FtpAdminClient
             settingList.Columns.Add(header1);
             settingList.Columns.Add(header2);
         }
+       
+        internal static void popupAlertBox(string message)
+        {
+            MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         internal static TreeNode searchNodeByPath(TreeNode rootNode, string nodePath)
         {
             TreeNode resultNode=null;

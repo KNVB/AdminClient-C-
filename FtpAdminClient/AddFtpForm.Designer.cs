@@ -36,13 +36,13 @@ namespace FtpAdminClient
             this.ipAddressList = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.controlPort = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.supportPassiveMode = new System.Windows.Forms.ComboBox();
             this.passiveModePortRangeLabel = new System.Windows.Forms.Label();
             this.passiveModePortRange = new System.Windows.Forms.TextBox();
-            this.passiveModePortRangePanel = new System.Windows.Forms.Panel();
             this.addFTPServerButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.supportPassiveMode = new System.Windows.Forms.ComboBox();
+            this.passiveModePortRangePanel = new System.Windows.Forms.Panel();
             this.passiveModePortRangePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +86,7 @@ namespace FtpAdminClient
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 159);
+            this.label3.Location = new System.Drawing.Point(5, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 12);
             this.label3.TabIndex = 4;
@@ -99,6 +99,46 @@ namespace FtpAdminClient
             this.controlPort.Size = new System.Drawing.Size(100, 22);
             this.controlPort.TabIndex = 5;
             this.controlPort.Text = "21";
+            // 
+            // passiveModePortRangeLabel
+            // 
+            this.passiveModePortRangeLabel.AutoSize = true;
+            this.passiveModePortRangeLabel.Location = new System.Drawing.Point(8, 6);
+            this.passiveModePortRangeLabel.Name = "passiveModePortRangeLabel";
+            this.passiveModePortRangeLabel.Size = new System.Drawing.Size(126, 12);
+            this.passiveModePortRangeLabel.TabIndex = 8;
+            this.passiveModePortRangeLabel.Text = "Passive Mode Port Range:";
+            // 
+            // passiveModePortRange
+            // 
+            this.passiveModePortRange.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.passiveModePortRange.Location = new System.Drawing.Point(141, 3);
+            this.passiveModePortRange.Name = "passiveModePortRange";
+            this.passiveModePortRange.Size = new System.Drawing.Size(271, 22);
+            this.passiveModePortRange.TabIndex = 9;
+            this.passiveModePortRange.Text = "e.g. 1000-1005,5000,6000";
+            this.passiveModePortRange.GotFocus += new System.EventHandler(this.passiveModePortRange_Enter);
+            this.passiveModePortRange.LostFocus += new System.EventHandler(this.passiveModePortRange_Leave);
+            // 
+            // addFTPServerButton
+            // 
+            this.addFTPServerButton.Location = new System.Drawing.Point(62, 291);
+            this.addFTPServerButton.Name = "addFTPServerButton";
+            this.addFTPServerButton.Size = new System.Drawing.Size(121, 23);
+            this.addFTPServerButton.TabIndex = 11;
+            this.addFTPServerButton.Text = "Add";
+            this.addFTPServerButton.UseVisualStyleBackColor = true;
+            this.addFTPServerButton.Click += new System.EventHandler(this.addFTPServerButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(275, 291);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(119, 23);
+            this.cancelButton.TabIndex = 12;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label4
             // 
@@ -122,24 +162,6 @@ namespace FtpAdminClient
             this.supportPassiveMode.TabIndex = 7;
             this.supportPassiveMode.SelectedIndexChanged += new System.EventHandler(this.supportPassiveMode_SelectedIndexChanged);
             // 
-            // passiveModePortRangeLabel
-            // 
-            this.passiveModePortRangeLabel.AutoSize = true;
-            this.passiveModePortRangeLabel.Location = new System.Drawing.Point(8, 6);
-            this.passiveModePortRangeLabel.Name = "passiveModePortRangeLabel";
-            this.passiveModePortRangeLabel.Size = new System.Drawing.Size(126, 12);
-            this.passiveModePortRangeLabel.TabIndex = 8;
-            this.passiveModePortRangeLabel.Text = "Passive Mode Port Range:";
-            // 
-            // passiveModePortRange
-            // 
-            this.passiveModePortRange.Location = new System.Drawing.Point(141, 3);
-            this.passiveModePortRange.Name = "passiveModePortRange";
-            this.passiveModePortRange.Size = new System.Drawing.Size(271, 22);
-            this.passiveModePortRange.TabIndex = 9;
-            this.passiveModePortRange.GotFocus += new System.EventHandler(this.passiveModePortRange_Enter);
-            this.passiveModePortRange.LostFocus += new System.EventHandler(this.passiveModePortRange_Leave);
-            // 
             // passiveModePortRangePanel
             // 
             this.passiveModePortRangePanel.Controls.Add(this.passiveModePortRange);
@@ -149,26 +171,6 @@ namespace FtpAdminClient
             this.passiveModePortRangePanel.Size = new System.Drawing.Size(412, 32);
             this.passiveModePortRangePanel.TabIndex = 10;
             this.passiveModePortRangePanel.Visible = false;
-            // 
-            // addFTPServerButton
-            // 
-            this.addFTPServerButton.Location = new System.Drawing.Point(62, 291);
-            this.addFTPServerButton.Name = "addFTPServerButton";
-            this.addFTPServerButton.Size = new System.Drawing.Size(121, 23);
-            this.addFTPServerButton.TabIndex = 11;
-            this.addFTPServerButton.Text = "Add";
-            this.addFTPServerButton.UseVisualStyleBackColor = true;
-            this.addFTPServerButton.Click += new System.EventHandler(this.addFTPServerButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(275, 291);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(119, 23);
-            this.cancelButton.TabIndex = 12;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // AddFtpForm
             // 
@@ -206,12 +208,12 @@ namespace FtpAdminClient
         private System.Windows.Forms.CheckedListBox ipAddressList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox controlPort;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox supportPassiveMode;
         private System.Windows.Forms.Label passiveModePortRangeLabel;
         private System.Windows.Forms.TextBox passiveModePortRange;
-        private System.Windows.Forms.Panel passiveModePortRangePanel;
         private System.Windows.Forms.Button addFTPServerButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox supportPassiveMode;
+        private System.Windows.Forms.Panel passiveModePortRangePanel;
     }
 }
