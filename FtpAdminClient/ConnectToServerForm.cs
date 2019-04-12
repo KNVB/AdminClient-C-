@@ -29,34 +29,34 @@ namespace FtpAdminClient
             adminServerName = serverName.Text.Trim();
             adminUserName = userName.Text.Trim();
             adminUserPassword = password.Text.Trim();
-            
-            int result=uiManager.addAdminServer(adminServerName, portNo.Text, adminUserName, adminUserPassword);
-            switch (result)
-            {
-                case 0:
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                        break;
-                case -1:
-                        serverName.Focus();
-                        break;
-                case -2:
-                        portNo.Focus();
-                        break;
-                case -3:
-                        userName.Focus();
-                        break;
-                case -4:
-                        password.Focus();
-                        break;
-            }
+            /*     
+                 int result=uiManager.addAdminServer(adminServerName, portNo.Text, adminUserName, adminUserPassword);
+                 switch (result)
+                 {
+                     case 0:
+                             this.DialogResult = DialogResult.OK;
+                             this.Close();
+                             break;
+                     case -1:
+                             serverName.Focus();
+                             break;
+                     case -2:
+                             portNo.Focus();
+                             break;
+                     case -3:
+                             userName.Focus();
+                             break;
+                     case -4:
+                             password.Focus();
+                             break;
+                 }*/
         }
         private void password_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+           /* if (e.KeyCode == Keys.Enter)
             {
                 loginButton_Click(this, new EventArgs());
-            }
+            }*/
         }
     }
 }
