@@ -1,0 +1,25 @@
+{	
+	"ImageIndex":6,
+	"SelectHandler":"re",
+	"Child":[
+				{
+					"Text":"Administration",
+					"ImageIndex":2,
+					"SelectHandler":"re",
+					"Child":[
+							  {
+								"Text":"Admin. Users",
+								"ImageIndex":4,
+								"SelectHandler":null,
+								"Child":null
+							  }
+							]
+				},
+				{
+					"Text":"FTP Server List",
+					"ImageIndex":7,
+					"SelectHandler":"re",
+					"Child":null
+				}
+			]
+}		

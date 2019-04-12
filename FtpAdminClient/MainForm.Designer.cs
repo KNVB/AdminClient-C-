@@ -31,7 +31,6 @@ namespace FtpAdminClient
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode(global::FtpAdminClient.Properties.Resources.Software_Name, 0, 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,12 +108,6 @@ namespace FtpAdminClient
             this.Panel1Tree.ImageList = this.imageList1;
             this.Panel1Tree.Location = new System.Drawing.Point(0, 0);
             this.Panel1Tree.Name = "Panel1Tree";
-            treeNode1.ImageIndex = 0;
-            treeNode1.Name = "rootNode";
-            treeNode1.SelectedImageIndex = 0;
-            treeNode1.Text = global::FtpAdminClient.Properties.Resources.Software_Name;
-            this.Panel1Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.Panel1Tree.SelectedImageIndex = 0;
             this.Panel1Tree.Size = new System.Drawing.Size(133, 233);
             this.Panel1Tree.TabIndex = 0;
@@ -157,7 +150,7 @@ namespace FtpAdminClient
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = Properties.Resources.Software_Name;
+            this.Text = "HK FTP Server";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

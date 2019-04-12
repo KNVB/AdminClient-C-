@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using ObjectLibrary;
+using AdminServerObject;
 using System.Windows.Forms;
 
 namespace FtpAdminClient
@@ -54,7 +54,7 @@ namespace FtpAdminClient
         private bool isAllInputValid()
         {
             bool result = true;
-            
+           /* 
             List<string> bindingAddressList = new List<string>();
             if (String.IsNullOrEmpty(serverDesc.Text) || (serverDesc.ForeColor == Color.Gray))
             {
@@ -92,7 +92,7 @@ namespace FtpAdminClient
                         }
                     }    
                 }
-            }
+            }*/
             return result;
         }
         private void cancelButton_Click(object sender, EventArgs e)
