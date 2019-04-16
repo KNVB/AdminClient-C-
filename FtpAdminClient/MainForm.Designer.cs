@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace FtpAdminClient
 {
@@ -111,6 +112,7 @@ namespace FtpAdminClient
             this.Panel1Tree.SelectedImageIndex = 0;
             this.Panel1Tree.Size = new System.Drawing.Size(133, 233);
             this.Panel1Tree.TabIndex = 0;
+            this.Panel1Tree.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
             this.Panel1Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Panel1Tree_AfterSelect);
             // 
             // imageList1
@@ -164,6 +166,7 @@ namespace FtpAdminClient
             this.PerformLayout();
 
         }
+              
 
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;

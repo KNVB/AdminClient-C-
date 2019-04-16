@@ -40,22 +40,37 @@ namespace FtpAdminClient
             this.Close();
             this.Dispose();
         }
-        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        private void Panel1Tree_Click(AdminNode node)
         {
-            switch(((AdminNode)e.Node).nodeType)
+            AdminServer adminServer= uiManager.getAdminServer(node.FullPath);
+            switch (node.nodeType)
             {
-                case NodeType.RootNode:
-                    uiManager.handleRootNodeSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);
-                    break;
                 case NodeType.AdminServerNode:
-                    ((AdminServerNode)e.Node).handleSelectEvent(settingList);
+                    ((AdminServerNode)node).handleSelectEvent(settingList);
                     break;
                 case NodeType.AdminServerAdministrationNode:
-                    ((AdminServerAdministrationNode)e.Node).handleSelectEvent(settingList);
+                    ((AdminServerAdministrationNode)node).handleSelectEvent(settingList);
                     break;
                 case NodeType.AdminUserAdministrationNode:
-                    ((AdminUserAdministrationNode)e.Node).handleSelectEvent(settingList);
-                    break;   
+                    uiManager.popupAdminUserAdministrationForm(node.FullPath);
+                    break;
+                case NodeType.FTPServerListNode:
+                    ((FTPServerListNode)node).handleSelectEvent(settingList,adminServer);
+                    break;
+                case NodeType.RootNode:
+                    ((RootNode)node).handleSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);
+                    break;
+            }
+        }
+        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Panel1Tree_Click((AdminNode)e.Node);
+        }
+        private void Panel1Tree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Panel1Tree.SelectedNode == e.Node)
+            {
+                Panel1Tree_Click((AdminNode)e.Node);
             }
         }
         private void settingList_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,14 +81,17 @@ namespace FtpAdminClient
                 case ListItemType.AddAdminServerListItem:
                     uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1);
                     break;
+                case ListItemType.AddFTPServerListItem:
+                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1, listItem.fullPath);
+                    break;
+                default:
+                    splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
+                    AdminNode node = rootNode.searchNodeByPath(rootNode,listItem.fullPath);
+                    node.Expand();
+                    Panel1Tree.SelectedNode = null;
+                    Panel1Tree.SelectedNode = node;
+                    break;
             }
-            /*if (listItem is AddAdminServerListItem)
-                uiManager.popupConnectToServerDiaglog(splitContainer,Panel1Tree, settingList, imageList1);
-            else
-            {
-                AdminNode node = (AdminNode)(Panel1Tree.Nodes.Find(listItem.fullPath, true)[0]);
-                Panel1Tree.SelectedNode = node;
-            }*/
         }
     }    
 }

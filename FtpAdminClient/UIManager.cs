@@ -21,37 +21,36 @@ namespace FtpAdminClient
             adminServerManager.disconnectServer(key);
             rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
         }
+        public AdminServer getAdminServer(string fullPath)
+        {
+            AdminServer adminServer = null;
+            int index = fullPath.IndexOf("\\");
+
+            string serverKey = fullPath.Substring(index + 1);
+            index = serverKey.IndexOf("\\");
+            if (index > -1)
+            {
+                serverKey = serverKey.Substring(0, index);
+                adminServer = this.adminServerManager.adminServerList[serverKey];
+            }
+            return adminServer;
+        }
         public RootNode getRootNode()
         {
             return rootNode;
-        }
-        public void handleRootNodeSelectEvent(TreeView treeView1, ListView listView, ImageList imageList1, SortedDictionary<string, AdminServer> adminServerList)
+        }        
+        public void popupAdminUserAdministrationForm(string fullPath)
         {
-            ColumnHeader header;
-            ListItem listItem;
-            listView.Items.Clear();
-            listView.Columns.Clear();
-            foreach (string headerString in rootNode.colunmNameList)
-            {
-                // MessageBox.Show(headerString);
-                header = new ColumnHeader();
-                header.Text = headerString;
-                listView.Columns.Add(header);
-            }
-            
-            foreach (string key in adminServerList.Keys)
-            {
-                listItem = new ListItem();
-                listItem.ListItemType = ListItemType.AdminServerListItem;
-                listItem.fullPath = rootNode.FullPath + "\\" + key;
-                listItem.Text = key;
-                listItem.Name = listItem.Text;
-                listItem.ImageIndex = 2;
-                listView.Items.Add(listItem);
-            }
-            //rootNode.addAdminServerListItem.fullPath = rootNode.FullPath;
-            listView.Items.Add(rootNode.addAdminServerListItem);
-            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            string serverKey = fullPath;
+            int index = serverKey.IndexOf("\\");
+            serverKey = serverKey.Substring(index + 1);
+            index = serverKey.IndexOf("\\");
+            serverKey = serverKey.Substring(0,index);
+            //MessageBox.Show(serverKey);
+
+            AdminUserForm adminUserForm = new AdminUserForm(serverKey);
+            adminUserForm.ShowDialog();
+
         }
         public void popupAlertBox(string message)
         {
@@ -66,6 +65,13 @@ namespace FtpAdminClient
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                 rebuildAdminServerTree(treeView, listView, imageList);
             }
+        }
+        public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ListView listView, ImageList imageList,string fullPath)
+        {
+            AdminServer adminServer = getAdminServer(fullPath);
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer);
+            DialogResult dialogresult = addFtpForm.ShowDialog();
+
         }
         private void rebuildAdminServerTree(TreeView treeView1, ListView listView, ImageList imageList1)
         {
