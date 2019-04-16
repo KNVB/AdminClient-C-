@@ -80,6 +80,7 @@ namespace FtpAdminClient
             foreach (string key in adminServerManager.adminServerList.Keys)
             {
                 adminServerNode = uiConfig.getAdminServerNode();
+                adminServerNode.adminServer = adminServerManager.adminServerList[key];
                 adminServerNode.Name = key;
                 adminServerNode.Text = adminServerNode.Name;
                 adminServerNode.buildNode();
