@@ -1,18 +1,21 @@
 ﻿using AdminServerObject;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using UIObject;
 namespace FtpAdminClient
 {
     public partial class MainForm : Form
     {
-        private AdminServerManager adminServerManager = new AdminServerManager();
+        private AdminServerManager adminServerManager;
         private RootNode rootNode;
-        private UIManager uiManager=new UIManager();
+        private UIManager uiManager;
         
         public MainForm()
         {
             InitializeComponent();
+            adminServerManager = new AdminServerManager();
+            uiManager = new UIManager(adminServerManager);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -27,9 +30,10 @@ namespace FtpAdminClient
             rootNode.Name = rootNode.Text;
             Panel1Tree.Nodes.Add(rootNode);
         }
+        
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            uiManager.popupConnectToServerDiaglog();
+            uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1);
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -41,16 +45,35 @@ namespace FtpAdminClient
             switch(((AdminNode)e.Node).nodeType)
             {
                 case NodeType.RootNode:
-                    ((RootNode)e.Node).handleSelectEvent(settingList, adminServerManager.adminServerList);
+                    uiManager.handleRootNodeSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);
                     break;
+                case NodeType.AdminServerNode:
+                    ((AdminServerNode)e.Node).handleSelectEvent(settingList);
+                    break;
+                case NodeType.AdminServerAdministrationNode:
+                    ((AdminServerAdministrationNode)e.Node).handleSelectEvent(settingList);
+                    break;
+                case NodeType.AdminUserAdministrationNode:
+                    ((AdminUserAdministrationNode)e.Node).handleSelectEvent(settingList);
+                    break;   
             }
-                // uiManager.doSelectNodeEvent((AdminNode)e.Node, settingList);
         }
         private void settingList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListItem listViewItem = (ListItem)settingList.SelectedItems[0];
-            MessageBox.Show(Panel1Tree.Nodes.Find(listViewItem.fullPath,true).Length.ToString());
-            //uiManager.doSelectListItemEvent(settingList);
+            ListItem listItem = (ListItem)settingList.SelectedItems[0];
+            switch (listItem.ListItemType)
+            {
+                case ListItemType.AddAdminServerListItem:
+                    uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1);
+                    break;
+            }
+            /*if (listItem is AddAdminServerListItem)
+                uiManager.popupConnectToServerDiaglog(splitContainer,Panel1Tree, settingList, imageList1);
+            else
+            {
+                AdminNode node = (AdminNode)(Panel1Tree.Nodes.Find(listItem.fullPath, true)[0]);
+                Panel1Tree.SelectedNode = node;
+            }*/
         }
     }    
 }
