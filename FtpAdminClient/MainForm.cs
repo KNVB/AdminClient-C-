@@ -42,7 +42,7 @@ namespace FtpAdminClient
         }
         private void Panel1Tree_Click(AdminNode node)
         {
-            AdminServer adminServer= uiManager.getAdminServer(node.FullPath);
+            //AdminServer adminServer= uiManager.getAdminServer(node.FullPath);
             switch (node.nodeType)
             {
                 case NodeType.AdminServerNode:
@@ -55,7 +55,7 @@ namespace FtpAdminClient
                     uiManager.popupAdminUserAdministrationForm(node.FullPath);
                     break;
                 case NodeType.FTPServerListNode:
-                    ((FTPServerListNode)node).handleSelectEvent(settingList,adminServer);
+                    ((FTPServerListNode)node).handleSelectEvent(settingList);
                     break;
                 case NodeType.RootNode:
                     ((RootNode)node).handleSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);

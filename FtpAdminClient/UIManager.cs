@@ -69,7 +69,7 @@ namespace FtpAdminClient
         public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ListView listView, ImageList imageList,string fullPath)
         {
             AdminServer adminServer = getAdminServer(fullPath);
-            AddFtpForm addFtpForm = new AddFtpForm(adminServer);
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer,this);
             DialogResult dialogresult = addFtpForm.ShowDialog();
 
         }

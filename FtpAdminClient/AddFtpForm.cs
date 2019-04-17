@@ -16,10 +16,12 @@ namespace FtpAdminClient
         public FtpServerInfo ftpServerInfo=null;
         private int controlPortNo = -1;
         private List<string> bindingAddressList =new List<string>();
-        public AddFtpForm(AdminServer adminServer)
+        private UIManager uiManager;
+        public AddFtpForm(AdminServer adminServer, UIManager uiManager)
         {
             InitializeComponent();
             this.adminServer = adminServer;
+            this.uiManager = uiManager;
         }
 
         private void AddFtpForm_Load(object sender, EventArgs e)
@@ -48,17 +50,17 @@ namespace FtpAdminClient
                     ftpServerInfo.passiveModeEnabled = true;
                     ftpServerInfo.passiveModePortRange = passiveModePortRange.Text;
                 }
+                adminServer.addFtpServer(ftpServerInfo);
                 this.Close();
             }
         }
         private bool isAllInputValid()
         {
             bool result = true;
-           /* 
             List<string> bindingAddressList = new List<string>();
             if (String.IsNullOrEmpty(serverDesc.Text) || (serverDesc.ForeColor == Color.Gray))
             {
-                Ui_Utility.popupAlertBox("Please enter the FTP server description.");
+                uiManager.popupAlertBox("Please enter the FTP server description.");
                 serverDesc.Focus();
                 result = false;
             }
@@ -66,7 +68,7 @@ namespace FtpAdminClient
             {
                 if (!isBindingAddressSelected())
                 {
-                    Ui_Utility.popupAlertBox("Please select at least one binding address.");
+                    uiManager.popupAlertBox("Please select at least one binding address.");
                     ipAddressList.Focus();
                     result = false;
                 }
@@ -75,7 +77,7 @@ namespace FtpAdminClient
                     controlPortNo = getControlPortNo();
                     if (controlPortNo == -1)
                     {
-                        Ui_Utility.popupAlertBox("Please enter an valid control port no.(0-65535).");
+                        uiManager.popupAlertBox("Please enter an valid control port no.(0-65535).");
                         controlPort.Focus();
                         result = false;
                     }
@@ -86,13 +88,13 @@ namespace FtpAdminClient
                             if (!Utility.isValidPassiveModePortRange(passiveModePortRange.Text))
                             {
                                 result = false;
-                                Ui_Utility.popupAlertBox("Please enter an valid TCP port range for passive mode");
+                                uiManager.popupAlertBox("Please enter an valid TCP port range for passive mode");
                                 passiveModePortRange.Focus();
                             }
                         }
                     }    
                 }
-            }*/
+            }
             return result;
         }
         private void cancelButton_Click(object sender, EventArgs e)
