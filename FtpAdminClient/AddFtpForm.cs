@@ -50,8 +50,26 @@ namespace FtpAdminClient
                     ftpServerInfo.passiveModeEnabled = true;
                     ftpServerInfo.passiveModePortRange = passiveModePortRange.Text;
                 }
-                adminServer.addFtpServer(ftpServerInfo);
-                this.Close();
+                try
+                {
+                    ServerResponse response = adminServer.addFtpServer(ftpServerInfo);
+                    switch (response.responseCode)
+                    {
+                        case 0:
+                            uiManager.popupAlertBox("Server is added successfully.");
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                            break;
+                        case 1:
+                            uiManager.popupAlertBox("Some of the specified address and port combination is not available.");
+                            break;
+                    }
+                }
+                catch (Exception err)
+                {
+                    uiManager.popupAlertBox(err.Message);
+                }
+                
             }
         }
         private bool isAllInputValid()

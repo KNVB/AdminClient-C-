@@ -56,24 +56,27 @@ namespace FtpAdminClient
         {
             MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        public void popupConnectToServerDiaglog(SplitContainer splitContainer,TreeView treeView, ListView listView, ImageList imageList)
+        public void popupConnectToServerDiaglog(SplitContainer splitContainer,TreeView treeView,  ImageList imageList)
         {
             ConnectToServerForm ctsf = new ConnectToServerForm(this, adminServerManager);
             DialogResult dialogresult = ctsf.ShowDialog();
             if (dialogresult.Equals(DialogResult.OK))
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                rebuildAdminServerTree(treeView, listView, imageList);
+                rebuildAdminServerTree(treeView, imageList);
             }
         }
-        public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ListView listView, ImageList imageList,string fullPath)
+        public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView,  ImageList imageList, string fullPath)
         {
             AdminServer adminServer = getAdminServer(fullPath);
-            AddFtpForm addFtpForm = new AddFtpForm(adminServer,this);
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
             DialogResult dialogresult = addFtpForm.ShowDialog();
-
+            if (dialogresult.Equals(DialogResult.OK))
+            {
+                rebuildFtpServerTree(treeView,  imageList, fullPath);
+            }
         }
-        private void rebuildAdminServerTree(TreeView treeView1, ListView listView, ImageList imageList1)
+        private void rebuildAdminServerTree(TreeView treeView1, ImageList imageList1)
         {
             AdminServerNode adminServerNode;
             rootNode.Nodes.Clear();
@@ -84,6 +87,7 @@ namespace FtpAdminClient
                 adminServerNode.Name = key;
                 adminServerNode.Text = adminServerNode.Name;
                 adminServerNode.buildNode();
+               
                 ToolStripMenuItem disconnect = new ToolStripMenuItem();
                 disconnect.Text = "Disconnect from the admin. server";
                 disconnect.Click += new EventHandler((sender, e) => disconnectServer(key));
@@ -97,6 +101,10 @@ namespace FtpAdminClient
                     adminServerNode.Expand();
                 }
             }
+        }
+        private void rebuildFtpServerTree(TreeView treeView1,  ImageList imageList1, string fullPath)
+        {
+
         }
     }
 }

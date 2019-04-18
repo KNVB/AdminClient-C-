@@ -33,7 +33,7 @@ namespace FtpAdminClient
         
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1);
+            uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -79,17 +79,20 @@ namespace FtpAdminClient
             switch (listItem.ListItemType)
             {
                 case ListItemType.AddAdminServerListItem:
-                    uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1);
+                    uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
                 case ListItemType.AddFTPServerListItem:
-                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree, settingList, imageList1, listItem.fullPath);
+                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.fullPath);
                     break;
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                     AdminNode node = rootNode.searchNodeByPath(rootNode,listItem.fullPath);
-                    node.Expand();
-                    Panel1Tree.SelectedNode = null;
-                    Panel1Tree.SelectedNode = node;
+                    if (node != null)
+                    {
+                        node.Expand();
+                        Panel1Tree.SelectedNode = null;
+                        Panel1Tree.SelectedNode = node;
+                    }
                     break;
             }
         }
