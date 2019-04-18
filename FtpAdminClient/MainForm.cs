@@ -57,6 +57,9 @@ namespace FtpAdminClient
                 case NodeType.FTPServerListNode:
                     ((FTPServerListNode)node).handleSelectEvent(settingList);
                     break;
+                case NodeType.FTPServerNode:
+                    MessageBox.Show(node.FullPath);
+                    break;
                 case NodeType.RootNode:
                     ((RootNode)node).handleSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);
                     break;
@@ -83,6 +86,11 @@ namespace FtpAdminClient
                     break;
                 case ListItemType.AddFTPServerListItem:
                     uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.fullPath);
+                    break;
+                case ListItemType.FTPServerNodeItem:
+                    AdminNode ftpServerListNode= rootNode.searchNodeByPath(rootNode, listItem.fullPath);
+                    Panel1Tree.SelectedNode = null;
+                   // Panel1Tree.SelectedNode = ftpServerNode;
                     break;
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
