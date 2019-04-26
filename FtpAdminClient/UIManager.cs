@@ -66,7 +66,7 @@ namespace FtpAdminClient
                 rebuildAdminServerTree(treeView, imageList);
             }
         }
-        public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView,  ImageList imageList, string fullPath)
+      /*  public void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView,  ImageList imageList)
         {
             AdminServer adminServer = getAdminServer(fullPath);
             AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
@@ -75,7 +75,7 @@ namespace FtpAdminClient
             {
                 rebuildFtpServerTree(treeView,  imageList, fullPath);
             }
-        }
+        }*/
         private void rebuildAdminServerTree(TreeView treeView1, ImageList imageList1)
         {
             AdminServerNode adminServerNode;

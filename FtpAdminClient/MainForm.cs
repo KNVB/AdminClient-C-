@@ -57,6 +57,9 @@ namespace FtpAdminClient
                 case NodeType.FTPServerListNode:
                     ((FTPServerListNode)node).handleSelectEvent(settingList);
                     break;
+                case NodeType.FTPServerNode:
+                    ((FTPServerNode)node).handleSelectEvent(settingList);
+                    break;
                 case NodeType.RootNode:
                     ((RootNode)node).handleSelectEvent(Panel1Tree, settingList, imageList1, adminServerManager.adminServerList);
                     break;
@@ -78,21 +81,28 @@ namespace FtpAdminClient
             ListItem listItem = (ListItem)settingList.SelectedItems[0];
             switch (listItem.ListItemType)
             {
-                case ListItemType.AddAdminServerListItem:
+                case ListItemType.AddAdminServerItem:
                     uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
+                /*
                 case ListItemType.AddFTPServerListItem:
                     uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.fullPath);
                     break;
+                */
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                    AdminNode node = rootNode.searchNodeByPath(rootNode,listItem.fullPath);
-                    if (node != null)
+                    AdminNode parentNode = listItem.parentNode;
+                    AdminNode childNode = parentNode.findChildNodeByName(listItem.Name);
+                    if (childNode == null)
                     {
-                        node.Expand();
-                        Panel1Tree.SelectedNode = null;
-                        Panel1Tree.SelectedNode = node;
+                        MessageBox.Show(parentNode.Name +","+listItem.Name);
                     }
+                    else
+                    {
+                        childNode.Expand();
+                        Panel1Tree.SelectedNode = null;
+                        Panel1Tree.SelectedNode = childNode;
+                    }                   
                     break;
             }
         }
