@@ -81,14 +81,13 @@ namespace FtpAdminClient
             ListItem listItem = (ListItem)settingList.SelectedItems[0];
             switch (listItem.ListItemType)
             {
-                case ListItemType.AddAdminServerItem:
+                case ListItemType.AddAdminServerListItem:
                     uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
                 /*
                 case ListItemType.AddFTPServerListItem:
                     uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.fullPath);
                     break;
-                */
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                     AdminNode parentNode = listItem.parentNode;
