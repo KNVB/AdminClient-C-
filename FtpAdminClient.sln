@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FtpAdminClient", "FtpAdminClient\FtpAdminClient.csproj", "{54DCF2A0-A9B7-4743-B6A8-7442D2FFA565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminServerObject", "AdminServerObject\AdminServerObject.csproj", "{E28B709F-E4D7-4CB2-B45C-0FE90EA8053B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIObject", "UIObject\UIObject.csproj", "{7654B780-3075-4E4E-BE4B-95D081DABA6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{54DCF2A0-A9B7-4743-B6A8-7442D2FFA565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54DCF2A0-A9B7-4743-B6A8-7442D2FFA565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54DCF2A0-A9B7-4743-B6A8-7442D2FFA565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28B709F-E4D7-4CB2-B45C-0FE90EA8053B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28B709F-E4D7-4CB2-B45C-0FE90EA8053B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28B709F-E4D7-4CB2-B45C-0FE90EA8053B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28B709F-E4D7-4CB2-B45C-0FE90EA8053B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7654B780-3075-4E4E-BE4B-95D081DABA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7654B780-3075-4E4E-BE4B-95D081DABA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7654B780-3075-4E4E-BE4B-95D081DABA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7654B780-3075-4E4E-BE4B-95D081DABA6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

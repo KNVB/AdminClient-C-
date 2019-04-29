@@ -1,0 +1,62 @@
+﻿{
+    "adminServerNode": {
+        "ImageIndex": 2,
+        "SelectedImageIndex": 2,
+        "colunmNameList": [ "Admin. server name", "Description" ],
+        "adminServerAdministrationNode": {
+            "Text": "Administration",
+            "Name": "Administration",
+            "ImageIndex": 7,
+            "SelectedImageIndex": 7,
+            "colunmNameList": [ "Item Name", "Description" ],
+            "description": "Manage admin. server",
+            "adminUserAdministrationNode": {
+                "Text": "Admin. Users",
+                "Name": "Admin. Users",
+                "ImageIndex": 6,
+                "SelectedImageIndex": 6,
+                "colunmNameList": [ "Item Name", "Description" ],
+                "description": "Manage admin. user"
+            }
+        },
+        "ftpServerListNode": {
+            "Text": "FTP Server List",
+            "Name": "FTP Server List",
+            "ImageIndex": 3,
+            "SelectedImageIndex": 3,
+            "colunmNameList": [ "Description", "User Connection", "Status" ],
+            "description": "All FTP server that under the remote server administration.",
+            "addFTPServerItem": {
+                "Text": "Add FTP Server",
+                "Name": "Add FTP Server",
+                "ImageIndex": 4
+            },
+            "ftpServerNodeTemplate": {
+                "colunmNameList": [ "Item Name", "Description" ],
+                "ImageIndex": 8,
+                "SelectedImageIndex": 8,
+                "ftpUsersListNode": {
+                    "Text": "Users",
+                    "Name": "Users",
+                    "description": "FTP server user administration."
+                },
+                "ftpUserGroupsListNode": {
+                    "Text": "Groups",
+                    "Name": "Groups",
+                    "description": "FTP server user group administration."
+                }
+            }
+        }
+    },
+   
+    "RootNode": {
+        "ImageIndex": 0,
+        "SelectedImageIndex": 0,
+        "colunmNameList": [ "Admin. Server Name", "Description" ],
+        "addAdminServerItem": {
+            "Text": "Add Admin. Server",
+            "Name": "Add Admin. Server",
+            "ImageIndex": 4
+        }
+    }
+}
