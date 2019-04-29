@@ -81,7 +81,7 @@ namespace FtpAdminClient
             ListItem listItem = (ListItem)settingList.SelectedItems[0];
             switch (listItem.ListItemType)
             {
-                case ListItemType.AddAdminServerListItem:
+                case ListItemType.AddAdminServerItem:
                     uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
                 /*
@@ -102,7 +102,7 @@ namespace FtpAdminClient
                         Panel1Tree.SelectedNode = null;
                         Panel1Tree.SelectedNode = childNode;
                     }                   
-                    break;
+                    break;*/
             }
         }
     }    
