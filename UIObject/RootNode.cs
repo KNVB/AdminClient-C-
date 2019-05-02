@@ -24,7 +24,7 @@ namespace UIObject
             {
                 listItem = new ListItem();
                 listItem.ListItemType = ListItemType.AdminServerItem;
-                listItem.relatedNode = this;
+                listItem.relatedNode = (Node)Nodes.Find(key, true)[0];
                 listItem.Text = key;
                 listItem.Name = listItem.Text;
                 listItem.ImageIndex = 2;
@@ -33,5 +33,19 @@ namespace UIObject
             listView.Items.Add(this.addAdminServerItem);
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
+       /*
+       public Node findChildNodeByName(string childNodeName)
+       {
+           Node childNode = null;
+           foreach (Node node in this.Nodes)
+           {
+               if (node.Name.Equals(childNodeName))
+               {
+                   childNode = node;
+                   break;
+               }
+           }
+           return childNode;
+       }*/
     }
 }

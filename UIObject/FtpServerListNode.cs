@@ -21,6 +21,7 @@ namespace UIObject
                 this.Nodes.Add(ftpServerNode);
             }
             this.addFTPServerItem = new ListItem(token["addFTPServerItem"]);
+            this.addFTPServerItem.relatedNode = this;
             this.addFTPServerItem.ListItemType = ListItemType.AddFTPServerItem;
         }
 

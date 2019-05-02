@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using AdminServerObject;
 using System.Windows.Forms;
 
@@ -20,6 +16,7 @@ namespace FtpAdminClient
         public AddFtpForm(AdminServer adminServer, UIManager uiManager)
         {
             InitializeComponent();
+            this.Text = "Add FTP Server to " + adminServer.serverName + ":" + adminServer.portNo;
             this.adminServer = adminServer;
             this.uiManager = uiManager;
         }

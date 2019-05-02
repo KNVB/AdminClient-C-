@@ -13,6 +13,7 @@ namespace UIObject
             adminServerAdministrationNode =new AdminServerAdministrationNode(token["adminServerAdministrationNode"],adminServer);
             ftpServerListNode=new FtpServerListNode(token["ftpServerListNode"], adminServer);
             this.Text = adminServer.serverName + ":" + adminServer.portNo;
+            this.Name = this.Text;
             this.Nodes.Add(adminServerAdministrationNode);
             this.Nodes.Add(ftpServerListNode);
             this.ContextMenuStrip = new ContextMenuStrip();

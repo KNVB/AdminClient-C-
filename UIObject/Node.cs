@@ -47,20 +47,5 @@ namespace UIObject
                 listView.Columns.Add(header);
             }
         }
-        /*
-        public Node findChildNodeByName(string childNodeName)
-        {
-            Node childNode = null;
-            foreach (Node node in this.Nodes)
-            {
-                if (node.Name.Equals(childNodeName))
-                {
-                    childNode = node;
-                    break;
-                }
-            }
-            return childNode;
-        }*/
-
-    }
+     }
 }

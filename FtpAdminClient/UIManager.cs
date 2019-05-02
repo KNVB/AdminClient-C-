@@ -39,6 +39,12 @@ namespace FtpAdminClient
             adminUserForm.ShowDialog();
 
         }
+        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView panel1Tree, ImageList imageList1,AdminServer adminServer)
+        {
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
+            DialogResult dialogresult =addFtpForm.ShowDialog();
+        }
+
         public void popupAlertBox(string message)
         {
             MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);

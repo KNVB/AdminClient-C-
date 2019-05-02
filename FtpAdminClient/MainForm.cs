@@ -83,25 +83,24 @@ namespace FtpAdminClient
                 case ListItemType.AddAdminServerItem:
                     uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
-                /*
-                case ListItemType.AddFTPServerListItem:
-                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.fullPath);
+                
+                case ListItemType.AddFTPServerItem:
+                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree,  imageList1, listItem.relatedNode.adminServer);
                     break;
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                    AdminNode parentNode = listItem.parentNode;
-                    AdminNode childNode = parentNode.findChildNodeByName(listItem.Name);
-                    if (childNode == null)
+                    Node relatedNode = listItem.relatedNode;
+                    if (relatedNode == null)
                     {
-                        MessageBox.Show(parentNode.Name +","+listItem.Name);
+                        MessageBox.Show(listItem.Name);
                     }
                     else
                     {
-                        childNode.Expand();
+                        relatedNode.Expand();
                         Panel1Tree.SelectedNode = null;
-                        Panel1Tree.SelectedNode = childNode;
+                        Panel1Tree.SelectedNode = relatedNode;
                     }                   
-                    break;*/
+                    break;
             }
         }       
     }    
