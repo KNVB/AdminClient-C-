@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -41,13 +45,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminNode.cs" />
+    <Compile Include="AdminServerAdministrationNode.cs" />
+    <Compile Include="AdminServerNode.cs" />
+    <Compile Include="AdminUserAdministrationNode.cs" />
+    <Compile Include="FtpServerListNode.cs" />
+    <Compile Include="FtpServerNode.cs" />
+    <Compile Include="FtpUserGroupsListNode.cs" />
+    <Compile Include="FtpUserListNode.cs" />
+    <Compile Include="ListItem.cs" />
+    <Compile Include="ListItemType.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="NodeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RootNode.cs" />
+    <Compile Include="UIObjFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="UIConfigParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdminServerObject\AdminServerObject.csproj">
+      <Project>{e28b709f-e4d7-4cb2-b45c-0fe90ea8053b}</Project>
+      <Name>AdminServerObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

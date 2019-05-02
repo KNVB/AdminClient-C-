@@ -2,7 +2,7 @@
     "adminServerNode": {
         "ImageIndex": 2,
         "SelectedImageIndex": 2,
-        "colunmNameList": [ "Admin. server name", "Description" ],
+        "colunmNameList": [ "Item Name", "Description" ],
         "adminServerAdministrationNode": {
             "Text": "Administration",
             "Name": "Administration",
@@ -29,26 +29,30 @@
             "addFTPServerItem": {
                 "Text": "Add FTP Server",
                 "Name": "Add FTP Server",
+                "description": "Add a FTP server instance",
                 "ImageIndex": 4
             },
-            "ftpServerNodeTemplate": {
+            "ftpServerNode": {
                 "colunmNameList": [ "Item Name", "Description" ],
                 "ImageIndex": 8,
                 "SelectedImageIndex": 8,
-                "ftpUsersListNode": {
-                    "Text": "Users",
-                    "Name": "Users",
-                    "description": "FTP server user administration."
-                },
                 "ftpUserGroupsListNode": {
                     "Text": "Groups",
                     "Name": "Groups",
+                    "ImageIndex": 7,
+                    "SelectedImageIndex": 7,
                     "description": "FTP server user group administration."
+                },
+                "ftpUsersListNode": {
+                    "Text": "Users",
+                    "Name": "Users",
+                    "ImageIndex": 6,
+                    "SelectedImageIndex": 6,
+                    "description": "FTP server user administration."
                 }
-            }
+            }            
         }
-    },
-   
+    },    
     "RootNode": {
         "ImageIndex": 0,
         "SelectedImageIndex": 0,

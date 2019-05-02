@@ -114,12 +114,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test_FTPAdminClient_Object\AdminServerObject\AdminServerObject.csproj">
-      <Project>{70dfeb91-e9de-4c87-a4b0-d939810ac4ba}</Project>
+    <ProjectReference Include="..\AdminServerObject\AdminServerObject.csproj">
+      <Project>{e28b709f-e4d7-4cb2-b45c-0fe90ea8053b}</Project>
       <Name>AdminServerObject</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UITesting\UIObject\UIObject.csproj">
-      <Project>{b891a39c-edd2-4459-8e39-8df87a2de88a}</Project>
+    <ProjectReference Include="..\UIObject\UIObject.csproj">
+      <Project>{7654b780-3075-4e4e-be4b-95d081daba6f}</Project>
       <Name>UIObject</Name>
     </ProjectReference>
   </ItemGroup>
