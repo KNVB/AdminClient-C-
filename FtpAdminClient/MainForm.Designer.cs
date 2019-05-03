@@ -50,11 +50,13 @@ namespace FtpAdminClient
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.serverToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(379, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -64,14 +66,14 @@ namespace FtpAdminClient
             this.addToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(66, 23);
             this.serverToolStripMenuItem.Text = "Server";
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -79,7 +81,7 @@ namespace FtpAdminClient
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -87,7 +89,8 @@ namespace FtpAdminClient
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer.Location = new System.Drawing.Point(0, 28);
+            this.splitContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -98,8 +101,9 @@ namespace FtpAdminClient
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer.Panel2.Controls.Add(this.settingList);
-            this.splitContainer.Size = new System.Drawing.Size(284, 237);
-            this.splitContainer.SplitterDistance = 137;
+            this.splitContainer.Size = new System.Drawing.Size(379, 298);
+            this.splitContainer.SplitterDistance = 182;
+            this.splitContainer.SplitterWidth = 5;
             this.splitContainer.TabIndex = 1;
             // 
             // Panel1Tree
@@ -108,9 +112,10 @@ namespace FtpAdminClient
             this.Panel1Tree.ImageIndex = 0;
             this.Panel1Tree.ImageList = this.imageList1;
             this.Panel1Tree.Location = new System.Drawing.Point(0, 0);
+            this.Panel1Tree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Panel1Tree.Name = "Panel1Tree";
             this.Panel1Tree.SelectedImageIndex = 0;
-            this.Panel1Tree.Size = new System.Drawing.Size(133, 233);
+            this.Panel1Tree.Size = new System.Drawing.Size(178, 294);
             this.Panel1Tree.TabIndex = 0;
             this.Panel1Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Panel1Tree_AfterSelect);
             this.Panel1Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
@@ -136,8 +141,9 @@ namespace FtpAdminClient
             this.settingList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingList.FullRowSelect = true;
             this.settingList.Location = new System.Drawing.Point(0, 0);
+            this.settingList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.settingList.Name = "settingList";
-            this.settingList.Size = new System.Drawing.Size(139, 233);
+            this.settingList.Size = new System.Drawing.Size(188, 294);
             this.settingList.SmallImageList = this.imageList1;
             this.settingList.TabIndex = 0;
             this.settingList.UseCompatibleStateImageBehavior = false;
@@ -146,14 +152,14 @@ namespace FtpAdminClient
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(379, 326);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
-            this.Text = "HK FTP Server";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

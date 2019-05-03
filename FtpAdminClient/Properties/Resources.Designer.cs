@@ -59,14 +59,5 @@ namespace FtpAdminClient.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HK FTP Server.
-        /// </summary>
-        internal static string Software_Name {
-            get {
-                return ResourceManager.GetString("Software_Name", resourceCulture);
-            }
-        }
     }
 }

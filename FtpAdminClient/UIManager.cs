@@ -21,7 +21,10 @@ namespace FtpAdminClient
             adminServerManager.disconnectServer(key);
             rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
         }
-       
+        public string getLabel(string key)
+        {
+            return (uiObjFactory.getLabel(key));
+        }
         public RootNode getRootNode()
         {
             return rootNode;

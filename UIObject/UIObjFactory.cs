@@ -24,6 +24,11 @@ namespace UIObject
             AdminServerNode adminServerNode=new AdminServerNode(getObj("adminServerNode"),adminServer);
             return adminServerNode;
         }
+        public string getLabel(string key)
+        {
+            var labelObj = (dynamic)getObj(key);
+            return labelObj.Text;
+        }
         public RootNode getRootNode()
         {
             RootNode rootNode = new RootNode(getObj("RootNode"));
