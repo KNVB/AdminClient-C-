@@ -15,6 +15,10 @@ namespace FtpAdminClient
             InitializeComponent();
             adminServerManager = new AdminServerManager();
             uiManager = new UIManager(adminServerManager);
+            this.Text = uiManager.getSoftwareName();
+            serverToolStripMenuItem.Text = uiManager.getAdminServerLabel();
+            addToolStripMenuItem.Text = uiManager.getConnectLabel();
+            exitToolStripMenuItem.Text = uiManager.getExitLabel();
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -23,7 +27,6 @@ namespace FtpAdminClient
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Text = Properties.Resources.Software_Name;
             rootNode = uiManager.getRootNode();
             rootNode.Text = this.Text;
             rootNode.Name = rootNode.Text;
@@ -32,7 +35,7 @@ namespace FtpAdminClient
         
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
+            uiManager.popupConnectToAdminServerDiaglog(splitContainer, Panel1Tree,  imageList1);
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -84,7 +87,7 @@ namespace FtpAdminClient
             switch (listItem.ListItemType)
             {
                 case ListItemType.AddAdminServerItem:
-                    uiManager.popupConnectToServerDiaglog(splitContainer, Panel1Tree,  imageList1);
+                    uiManager.popupConnectToAdminServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
                 
                 case ListItemType.AddFTPServerItem:

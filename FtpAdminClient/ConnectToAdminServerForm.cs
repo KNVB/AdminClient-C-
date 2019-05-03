@@ -4,22 +4,29 @@ using System.Windows.Forms;
 
 namespace FtpAdminClient
 {
-    public partial class ConnectToServerForm : Form
+    public partial class ConnectToAdminServerForm : Form
     {
         private int adminPortNo = -1;
         private string adminServerName = "";
         private string adminUserName = "", adminUserPassword = "";
         private AdminServerManager adminServerManager;
         private UIManager uiManager;
-        public ConnectToServerForm(UIManager uiManager, AdminServerManager adminServerManager)
+        public ConnectToAdminServerForm(UIManager uiManager, AdminServerManager adminServerManager)
         {
             InitializeComponent();
             this.uiManager = uiManager;
             this.adminServerManager = adminServerManager;
+            this.Text = uiManager.getConnectToAdminServerFormLabel();
+            label1.Text = uiManager.getServerNameLabel();
+            label2.Text = uiManager.getPortNoLabel();
+            label3.Text = uiManager.getUserNameLabel();
+            label4.Text = uiManager.getPasswordLabel();
+            loginButton.Text = uiManager.getConnectLabel();
+            cancelButton.Text = uiManager.getCancelButtonLabel();
         }
         private void ConnectToServerForm_Load(object sender, EventArgs e)
         {
-            //loginButton_Click(this, new EventArgs());
+             //loginButton_Click(this, new EventArgs());
         }
         private void cancelButton_Click(object sender, EventArgs e)
         {

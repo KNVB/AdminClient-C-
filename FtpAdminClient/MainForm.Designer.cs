@@ -66,23 +66,20 @@ namespace FtpAdminClient
             this.addToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(66, 23);
-            this.serverToolStripMenuItem.Text = "Server";
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(12, 24);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
-            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // splitContainer
@@ -90,7 +87,7 @@ namespace FtpAdminClient
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.Location = new System.Drawing.Point(0, 28);
-            this.splitContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -112,7 +109,7 @@ namespace FtpAdminClient
             this.Panel1Tree.ImageIndex = 0;
             this.Panel1Tree.ImageList = this.imageList1;
             this.Panel1Tree.Location = new System.Drawing.Point(0, 0);
-            this.Panel1Tree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Panel1Tree.Margin = new System.Windows.Forms.Padding(4);
             this.Panel1Tree.Name = "Panel1Tree";
             this.Panel1Tree.SelectedImageIndex = 0;
             this.Panel1Tree.Size = new System.Drawing.Size(178, 294);
@@ -141,7 +138,7 @@ namespace FtpAdminClient
             this.settingList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingList.FullRowSelect = true;
             this.settingList.Location = new System.Drawing.Point(0, 0);
-            this.settingList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.settingList.Margin = new System.Windows.Forms.Padding(4);
             this.settingList.Name = "settingList";
             this.settingList.Size = new System.Drawing.Size(188, 294);
             this.settingList.SmallImageList = this.imageList1;
@@ -158,7 +155,7 @@ namespace FtpAdminClient
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

@@ -2,7 +2,7 @@
 
 namespace FtpAdminClient
 {
-    partial class ConnectToServerForm
+    partial class ConnectToAdminServerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -46,40 +46,41 @@ namespace FtpAdminClient
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 19);
+            this.label1.Location = new System.Drawing.Point(51, 24);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 12);
+            this.label1.Size = new System.Drawing.Size(0, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Server name:";
             // 
             // serverName
             // 
-            this.serverName.Location = new System.Drawing.Point(107, 11);
+            this.serverName.Location = new System.Drawing.Point(143, 14);
+            this.serverName.Margin = new System.Windows.Forms.Padding(4);
             this.serverName.Name = "serverName";
-            this.serverName.Size = new System.Drawing.Size(171, 22);
+            this.serverName.Size = new System.Drawing.Size(227, 25);
             this.serverName.TabIndex = 1;
             this.serverName.Text = "localhost";
-            this.serverName.KeyDown += this.enterKeyHandler;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 48);
+            this.label2.Location = new System.Drawing.Point(79, 60);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 12);
+            this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Port no.:";
             // 
             // portNo
             // 
-            this.portNo.Location = new System.Drawing.Point(107, 43);
+            this.portNo.Location = new System.Drawing.Point(143, 54);
+            this.portNo.Margin = new System.Windows.Forms.Padding(4);
             this.portNo.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.portNo.Name = "portNo";
-            this.portNo.Size = new System.Drawing.Size(171, 22);
+            this.portNo.Size = new System.Drawing.Size(228, 25);
             this.portNo.TabIndex = 3;
             this.portNo.Value = new decimal(new int[] {
             4466,
@@ -90,65 +91,65 @@ namespace FtpAdminClient
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 77);
+            this.label3.Location = new System.Drawing.Point(63, 96);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 12);
+            this.label3.Size = new System.Drawing.Size(0, 15);
             this.label3.TabIndex = 4;
-            this.label3.Text = "User name:";
             // 
             // userName
             // 
-            this.userName.Location = new System.Drawing.Point(107, 72);
+            this.userName.Location = new System.Drawing.Point(143, 90);
+            this.userName.Margin = new System.Windows.Forms.Padding(4);
             this.userName.Name = "userName";
-            this.userName.Size = new System.Drawing.Size(171, 22);
+            this.userName.Size = new System.Drawing.Size(227, 25);
             this.userName.TabIndex = 5;
             this.userName.Text = "admin";
-            this.userName.KeyDown += this.enterKeyHandler;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(53, 108);
+            this.label4.Location = new System.Drawing.Point(71, 135);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 12);
+            this.label4.Size = new System.Drawing.Size(0, 15);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Password:";
             // 
             // password
             // 
-            this.password.Location = new System.Drawing.Point(107, 104);
+            this.password.Location = new System.Drawing.Point(143, 130);
+            this.password.Margin = new System.Windows.Forms.Padding(4);
             this.password.Name = "password";
             this.password.PasswordChar = '*';
-            this.password.Size = new System.Drawing.Size(171, 22);
+            this.password.Size = new System.Drawing.Size(227, 25);
             this.password.TabIndex = 7;
             this.password.Text = "password";
-            this.password.KeyDown += this.enterKeyHandler;
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(40, 160);
+            this.loginButton.Location = new System.Drawing.Point(53, 200);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(4);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(100, 29);
             this.loginButton.TabIndex = 8;
-            this.loginButton.Text = "Connect";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(231, 160);
+            this.cancelButton.Location = new System.Drawing.Point(308, 200);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(100, 29);
             this.cancelButton.TabIndex = 9;
-            this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // ConnectToServerForm
+            // ConnectToAdminServerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 221);
+            this.ClientSize = new System.Drawing.Size(464, 276);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.password);
@@ -159,8 +160,8 @@ namespace FtpAdminClient
             this.Controls.Add(this.label2);
             this.Controls.Add(this.serverName);
             this.Controls.Add(this.label1);
-            this.Name = "ConnectToServerForm";
-            this.Text = "Connect To Server";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "ConnectToAdminServerForm";
             this.Load += new System.EventHandler(this.ConnectToServerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.portNo)).EndInit();
             this.ResumeLayout(false);

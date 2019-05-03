@@ -21,13 +21,97 @@ namespace FtpAdminClient
             adminServerManager.disconnectServer(key);
             rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
         }
-        public string getLabel(string key)
+        public string getAddLabel()
+        {
+            return getLabelText("AddLabel");
+        }
+        public string getAddFtpServerFormLabel()
+        {
+            return getLabelText("AddFtpServerFormLabel");
+        }
+        public string getAdminServerLabel()
+        {
+            return getLabelText("AdminServerLabel");
+        }
+        public string getCancelButtonLabel()
+        {
+            return getLabelText("CancelButtonLabel");
+        }
+        public string getConnectLabel()
+        {
+            return getLabelText("ConnectLabel");
+        }
+        public string getConnectToAdminServerFormLabel()
+        {
+            return getLabelText("ConnectToAdminServerFormLabel");
+        }
+        public string getDeconnectFromAdminServerLabel()
+        { 
+             return getLabelText("DeconnectFromAdminServerLabel");
+        }
+        public string getEditFtpServerNetworkPropertiesFormLabel()
+        {
+            return getLabelText("EditFtpServerNetworkPropertiesFormLabel");
+        }
+        public string getExitLabel()
+        {
+            return getLabelText("ExitLabel");
+        }
+        public string getFtpServerDescLabel()
+        {
+            return getLabelText("FtpServerDescLabel");
+        }
+        public string getFtpServerBindingAddressLabel()
+        {
+            return getLabelText("FtpServerBindingAddressLabel");
+        }
+        private string getLabelText(string key)
         {
             return (uiObjFactory.getLabel(key));
+        }
+        public string getNoAnswerLabel()
+        {
+            return getLabelText("NoAnswerLabel");
+        }
+        public string getPasswordLabel()
+        {
+            return getLabelText("PasswordLabel");
+        }
+        public string getPassiveModePortRangeLabel()
+        {
+            return getLabelText("PassiveModePortRangeLabel");
+        }
+        public string getPortNoLabel()
+        {
+            return getLabelText("PortNoLabel");
         }
         public RootNode getRootNode()
         {
             return rootNode;
+        }
+        public string getSaveChangeButtonLabel()
+        {
+            return getLabelText("SaveChangeButtonLabel");
+        }
+        public string getServerNameLabel()
+        {
+            return getLabelText("ServerNameLabel");
+        }
+        public string getSoftwareName()
+        {
+            return getLabelText("SoftwareName");
+        }
+        public string getSupportPassiveModeLabel()
+        {
+            return getLabelText("SupportPassiveModeLabel");
+        }
+        public string getUserNameLabel()
+        {
+            return getLabelText("UserNameLabel");
+        }
+        public string getYesAnswerLabel()
+        {
+            return getLabelText("YesAnswerLabel");
         }
         public void popupAdminUserAdministrationForm(string fullPath)
         {
@@ -58,9 +142,9 @@ namespace FtpAdminClient
             MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         
-        public void popupConnectToServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList)
+        public void popupConnectToAdminServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList)
         {
-            ConnectToServerForm ctsf = new ConnectToServerForm(this, adminServerManager);
+            ConnectToAdminServerForm ctsf = new ConnectToAdminServerForm(this, adminServerManager);
             DialogResult dialogresult = ctsf.ShowDialog();
             if (dialogresult.Equals(DialogResult.OK))
             {
@@ -86,7 +170,7 @@ namespace FtpAdminClient
             {
                 adminServerNode = uiObjFactory.getAdminServerNode(adminServerManager.adminServerList[key]);
                 ToolStripMenuItem disconnect = new ToolStripMenuItem();
-                disconnect.Text = "Disconnect from the admin. server";
+                disconnect.Text = getDeconnectFromAdminServerLabel();
                 disconnect.Click += new EventHandler((sender, e) => disconnectServer(key));
                 disconnect.Image = imageList1.Images[5];
                 adminServerNode.ContextMenuStrip.Items.Add(disconnect);

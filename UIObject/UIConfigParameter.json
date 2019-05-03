@@ -71,44 +71,34 @@
     }
   },
 
-
-
   "AddLabel": {
     "Text": "Add"
   },
   "AddFtpServerFormLabel": {
     "Text": "Add FTP Server"
   },
-
-  "AdminServerNameLabel": {
-    "Text": "Server Name"
-  },
-  "AdminUserNameLabel": {
-    "Text": "User Name"
-  },
-  "AdminUserPasswordLabel": {
-    "Text": "Password"
+  "AdminServerLabel": {
+    "Text": "Admin. Server"
   },
   "CancelButtonLabel": {
     "Text": "Cancel"
   },
-
   "ConnectLabel": {
     "Text": "Connect"
   },
   "ConnectToAdminServerFormLabel": {
-    "Text": "Connect To Remote Server"
+    "Text": "Connect To Admin. Server"
   },
-  "ControlPortNoLabel": {
-    "Text": "Port No."
+  "DeconnectFromAdminServerLabel": {
+    "Text": "Disconnect from the admin. server"
   },
-
   "EditFtpServerNetworkPropertiesFormLabel": {
     "Text": "Edit Ftp Server Network Properties Form"
   },
   "ExitLabel": {
     "Text": "Exit"
   },
+
   "FtpServerDescLabel": {
     "Text": "Server Description"
   },
@@ -119,17 +109,29 @@
   "NoAnswerLabel": {
     "Text": "No"
   },
-  "PassicwModePortRangeLabel": {
+  "PasswordLabel": {
+    "Text": "Password"
+  },
+  "PassiveModePortRangeLabel": {
     "Text": "Passive Mode Port Range"
+  },
+  "PortNoLabel": {
+    "Text": "Port No."
   },
   "SaveChangeButtonLabel": {
     "Text": "Save Change"
   },
+  "ServerNameLabel": {
+    "Text": "Server Name"
+  },
   "SoftwareName": {
-    "Text": "My FTP server admin. console" 
+    "Text": "My FTP server admin. console"
   },
   "SupportPassiveModeLabel": {
     "Text": "Suport Passive Mode"
+  },
+  "UserNameLabel": {
+    "Text": "User Name"
   },
   "YesAnswerLabel": {
     "Text": "Yes"
