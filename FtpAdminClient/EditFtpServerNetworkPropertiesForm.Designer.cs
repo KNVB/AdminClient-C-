@@ -1,6 +1,6 @@
 ﻿namespace FtpAdminClient
 {
-    partial class AddFtpForm
+    partial class EditFtpServerNetworkPropertiesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Add FTP Server";
-            this.actionButton.Text = "Add";
-            this.actionButton.Click += new System.EventHandler(this.addFTPServerButton_Click);
+            this.Text = "Edit Ftp Server Network Properties Form";
+            this.actionButton.Text = "Save Change";
+            this.actionButton.Click += new System.EventHandler(this.saveFtpServerNetworkProperties);
         }
 
         #endregion

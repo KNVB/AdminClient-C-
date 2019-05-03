@@ -21,6 +21,7 @@ namespace AdminServerObject
         private MessageCoder messageCoder;
         private ServerResponse serverResponse;
         private WebSocket _websocket=null;
+
         private string errorMessage = "";
         private static readonly ILog logger = LogManager.GetLogger(typeof(AdminServer));
 
@@ -111,6 +112,24 @@ namespace AdminServerObject
             }
             return result;
         }
+        public FtpServerInfo getFTPServerInfo(string serverId)
+        {
+            FtpServerInfo result = null;
+            Request request = new Request();
+            request.action = "GetFTPServerInfo";
+            request.ObjectMap["serverId"] = serverId;
+            _websocket.Send(messageCoder.aesEncode(jss.Serialize(request)));
+            _messageReceivedEvent.WaitOne();
+            if (String.IsNullOrEmpty(errorMessage))
+                result = jss.Deserialize<FtpServerInfo>(jss.Serialize(serverResponse.returnObjects["ftpServerInfo"]));
+            else
+            {
+                disConnect();
+                websocketException = new Exception("An exception occurs when getting the FTP Server Info.");
+                throw websocketException;
+            }
+            return result;
+        }
         public SortedDictionary<string, FtpServerInfo> getFTPServerList()
         {
             SortedDictionary<string, FtpServerInfo> result = null;
@@ -193,6 +212,15 @@ namespace AdminServerObject
             }
             return result;
         }
+        public ServerResponse saveFtpServerNetworkProperties(FtpServerInfo ftpServerInfo, string serverId)
+        {
+            throw new NotImplementedException();
+        }
+        private void sendRSAKey()
+        {
+            logger.Debug("Send RSA Key");
+            _websocket.Send(messageCoder.getRSAPublicKey());
+        }
         private void websocket_Closed(object sender, EventArgs e)
         {
             errorMessage = e.ToString();
@@ -229,10 +257,6 @@ namespace AdminServerObject
             logger.Debug("Decoded server response:" + decodedMessage);
             _messageReceivedEvent.Set();
         }
-        private void sendRSAKey()
-        {
-            logger.Debug("Send RSA Key");
-            _websocket.Send(messageCoder.getRSAPublicKey());
-        }        
+          
     }
 }

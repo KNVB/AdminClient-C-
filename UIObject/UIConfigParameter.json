@@ -2,13 +2,13 @@
     "adminServerNode": {
         "ImageIndex": 2,
         "SelectedImageIndex": 2,
-        "colunmNameList": [ "Item Name", "Description" ],
+        "colunmNameList": [ "Item", "Item Description" ],
         "adminServerAdministrationNode": {
             "Text": "Administration",
             "Name": "Administration",
             "ImageIndex": 7,
             "SelectedImageIndex": 7,
-            "colunmNameList": [ "Item Name", "Description" ],
+            "colunmNameList": [ "Item", "Item Description" ],
             "description": "Manage admin. server",
             "adminUserAdministrationNode": {
                 "Text": "Admin. Users",
@@ -33,9 +33,16 @@
                 "ImageIndex": 4
             },
             "ftpServerNode": {
-                "colunmNameList": [ "Item Name", "Description" ],
+                "colunmNameList": [ "Configuration Item", "Item Description" ],
                 "ImageIndex": 8,
                 "SelectedImageIndex": 8,
+                "ftpServerNetworkPropertiesNode": {
+                    "Text": "Edit Network Properties",
+                    "Name": "Edit Network Properties",
+                    "ImageIndex": 10,
+                    "SelectedImageIndex": 10,
+                    "description": "Edit FTP server network related propperties."
+                },
                 "ftpUserGroupsListNode": {
                     "Text": "Groups",
                     "Name": "Groups",

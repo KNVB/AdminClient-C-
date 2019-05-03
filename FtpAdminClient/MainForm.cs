@@ -59,6 +59,9 @@ namespace FtpAdminClient
                 case NodeType.FTPServerNode:
                     ((FtpServerNode)node).handleSelectEvent(settingList);
                     break;
+                case NodeType.FTPServerNetworkPropertiesNode:
+                    uiManager.popupEditFtpServerNetworkPropertiesForm((FtpServerNetworkPropertiesNode)node);
+                    break;
                 case NodeType.RootNode:
                     ((RootNode)node).handleSelectEvent(settingList, adminServerManager.adminServerList);
                     break;

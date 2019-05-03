@@ -16,5 +16,6 @@ namespace UIObject
         public const int FTPServerNode = 5;
         public const int FTPUserListNode = 6;
         public const int FTPUserGroupsListNode = 7;
+        public const int FTPServerNetworkPropertiesNode=8;
     }
 }

@@ -104,13 +104,14 @@ namespace FtpAdminClient
                 }
                 Cursor.Current = Cursors.Default;
             }
-        }
-        private void password_KeyDown(object sender, KeyEventArgs e)
+        }      
+
+        private void enterKeyHandler(object sender, KeyEventArgs e)
         {
-           /* if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 loginButton_Click(this, new EventArgs());
-            }*/
+            }
         }
     }
 }

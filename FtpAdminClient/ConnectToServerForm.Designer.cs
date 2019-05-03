@@ -59,6 +59,7 @@ namespace FtpAdminClient
             this.serverName.Size = new System.Drawing.Size(171, 22);
             this.serverName.TabIndex = 1;
             this.serverName.Text = "localhost";
+            this.serverName.KeyDown += this.enterKeyHandler;
             // 
             // label2
             // 
@@ -102,6 +103,7 @@ namespace FtpAdminClient
             this.userName.Size = new System.Drawing.Size(171, 22);
             this.userName.TabIndex = 5;
             this.userName.Text = "admin";
+            this.userName.KeyDown += this.enterKeyHandler;
             // 
             // label4
             // 
@@ -120,6 +122,7 @@ namespace FtpAdminClient
             this.password.Size = new System.Drawing.Size(171, 22);
             this.password.TabIndex = 7;
             this.password.Text = "password";
+            this.password.KeyDown += this.enterKeyHandler;
             // 
             // loginButton
             // 

@@ -49,6 +49,7 @@
     <Compile Include="AdminServerNode.cs" />
     <Compile Include="AdminUserAdministrationNode.cs" />
     <Compile Include="FtpServerListNode.cs" />
+    <Compile Include="FtpServerNetworkPropertiesNode.cs" />
     <Compile Include="FtpServerNode.cs" />
     <Compile Include="FtpUserGroupsListNode.cs" />
     <Compile Include="FtpUserListNode.cs" />

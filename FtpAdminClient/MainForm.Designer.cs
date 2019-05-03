@@ -129,6 +129,7 @@ namespace FtpAdminClient
             this.imageList1.Images.SetKeyName(7, "Admin-icon.png");
             this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
             this.imageList1.Images.SetKeyName(9, "Button Delete.png");
+            this.imageList1.Images.SetKeyName(10, "icons8-edit-property-24.png");
             // 
             // settingList
             // 

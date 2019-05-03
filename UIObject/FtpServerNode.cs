@@ -8,13 +8,16 @@ namespace UIObject
     {
         private FtpUserListNode ftpUsersListNode=null;
         private FtpUserGroupsListNode ftpUserGroupsListNode=null;
+        private FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode = null;
         public FtpServerNode(JToken token, AdminServer adminServer, string serverDesc,string serverId) : base(token, adminServer)
         {
             nodeType = NodeType.FTPServerNode;
             ftpUsersListNode = new FtpUserListNode(token["ftpUsersListNode"], adminServer,serverId);
             ftpUserGroupsListNode =new FtpUserGroupsListNode(token["ftpUserGroupsListNode"], adminServer, serverId);
+            ftpServerNetworkPropertiesNode = new FtpServerNetworkPropertiesNode(token["ftpServerNetworkPropertiesNode"], adminServer, serverId);
             this.Text = serverDesc;
             this.Name = serverId;
+            this.Nodes.Add(ftpServerNetworkPropertiesNode);
             this.Nodes.Add(ftpUsersListNode);
             this.Nodes.Add(ftpUserGroupsListNode);
         }       
@@ -24,6 +27,15 @@ namespace UIObject
             ListItem listItem;
 
             initListView(listView);
+            listView.Columns[0].Text += " on " + this.Text;
+
+            listItem = new ListItem();
+            listItem.Text = ftpServerNetworkPropertiesNode.Text;
+            listItem.Name = listItem.Text;
+            listItem.relatedNode = ftpServerNetworkPropertiesNode;
+            listItem.SubItems.Add(ftpServerNetworkPropertiesNode.description);
+            listItem.ImageIndex = ftpServerNetworkPropertiesNode.ImageIndex;
+            listView.Items.Add(listItem);
 
             listItem = new ListItem();
             listItem.Text = ftpUsersListNode.Text;

@@ -39,16 +39,22 @@ namespace FtpAdminClient
             adminUserForm.ShowDialog();
 
         }
-        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView panel1Tree, ImageList imageList1,AdminServer adminServer)
+        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList,AdminServer adminServer)
         {
             AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
             DialogResult dialogresult =addFtpForm.ShowDialog();
+            if (dialogresult.Equals(DialogResult.OK))
+            {
+                splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
+                rebuildAdminServerTree(treeView, imageList);
+            }
         }
 
         public void popupAlertBox(string message)
         {
             MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        
         public void popupConnectToServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList)
         {
             ConnectToServerForm ctsf = new ConnectToServerForm(this, adminServerManager);
@@ -58,6 +64,16 @@ namespace FtpAdminClient
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                 rebuildAdminServerTree(treeView, imageList);
             }
+        }
+
+        internal void popupEditFtpServerNetworkPropertiesForm(FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode)
+        {
+            EditFtpServerNetworkPropertiesForm efsf = new EditFtpServerNetworkPropertiesForm( ftpServerNetworkPropertiesNode.adminServer, this, ftpServerNetworkPropertiesNode.serverId);
+            DialogResult dialogresult = efsf.ShowDialog();
+        }
+        public void popupMessageBox(string message)
+        {
+            MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         private void rebuildAdminServerTree(TreeView treeView1, ImageList imageList1)
         {

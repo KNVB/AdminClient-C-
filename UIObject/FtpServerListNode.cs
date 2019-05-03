@@ -34,13 +34,14 @@ namespace UIObject
             ftpServerList = adminServer.getFTPServerList();
             foreach (string serverId in ftpServerList.Keys)
             {
+                ftpServerNode = ((FtpServerNode)Nodes.Find(serverId, true)[0]);
                 ftpServerInfo = ftpServerList[serverId];
                 listItem = new ListItem();
                 listItem.ListItemType = ListItemType.FTPServerListItem;
-                listItem.relatedNode = this;
+                listItem.relatedNode = ftpServerNode;
                 listItem.Text = ftpServerInfo.description;
                 listItem.Name = ftpServerInfo.serverId;
-          //      listItem.ImageIndex = ftpServerNodeTemplate.SelectedImageIndex;
+                listItem.ImageIndex =  ftpServerNode.ImageIndex;
                 listItem.SubItems.Add("1");
                 switch (ftpServerInfo.status)
                 {
