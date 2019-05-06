@@ -12,6 +12,7 @@ namespace FtpAdminClient
         public AddFtpForm(AdminServer adminServer, UIManager uiManager):base(adminServer, uiManager)
         {
             InitializeComponent();
+            ipAddressList.SetItemChecked(0, true);
         }
         private void addFTPServerButton_Click(object sender, EventArgs e)
         {
@@ -22,7 +23,7 @@ namespace FtpAdminClient
                 ftpServerInfo.description = serverDesc.Text;
                 ftpServerInfo.controlPort = controlPortNo;
                 ftpServerInfo.bindingAddresses = bindingAddressList;
-                if (supportPassiveMode.Text.Equals("No"))
+                if (supportPassiveMode.Text.Equals(uiManager.getNoAnswerLabel()))
                     ftpServerInfo.passiveModeEnabled = false;
                 else
                 {
@@ -35,12 +36,12 @@ namespace FtpAdminClient
                     switch (response.responseCode)
                     {
                         case 0:
-                            uiManager.popupMessageBox("Server is added successfully.");
+                            uiManager.popupMessageBox(uiManager.getAddFTPServerSuccessMsg());
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
                         case 1:
-                            uiManager.popupAlertBox("Some of the specified address and port combination is/are not available.");
+                            uiManager.popupAlertBox(uiManager.getAddressOrPortNotAvailableMsg());
                             break;
                     }
                 }

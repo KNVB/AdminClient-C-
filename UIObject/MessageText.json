@@ -1,0 +1,15 @@
+﻿{
+    "AddFTPServerSuccess": "Server is added successfully.",
+    "AddressOrPortNotAvailable": "Some of the specified address and port combination is/are not available.",
+    "AdminServerAddedAlready": "The specified server has been added already.",
+    "InvalidAdminServerNameOrPortNo": "Invalid admin. server name or port no.",
+    "InvalidAdminUserOrPassword": "Invalid admin. user or password",
+    "InvalidControlPortNo": "Please enter an valid control port no.(0-65535).",
+    "InvalidPassivePortRange": "Please enter an valid TCP port range for passive mode",
+    "MissingAdminPortNo": "Please enter the admin. server port no. (0-65535).",
+    "MissingAdminServerNameOrIP": "Please enter the admin. server name or IP address.",
+    "MissingAdminUserName": "Please enter the admin. user name.",
+    "MissingAdminUserPassword": "Please enter the admin. user password.",
+    "MissingBindingAddress": "Please select at least one binding address.",
+    "MissingFTPServerDesc": "Please enter the FTP server description."
+}

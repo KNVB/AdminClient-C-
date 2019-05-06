@@ -21,97 +21,17 @@ namespace FtpAdminClient
             adminServerManager.disconnectServer(key);
             rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
         }
-        public string getAddLabel()
+        private string getMessageText(string key)
         {
-            return getLabelText("AddLabel");
-        }
-        public string getAddFtpServerFormLabel()
-        {
-            return getLabelText("AddFtpServerFormLabel");
-        }
-        public string getAdminServerLabel()
-        {
-            return getLabelText("AdminServerLabel");
-        }
-        public string getCancelButtonLabel()
-        {
-            return getLabelText("CancelButtonLabel");
-        }
-        public string getConnectLabel()
-        {
-            return getLabelText("ConnectLabel");
-        }
-        public string getConnectToAdminServerFormLabel()
-        {
-            return getLabelText("ConnectToAdminServerFormLabel");
-        }
-        public string getDeconnectFromAdminServerLabel()
-        { 
-             return getLabelText("DeconnectFromAdminServerLabel");
-        }
-        public string getEditFtpServerNetworkPropertiesFormLabel()
-        {
-            return getLabelText("EditFtpServerNetworkPropertiesFormLabel");
-        }
-        public string getExitLabel()
-        {
-            return getLabelText("ExitLabel");
-        }
-        public string getFtpServerDescLabel()
-        {
-            return getLabelText("FtpServerDescLabel");
-        }
-        public string getFtpServerBindingAddressLabel()
-        {
-            return getLabelText("FtpServerBindingAddressLabel");
+            return uiObjFactory.getMessageText(key);
         }
         private string getLabelText(string key)
         {
             return (uiObjFactory.getLabel(key));
         }
-        public string getNoAnswerLabel()
-        {
-            return getLabelText("NoAnswerLabel");
-        }
-        public string getPasswordLabel()
-        {
-            return getLabelText("PasswordLabel");
-        }
-        public string getPassiveModePortRangeLabel()
-        {
-            return getLabelText("PassiveModePortRangeLabel");
-        }
-        public string getPortNoLabel()
-        {
-            return getLabelText("PortNoLabel");
-        }
         public RootNode getRootNode()
         {
             return rootNode;
-        }
-        public string getSaveChangeButtonLabel()
-        {
-            return getLabelText("SaveChangeButtonLabel");
-        }
-        public string getServerNameLabel()
-        {
-            return getLabelText("ServerNameLabel");
-        }
-        public string getSoftwareName()
-        {
-            return getLabelText("SoftwareName");
-        }
-        public string getSupportPassiveModeLabel()
-        {
-            return getLabelText("SupportPassiveModeLabel");
-        }
-        public string getUserNameLabel()
-        {
-            return getLabelText("UserNameLabel");
-        }
-        public string getYesAnswerLabel()
-        {
-            return getLabelText("YesAnswerLabel");
         }
         public void popupAdminUserAdministrationForm(string fullPath)
         {
@@ -187,5 +107,157 @@ namespace FtpAdminClient
         {
 
         }
+//-----------------------Get Error Message start-----------------------------
+        public string getAddFTPServerSuccessMsg()
+        {
+            return getMessageText("AddFTPServerSuccess");
+        }
+        public string getAddressOrPortNotAvailableMsg()
+        {
+            return getMessageText("AddressOrPortNotAvailable");
+        }       
+        public string getAdminServerAddedAlreadyMsg()
+        {
+            return getMessageText("AdminServerAddedAlready");
+        }
+
+        public string getInvalidAdminServerNameOrPortNoMsg()
+        {
+            return getMessageText("InvalidAdminServerNameOrPortNo");
+        }
+        public string getInvalidAdminUserNameOrPasswordMsg()
+        {
+            return getMessageText("InvalidAdminUserOrPassword");
+        }
+        public string getInvalidControlPortNoMsg()
+        {
+            return getMessageText("InvalidControlPortNo");
+        }
+        public string getInvalidPassivePortRangeMsg()
+        {
+            return getMessageText("InvalidPassivePortRange");
+        }
+         
+        public string getMissingAdminPortNoMsg()
+        {
+            return getMessageText("MissingAdminPortNo");
+        }
+        public string getMissingAdminServerNameOrIPMsg()
+        {
+            return getMessageText("MissingAdminServerNameOrIP");
+        }
+        public string getMissingAdminUserNameMsg()
+        {
+            return getMessageText("MissingAdminUserName");
+        }
+        public string getMissingAdminUserPasswordMsg()
+        {
+            return getMessageText("MissingAdminUserPassword");
+        }
+        public string getMissingBindingAddressMsg()
+        {
+            return getMessageText("MissingBindingAddress");
+        }
+        public string getMissingFTPServerDescMsg()
+        {
+            return getMessageText("MissingFTPServerDesc");
+        }
+
+//-----------------------Get Error Message end-------------------------------
+//-----------------------Get Label Start-------------------------------------
+        public string getAddLabel()
+        {
+            return getLabelText("AddLabel");
+        }
+        public string getAddFtpServerFormLabel()
+        {
+            return getLabelText("AddFtpServerFormLabel");
+        }
+        public string getAdminServerLabel()
+        {
+            return getLabelText("AdminServerLabel");
+        }
+        public string getAllIPAddressLabel()
+        {
+            return getLabelText("AllIPAddressLabel");
+        }
+        public string getCancelButtonLabel()
+        {
+            return getLabelText("CancelButtonLabel");
+        }
+        public string getConnectLabel()
+        {
+            return getLabelText("ConnectLabel");
+        }
+        public string getConnectToAdminServerFormLabel()
+        {
+            return getLabelText("ConnectToAdminServerFormLabel");
+        }
+        public string getControlPortDefault21Label()
+        {
+            return getLabelText("ControlPortDefault21Label") + ":";
+        }
+        public string getDeconnectFromAdminServerLabel()
+        {
+            return getLabelText("DeconnectFromAdminServerLabel");
+        }
+        public string getEditFtpServerNetworkPropertiesFormLabel()
+        {
+            return getLabelText("EditFtpServerNetworkPropertiesFormLabel");
+        }
+        public string getExitLabel()
+        {
+            return getLabelText("ExitLabel");
+        }
+        public string getFtpServerDescLabel()
+        {
+            return getLabelText("FtpServerDescLabel") + ":";
+        }
+        public string getFtpServerBindingAddressLabel()
+        {
+            return getLabelText("FtpServerBindingAddressLabel") + ":";
+        }
+        public string getNoAnswerLabel()
+        {
+            return getLabelText("NoAnswerLabel");
+        }
+        public string getPasswordLabel()
+        {
+            return getLabelText("PasswordLabel") + ":";
+        }
+        public string getPassiveModePortRangeLabel()
+        {
+            return getLabelText("PassiveModePortRangeLabel") + ":";
+        }
+        public string getPortNoLabel()
+        {
+            return getLabelText("PortNoLabel") + ":";
+        }
+        public string getSaveChangeButtonLabel()
+        {
+            return getLabelText("SaveChangeButtonLabel");
+        }
+        public string getServerNameLabel()
+        {
+            return getLabelText("ServerNameLabel") + ":";
+        }
+        public string getSoftwareName()
+        {
+            return getLabelText("SoftwareName");
+        }
+        public string getSupportPassiveModeLabel()
+        {
+            return getLabelText("SupportPassiveModeLabel") + ":";
+        }
+        public string getUserNameLabel()
+        {
+            return getLabelText("UserNameLabel") + ":";
+        }
+        public string getYesAnswerLabel()
+        {
+            return getLabelText("YesAnswerLabel");
+        }
+        //-----------------------Get Label End-------------------------------------
+
     }
 }

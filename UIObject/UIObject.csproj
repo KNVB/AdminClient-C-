@@ -48,6 +48,7 @@
     <Compile Include="AdminServerAdministrationNode.cs" />
     <Compile Include="AdminServerNode.cs" />
     <Compile Include="AdminUserAdministrationNode.cs" />
+    <Compile Include="ItemObject.cs" />
     <Compile Include="FtpServerListNode.cs" />
     <Compile Include="FtpServerNetworkPropertiesNode.cs" />
     <Compile Include="FtpServerNode.cs" />
@@ -62,8 +63,14 @@
     <Compile Include="UIObjFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MessageText.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Label.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
-    <None Include="UIConfigParameter.json">
+    <None Include="UIObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

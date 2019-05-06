@@ -21,7 +21,7 @@ namespace AdminServerObject
         private MessageCoder messageCoder;
         private ServerResponse serverResponse;
         private WebSocket _websocket=null;
-
+        private SortedDictionary<string, FtpServerInfo> ftpServerList = null;
         private string errorMessage = "";
         private static readonly ILog logger = LogManager.GetLogger(typeof(AdminServer));
 
@@ -42,12 +42,7 @@ namespace AdminServerObject
             List<string> bindingAddresses = new List<string>();
             foreach (string address in ftpServerInfo.bindingAddresses)
             {
-                if (address.Equals("*(All IP address)"))
-                {
-                    bindingAddresses.Add("*");
-                }
-                else
-                    bindingAddresses.Add(address);
+                bindingAddresses.Add(address);
             }
             ftpServerInfo.bindingAddresses = bindingAddresses;
             request.ObjectMap["ftpServerInfo"] = ftpServerInfo;
@@ -115,6 +110,12 @@ namespace AdminServerObject
         public FtpServerInfo getFTPServerInfo(string serverId)
         {
             FtpServerInfo result = null;
+            if (ftpServerList != null)
+            {
+                result = ftpServerList[serverId];
+            }
+            /*
+            FtpServerInfo result = null;
             Request request = new Request();
             request.action = "GetFTPServerInfo";
             request.ObjectMap["serverId"] = serverId;
@@ -127,25 +128,25 @@ namespace AdminServerObject
                 disConnect();
                 websocketException = new Exception("An exception occurs when getting the FTP Server Info.");
                 throw websocketException;
-            }
+            }*/
             return result;
         }
         public SortedDictionary<string, FtpServerInfo> getFTPServerList()
         {
-            SortedDictionary<string, FtpServerInfo> result = null;
+            ftpServerList = null;
             Request request = new Request();
             request.action = "GetFTPServerList";
             _websocket.Send(messageCoder.aesEncode(jss.Serialize(request)));
             _messageReceivedEvent.WaitOne();
             if (String.IsNullOrEmpty(errorMessage))
-                result = jss.Deserialize<SortedDictionary<string, FtpServerInfo>>(jss.Serialize(serverResponse.returnObjects["ftpServerList"]));
+                ftpServerList = jss.Deserialize<SortedDictionary<string, FtpServerInfo>>(jss.Serialize(serverResponse.returnObjects["ftpServerList"]));
             else
             {
                 disConnect();
                 websocketException = new Exception("An exception occurs when getting the FTP Server List.");
                 throw websocketException;
             }
-            return result;
+            return ftpServerList;
         }
         public List<string>getIPAddressList()
         {

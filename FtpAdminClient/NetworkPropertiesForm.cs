@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using AdminServerObject;
 using System.Windows.Forms;
+using UIObject;
+
 namespace FtpAdminClient
 {
     public partial class NetworkPropertiesForm : Form
@@ -21,14 +23,36 @@ namespace FtpAdminClient
             this.adminServer = adminServer;
             this.uiManager = uiManager;
             InitializeComponent();
+            
+            label1.Text = uiManager.getFtpServerDescLabel();
+            label2.Text = uiManager.getFtpServerBindingAddressLabel();
+            label3.Text = uiManager.getControlPortDefault21Label();
+            label4.Text = uiManager.getSupportPassiveModeLabel();
+            passiveModePortRangeLabel.Text = uiManager.getPassiveModePortRangeLabel();
+
             List<string> ipList = adminServer.getIPAddressList();
-            ipAddressList.Items.Add("*(All IP address)");
-            ipAddressList.SetItemChecked(0, true);
+            ItemObject listItem = new ItemObject();
+            listItem.Text= "("+ uiManager.getAllIPAddressLabel() + ")";
+            listItem.Value = "*";
+            ipAddressList.Items.Add(listItem);
             foreach (var ip in ipList)
             {
-                ipAddressList.Items.Add(ip);
+                listItem = new ItemObject();
+                listItem.Text = (string)ip;
+                listItem.Value = listItem.Text;
+                ipAddressList.Items.Add(listItem);
             }
-            supportPassiveMode.SelectedIndex = 1; //default not support passive mode
+            listItem = new ItemObject();
+            listItem.Text = uiManager.getNoAnswerLabel();
+            listItem.Value = false;
+            supportPassiveMode.Items.Insert(0, listItem);
+            listItem = new ItemObject();
+            listItem.Text = uiManager.getYesAnswerLabel();
+            listItem.Value = true;
+            supportPassiveMode.Items.Insert(1, listItem);
+            supportPassiveMode.SelectedIndex = 0; //default not support passive mode
+            cancelButton.Text = uiManager.getCancelButtonLabel();
+            
         }
         private void NetworkPropertiesForm_Load(object sender, EventArgs e)
         {
@@ -38,9 +62,9 @@ namespace FtpAdminClient
         {
             bool result = true;
             List<string> bindingAddressList = new List<string>();
-            if (String.IsNullOrEmpty(serverDesc.Text) || (serverDesc.ForeColor == Color.Gray))
+            if (String.IsNullOrEmpty(serverDesc.Text) || (serverDesc.ForeColor == SystemColors.GrayText))
             {
-                uiManager.popupAlertBox("Please enter the FTP server description.");
+                uiManager.popupAlertBox(uiManager.getMissingFTPServerDescMsg());
                 serverDesc.Focus();
                 result = false;
             }
@@ -48,7 +72,7 @@ namespace FtpAdminClient
             {
                 if (!isBindingAddressSelected())
                 {
-                    uiManager.popupAlertBox("Please select at least one binding address.");
+                    uiManager.popupAlertBox(uiManager.getMissingBindingAddressMsg());
                     ipAddressList.Focus();
                     result = false;
                 }
@@ -57,18 +81,19 @@ namespace FtpAdminClient
                     controlPortNo = getControlPortNo();
                     if (controlPortNo == -1)
                     {
-                        uiManager.popupAlertBox("Please enter an valid control port no.(0-65535).");
+                        uiManager.popupAlertBox(uiManager.getInvalidControlPortNoMsg());
                         controlPort.Focus();
                         result = false;
                     }
                     else
                     {
-                        if (supportPassiveMode.Text.Equals("Yes"))
+                        ItemObject listItem =(ItemObject)supportPassiveMode.SelectedItem;
+                        if (Convert.ToBoolean(listItem.Value))
                         {
                             if (!Utility.isValidPassiveModePortRange(passiveModePortRange.Text))
                             {
                                 result = false;
-                                uiManager.popupAlertBox("Please enter an valid TCP port range for passive mode");
+                                uiManager.popupAlertBox(uiManager.getInvalidPassivePortRangeMsg());
                                 passiveModePortRange.Focus();
                             }
                         }
@@ -89,10 +114,15 @@ namespace FtpAdminClient
         private bool isBindingAddressSelected()
         {
             bindingAddressList.Clear();
+            ItemObject item;
             for (int i = 0; i < ipAddressList.Items.Count; i++)
             {
                 if (ipAddressList.GetItemChecked(i))
-                    bindingAddressList.Add(ipAddressList.Items[i].ToString());
+                {
+                    item =(ItemObject)ipAddressList.Items[i];
+                    bindingAddressList.Add(Convert.ToString(item.Value));
+                }
+                    
             }
             return (bindingAddressList.Count > 0);
         }
@@ -126,16 +156,23 @@ namespace FtpAdminClient
             if (serverDesc.Text == "")
             {
                 serverDesc.Text = "New Server";
-                serverDesc.ForeColor = Color.Gray;
+                serverDesc.ForeColor = SystemColors.GrayText;
             }
         }
 
         private void supportPassiveMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (supportPassiveMode.Text.Equals("Yes"))
-                passiveModePortRangePanel.Visible = true;
+            if (supportPassiveMode.Text.Equals(uiManager.getYesAnswerLabel()))
+            {
+                passiveModePortRange.Visible = true;
+                passiveModePortRangeLabel.Visible = true;
+
+            }
             else
-                passiveModePortRangePanel.Visible = false;
+            {
+                passiveModePortRange.Visible = false;
+                passiveModePortRangeLabel.Visible = false;
+            }
         }
     }
 }

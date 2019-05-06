@@ -40,7 +40,7 @@ namespace FtpAdminClient
             adminServerName = serverName.Text.Trim();
             if (String.IsNullOrEmpty(adminServerName))
             {
-                uiManager.popupAlertBox("Please enter the admin. server name or IP address.");
+                uiManager.popupAlertBox(uiManager.getMissingAdminServerNameOrIPMsg());
                 serverName.Focus();
                 isValidate = false;
             }
@@ -48,7 +48,7 @@ namespace FtpAdminClient
             {
                 if (String.IsNullOrEmpty(portNo.Text))
                 {
-                    uiManager.popupAlertBox("Please enter the admin. server port no. (0-65535).");
+                    uiManager.popupAlertBox(uiManager.getMissingAdminPortNoMsg());
                     portNo.Focus();
                     isValidate = false;
                 }
@@ -58,7 +58,7 @@ namespace FtpAdminClient
                     adminUserName = userName.Text.Trim();
                     if (String.IsNullOrEmpty(adminUserName))
                     {
-                        uiManager.popupAlertBox("Please enter the admin. user name.");
+                        uiManager.popupAlertBox(uiManager.getMissingAdminUserNameMsg());
                         userName.Focus();
                         isValidate = false;
                     }
@@ -67,7 +67,7 @@ namespace FtpAdminClient
                         adminUserPassword = password.Text.Trim();
                         if (String.IsNullOrEmpty(adminUserPassword))
                         {
-                            uiManager.popupAlertBox("Please enter the admin. user password.");
+                            uiManager.popupAlertBox(uiManager.getMissingAdminUserPasswordMsg());
                             password.Focus();
                             isValidate = false;
                         }
@@ -95,13 +95,13 @@ namespace FtpAdminClient
                             this.Close();
                             break;
                         case 1:
-                            uiManager.popupAlertBox("The specified server have been added");
+                            uiManager.popupAlertBox(uiManager.getAdminServerAddedAlreadyMsg());
                             break;
                         case 2:
-                            uiManager.popupAlertBox("Invalid admin. server name or port no.");
+                            uiManager.popupAlertBox(uiManager.getInvalidAdminServerNameOrPortNoMsg());
                             break;
                         case 3:
-                            uiManager.popupAlertBox("Invalid admin. user or password");
+                            uiManager.popupAlertBox(uiManager.getInvalidAdminUserNameOrPasswordMsg());
                             break;
                     }
                 }

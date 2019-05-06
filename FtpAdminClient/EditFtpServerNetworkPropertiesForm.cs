@@ -1,6 +1,8 @@
 ﻿using AdminServerObject;
 using System.Windows.Forms;
 using System;
+using System.Drawing;
+using UIObject;
 
 namespace FtpAdminClient
 {
@@ -15,7 +17,8 @@ namespace FtpAdminClient
         public EditFtpServerNetworkPropertiesForm(AdminServer adminServer, UIManager uiManager,string serverId) : base(adminServer, uiManager)
         {
             InitializeComponent();
-            string value;
+            bool value;
+            ItemObject listItem;
             this.serverId = serverId;
             ftpServerInfo = adminServer.getFTPServerInfo(this.serverId);
             if (ftpServerInfo == null)
@@ -24,32 +27,35 @@ namespace FtpAdminClient
             {
                 serverDesc.Text = ftpServerInfo.description;
                 controlPort.Text= Convert.ToString(ftpServerInfo.controlPort);
-
-                foreach(var item in supportPassiveMode.Items)
+                serverDesc.ForeColor = Color.Black;
+                if (ftpServerInfo.passiveModeEnabled)
                 {
-                    value = Convert.ToString(item);
-                    if (ftpServerInfo.passiveModeEnabled)
+                    passiveModePortRange.Text = ftpServerInfo.passiveModePortRange;
+                    passiveModePortRangeLabel.Visible = true;
+                    passiveModePortRange.Visible = true;
+                }
+                else
+                {
+                    passiveModePortRangeLabel.Visible = false;
+                    passiveModePortRange.Visible = false;
+                }
+                foreach (var item in supportPassiveMode.Items)
+                {
+                    listItem = (ItemObject)item;
+                    value = Convert.ToBoolean(listItem.Value);
+                    if (ftpServerInfo.passiveModeEnabled == value)
                     {
-                        if (value.Equals("Yes"))
-                            supportPassiveMode.SelectedItem = item;
-                    }
-                    else
-                    {
-                        if (value.Equals("No"))
-                            supportPassiveMode.SelectedItem = item;
+                        supportPassiveMode.SelectedItem = item;
                     }
                 }
                 for (int i = 0; i < ipAddressList.Items.Count; i++)
                 {
-                    value = Convert.ToString(ipAddressList.Items[i]);
-                    if (ftpServerInfo.bindingAddresses.Contains(value))
+                    listItem = (ItemObject)ipAddressList.Items[i];
+                    if (ftpServerInfo.bindingAddresses.Contains(Convert.ToString(listItem.Value)))
                         ipAddressList.SetItemChecked(i, true);
                     else
                         ipAddressList.SetItemChecked(i, false);
                 }
-                /*
-                passiveModePortRange
-                */
             }
         }
         private void saveFtpServerNetworkProperties(object sender, EventArgs e)

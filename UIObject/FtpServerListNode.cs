@@ -31,7 +31,7 @@ namespace UIObject
             ListItem listItem;
             initListView(listView);
             this.addFTPServerItem.ListItemType = ListItemType.AddFTPServerItem;
-            ftpServerList = adminServer.getFTPServerList();
+            //ftpServerList = adminServer.getFTPServerList();
             foreach (string serverId in ftpServerList.Keys)
             {
                 ftpServerNode = ((FtpServerNode)Nodes.Find(serverId, true)[0]);
