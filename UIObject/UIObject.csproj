@@ -48,6 +48,7 @@
     <Compile Include="AdminServerAdministrationNode.cs" />
     <Compile Include="AdminServerNode.cs" />
     <Compile Include="AdminUserAdministrationNode.cs" />
+    <Compile Include="DeleteFTPServerNode.cs" />
     <Compile Include="ItemObject.cs" />
     <Compile Include="FtpServerListNode.cs" />
     <Compile Include="FtpServerNetworkPropertiesNode.cs" />

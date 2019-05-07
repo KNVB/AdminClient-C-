@@ -14,5 +14,6 @@ namespace UIObject
         public const int AdminUserAdministrationItem = 3;
         public const int FTPServerListItem = 4;
         public const int AddFTPServerItem = 5;
+        public const int DeleteFTPServerItem = 6;
     }
 }

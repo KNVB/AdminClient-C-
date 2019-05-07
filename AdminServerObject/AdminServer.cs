@@ -23,6 +23,7 @@ namespace AdminServerObject
         private WebSocket _websocket=null;
         private SortedDictionary<string, FtpServerInfo> ftpServerList = null;
         private string errorMessage = "";
+        public string lastServerId = "";
         private static readonly ILog logger = LogManager.GetLogger(typeof(AdminServer));
 
         public int portNo;
@@ -51,6 +52,9 @@ namespace AdminServerObject
             if (String.IsNullOrEmpty(errorMessage))
             {
                 response= jss.Deserialize<ServerResponse>(jss.Serialize(serverResponse));
+                ftpServerInfo.serverId = (string)response.returnObjects["ftpServerId"];
+                ftpServerList.Add(ftpServerInfo.serverId, ftpServerInfo);
+                lastServerId = ftpServerInfo.serverId;
             }
             else
             {
@@ -133,6 +137,11 @@ namespace AdminServerObject
         }
         public SortedDictionary<string, FtpServerInfo> getFTPServerList()
         {
+            return this.ftpServerList;
+        }
+       /* 
+        public SortedDictionary<string, FtpServerInfo> getFTPServerList()
+        {
             ftpServerList = null;
             Request request = new Request();
             request.action = "GetFTPServerList";
@@ -147,7 +156,7 @@ namespace AdminServerObject
                 throw websocketException;
             }
             return ftpServerList;
-        }
+        }*/
         public List<string>getIPAddressList()
         {
             List<string> result = null;
@@ -165,7 +174,7 @@ namespace AdminServerObject
             }
             return result;
         }
-        public FtpServerInfo getInitialFtpServerInfo()
+     /*   public FtpServerInfo getInitialFtpServerInfo()
         {
             FtpServerInfo result=null;
             Request request = new Request();
@@ -181,7 +190,7 @@ namespace AdminServerObject
                 throw websocketException;
             }
             return result;
-        }
+        }*/
         public bool login(string userName, string password)
         {
             bool result = true;
@@ -195,6 +204,7 @@ namespace AdminServerObject
                 if (serverResponse.responseCode == 0)
                 {
                     logger.Info("Login to admin. server successfully.");
+                    this.ftpServerList = jss.Deserialize<SortedDictionary<string, FtpServerInfo>>(jss.Serialize(serverResponse.returnObjects["ftpServerList"]));
                     result = true;
                 }
                 else
@@ -212,6 +222,10 @@ namespace AdminServerObject
                 throw websocketException;
             }
             return result;
+        }
+        public void removeFtpServer(string ftpServerId)
+        {
+            throw new NotImplementedException();
         }
         public ServerResponse saveFtpServerNetworkProperties(FtpServerInfo ftpServerInfo, string serverId)
         {

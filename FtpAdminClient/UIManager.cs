@@ -16,11 +16,25 @@ namespace FtpAdminClient
             rootNode = uiObjFactory.getRootNode();
             this.adminServerManager = adminServerManager;
         }
+        public void deleteFtpServer(DeleteFTPServerNode deleteFTPServerNode, TreeView treeView1)
+        {
+            DialogResult dialogResult = MessageBox.Show(getConfirmDelFTPServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AdminServer adminServer = deleteFTPServerNode.adminServer;
+                //adminServer.removeFtpServer(deleteFTPServerNode.ftpServerId);
+                treeView1.Nodes.Remove(deleteFTPServerNode.Parent);
+            }
+        }
         private void disconnectServer(string key)
         {
-            adminServerManager.disconnectServer(key);
-            rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
-        }
+            DialogResult dialogResult = MessageBox.Show(getConfirmDisconnectFromAdminServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                adminServerManager.disconnectServer(key);
+                rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
+            }
+        }        
         private string getMessageText(string key)
         {
             return uiObjFactory.getMessageText(key);
@@ -33,27 +47,21 @@ namespace FtpAdminClient
         {
             return rootNode;
         }
-        public void popupAdminUserAdministrationForm(string fullPath)
+        public void popupAdminUserAdministrationForm(AdminServer adminServer)
         {
-            string serverKey = fullPath;
-            int index = serverKey.IndexOf("\\");
-            serverKey = serverKey.Substring(index + 1);
-            index = serverKey.IndexOf("\\");
-            serverKey = serverKey.Substring(0, index);
-            //MessageBox.Show(serverKey);
-
-            AdminUserForm adminUserForm = new AdminUserForm(serverKey);
+            AdminUserForm adminUserForm = new AdminUserForm(adminServer,this);
             adminUserForm.ShowDialog();
 
         }
-        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList,AdminServer adminServer)
+        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ListItem listItem)
         {
-            AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
+            FtpServerListNode ftpServerListNode = (FtpServerListNode)listItem.relatedNode;
+            AddFtpForm addFtpForm = new AddFtpForm(ftpServerListNode.adminServer, this);
             DialogResult dialogresult =addFtpForm.ShowDialog();
             if (dialogresult.Equals(DialogResult.OK))
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                rebuildAdminServerTree(treeView, imageList);
+                ftpServerListNode.rebuildFtpServerTree(treeView);
             }
         }
 
@@ -75,7 +83,7 @@ namespace FtpAdminClient
 
         internal void popupEditFtpServerNetworkPropertiesForm(FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode)
         {
-            EditFtpServerNetworkPropertiesForm efsf = new EditFtpServerNetworkPropertiesForm( ftpServerNetworkPropertiesNode.adminServer, this, ftpServerNetworkPropertiesNode.serverId);
+            EditFtpServerNetworkPropertiesForm efsf = new EditFtpServerNetworkPropertiesForm(ftpServerNetworkPropertiesNode.adminServer, this, ftpServerNetworkPropertiesNode.serverId);
             DialogResult dialogresult = efsf.ShowDialog();
         }
         public void popupMessageBox(string message)
@@ -103,11 +111,7 @@ namespace FtpAdminClient
                 }
             }
         }
-        private void rebuildFtpServerTree(TreeView treeView1, ImageList imageList1, string fullPath)
-        {
-
-        }
-//-----------------------Get Error Message start-----------------------------
+//-----------------------Get Message Text Start-----------------------------
         public string getAddFTPServerSuccessMsg()
         {
             return getMessageText("AddFTPServerSuccess");
@@ -120,7 +124,14 @@ namespace FtpAdminClient
         {
             return getMessageText("AdminServerAddedAlready");
         }
-
+        public string getConfirmDelFTPServerMsg()
+        {
+            return getMessageText("ConfirmDelFTPServer");
+        }
+        public string getConfirmDisconnectFromAdminServerMsg()
+        {
+            return getMessageText("ConfirmDisconnectFromAdminServer");
+        }
         public string getInvalidAdminServerNameOrPortNoMsg()
         {
             return getMessageText("InvalidAdminServerNameOrPortNo");
@@ -162,8 +173,7 @@ namespace FtpAdminClient
         {
             return getMessageText("MissingFTPServerDesc");
         }
-
-//-----------------------Get Error Message end-------------------------------
+//-----------------------Get Message Text End-------------------------------
 //-----------------------Get Label Start-------------------------------------
         public string getAddLabel()
         {
@@ -177,6 +187,10 @@ namespace FtpAdminClient
         {
             return getLabelText("AdminServerLabel");
         }
+        public string getAdminUserFormLabel()
+        {
+            return getLabelText("AdminUserFormLabel");
+        }        
         public string getAllIPAddressLabel()
         {
             return getLabelText("AllIPAddressLabel");
@@ -184,7 +198,11 @@ namespace FtpAdminClient
         public string getCancelButtonLabel()
         {
             return getLabelText("CancelButtonLabel");
-        }
+        }       
+        public string getConfirmLabel()
+        {
+            return getLabelText("ConfirmLabel");
+        }   
         public string getConnectLabel()
         {
             return getLabelText("ConnectLabel");
@@ -257,7 +275,7 @@ namespace FtpAdminClient
         {
             return getLabelText("YesAnswerLabel");
         }
-        //-----------------------Get Label End-------------------------------------
+//-----------------------Get Label End-------------------------------------
 
     }
 }

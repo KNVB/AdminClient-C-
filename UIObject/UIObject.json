@@ -32,32 +32,39 @@
         "description": "Add a FTP server instance",
         "ImageIndex": 4
       },
-      "ftpServerNode": {
+    "ftpServerNode": {
         "colunmNameList": [ "Configuration Item", "Item Description" ],
         "ImageIndex": 8,
         "SelectedImageIndex": 8,
+        "deleteFTPServerNode": {
+            "Text": "Remove This FTP Server",
+            "Name": "Remove This FTP Server",
+            "description": "Remove this FTP server instance",
+            "ImageIndex": 9,
+            "SelectedImageIndex":9
+        },
         "ftpServerNetworkPropertiesNode": {
-          "Text": "Edit Network Properties",
-          "Name": "Edit Network Properties",
-          "ImageIndex": 10,
-          "SelectedImageIndex": 10,
-          "description": "Edit FTP server network related propperties."
+            "Text": "Edit Network Properties",
+            "Name": "Edit Network Properties",
+            "ImageIndex": 10,
+            "SelectedImageIndex": 10,
+            "description": "Edit FTP server network related propperties."
         },
         "ftpUserGroupsListNode": {
-          "Text": "Groups",
-          "Name": "Groups",
-          "ImageIndex": 7,
-          "SelectedImageIndex": 7,
-          "description": "FTP server user group administration."
+            "Text": "Groups",
+            "Name": "Groups",
+            "ImageIndex": 7,
+            "SelectedImageIndex": 7,
+            "description": "FTP server user group administration."
         },
         "ftpUsersListNode": {
-          "Text": "Users",
-          "Name": "Users",
-          "ImageIndex": 6,
-          "SelectedImageIndex": 6,
-          "description": "FTP server user administration."
+            "Text": "Users",
+            "Name": "Users",
+            "ImageIndex": 6,
+            "SelectedImageIndex": 6,
+            "description": "FTP server user administration."
         }
-      }
+    }
     }
   },
   "RootNode": {

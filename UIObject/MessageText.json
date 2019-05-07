@@ -2,6 +2,8 @@
     "AddFTPServerSuccess": "Server is added successfully.",
     "AddressOrPortNotAvailable": "Some of the specified address and port combination is/are not available.",
     "AdminServerAddedAlready": "The specified server has been added already.",
+    "ConfirmDelFTPServer": "Delete this FTP Server instance?",
+    "ConfirmDisconnectFromAdminServer": "Disconnect from this admin. server?",
     "InvalidAdminServerNameOrPortNo": "Invalid admin. server name or port no.",
     "InvalidAdminUserOrPassword": "Invalid admin. user or password",
     "InvalidControlPortNo": "Please enter an valid control port no.(0-65535).",

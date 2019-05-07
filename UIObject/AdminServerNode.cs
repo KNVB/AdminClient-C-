@@ -41,6 +41,6 @@ namespace UIObject
             listView.Items.Add(listItem);
             
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
+        }       
     }
 }

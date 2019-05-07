@@ -31,8 +31,6 @@ namespace UIObject
                 json = streamReader.ReadToEnd();
                 objectList = JObject.Parse(json);
             }
-
-            
         }
         public AdminServerNode getAdminServerNode(AdminServer adminServer)
         {

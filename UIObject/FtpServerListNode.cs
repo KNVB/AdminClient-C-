@@ -9,18 +9,20 @@ namespace UIObject
     {
         public ListItem addFTPServerItem;
         private FtpServerNode ftpServerNode;
+        private JToken token;
         private SortedDictionary<string, FtpServerInfo> ftpServerList;
         public FtpServerListNode(JToken token, AdminServer adminServer) : base(token, adminServer)
         {
             nodeType = NodeType.FTPServerListNode;
             ftpServerList = adminServer.getFTPServerList();
+            this.token = token;
             this.Nodes.Clear();
             foreach (FtpServerInfo ftpServerInfo in ftpServerList.Values)
             {
-                ftpServerNode = new FtpServerNode(token["ftpServerNode"], adminServer, ftpServerInfo.description, ftpServerInfo.serverId);
+                ftpServerNode = new FtpServerNode(this.token["ftpServerNode"], adminServer, ftpServerInfo.description, ftpServerInfo.serverId);
                 this.Nodes.Add(ftpServerNode);
             }
-            this.addFTPServerItem = new ListItem(token["addFTPServerItem"]);
+            this.addFTPServerItem = new ListItem(this.token["addFTPServerItem"]);
             this.addFTPServerItem.relatedNode = this;
             this.addFTPServerItem.ListItemType = ListItemType.AddFTPServerItem;
         }
@@ -60,6 +62,22 @@ namespace UIObject
             }
             listView.Items.Add(this.addFTPServerItem);
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+        public void rebuildFtpServerTree(TreeView treeView)
+        {
+            FtpServerNode ftpServerNode;
+            SortedDictionary<string, FtpServerInfo> ftpServerList = adminServer.getFTPServerList();
+            this.Nodes.Clear();
+            foreach (FtpServerInfo ftpServerInfo in ftpServerList.Values)
+            {
+                ftpServerNode = new FtpServerNode(this.token["ftpServerNode"], adminServer, ftpServerInfo.description, ftpServerInfo.serverId);
+                this.Nodes.Add(ftpServerNode);
+                if (adminServer.lastServerId.Equals(ftpServerInfo.serverId))
+                {
+                    treeView.SelectedNode = ftpServerNode;
+                    this.Expand();
+                }
+            }
         }
     }
 }
