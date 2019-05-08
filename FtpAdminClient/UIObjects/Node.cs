@@ -33,6 +33,7 @@ namespace FtpAdminClient
 
             if (obj.colunmNameList!=null)
                 this.colunmNameList = obj.colunmNameList.ToObject<List<string>>();
+            this.ContextMenuStrip = new ContextMenuStrip();
         }
         public void initListView(ListView listView)
         {

@@ -16,7 +16,6 @@ namespace FtpAdminClient
             this.Name = this.Text;
             this.Nodes.Add(adminServerAdministrationNode);
             this.Nodes.Add(ftpServerListNode);
-            this.ContextMenuStrip = new ContextMenuStrip();
         }
         public void handleSelectEvent(ListView listView)
         {
