@@ -6,15 +6,12 @@ namespace FtpAdminClient
 {
     public class FtpServerNode:Node
     {
-        public ListItem deleteFTPServerItem;
         private FtpUserListNode ftpUsersListNode=null;
         private FtpUserGroupsListNode ftpUserGroupsListNode=null;
         private FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode = null;
         public FtpServerNode(JToken token, AdminServer adminServer, string serverDesc,string serverId) : base(token, adminServer)
         {
             nodeType = NodeType.FTPServerNode;
-            deleteFTPServerItem=new ListItem(token["deleteFTPServerItem"]);
-            deleteFTPServerItem.ListItemType = ListItemType.DeleteFTPServerItem;
             ftpUsersListNode = new FtpUserListNode(token["ftpUsersListNode"], adminServer,serverId);
             ftpUserGroupsListNode =new FtpUserGroupsListNode(token["ftpUserGroupsListNode"], adminServer, serverId);
             ftpServerNetworkPropertiesNode = new FtpServerNetworkPropertiesNode(token["ftpServerNetworkPropertiesNode"], adminServer, serverId);
@@ -55,8 +52,6 @@ namespace FtpAdminClient
             listItem.SubItems.Add(ftpUserGroupsListNode.description);
             listItem.ImageIndex = ftpUserGroupsListNode.ImageIndex;
             listView.Items.Add(listItem);
-
-            listView.Items.Add(this.deleteFTPServerItem);
 
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
