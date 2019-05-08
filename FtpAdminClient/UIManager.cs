@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using UIObject;
 using AdminServerObject;
 using System.Windows.Forms;
 
@@ -53,7 +51,7 @@ namespace FtpAdminClient
             adminUserForm.ShowDialog();
 
         }
-        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ListItem listItem)
+        internal void popupAddFTPServerDiaglog(SplitContainer splitContainer, TreeView treeView, ImageList imageList, ListItem listItem)
         {
             FtpServerListNode ftpServerListNode = (FtpServerListNode)listItem.relatedNode;
             AddFtpForm addFtpForm = new AddFtpForm(ftpServerListNode.adminServer, this);
@@ -61,7 +59,8 @@ namespace FtpAdminClient
             if (dialogresult.Equals(DialogResult.OK))
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-                ftpServerListNode.rebuildFtpServerTree(treeView);
+                //ftpServerListNode.rebuildFtpServerTree(treeView);
+                rebuildFTPServerTree(ftpServerListNode,treeView, imageList);
             }
         }
 
@@ -108,6 +107,27 @@ namespace FtpAdminClient
                 {
                     treeView1.SelectedNode = adminServerNode;
                     adminServerNode.Expand();
+                }
+            }
+        }
+        private void rebuildFTPServerTree(FtpServerListNode ftpServerListNode,TreeView treeView, ImageList imageList1)
+        {
+            FtpServerNode ftpServerNode;
+            AdminServer adminServer = ftpServerListNode.adminServer;
+            ftpServerListNode.Nodes.Clear();
+            foreach (FtpServerInfo ftpServerInfo in adminServer.getFTPServerList().Values)
+            {
+                ftpServerNode = ftpServerListNode.genFtpServerNode(ftpServerInfo.description, ftpServerInfo.serverId);
+                ToolStripMenuItem removeServerToolStrip = new ToolStripMenuItem();
+                removeServerToolStrip.Text = getRemoveFtpServerLabel();
+                removeServerToolStrip.Image = imageList1.Images[9];
+
+                ftpServerNode.ContextMenuStrip.Items.Add(removeServerToolStrip);
+                ftpServerListNode.Nodes.Add(ftpServerNode);
+                if (adminServer.lastServerId.Equals(ftpServerInfo.serverId))
+                {
+                    treeView.SelectedNode = ftpServerNode;
+                    ftpServerListNode.Expand();
                 }
             }
         }
@@ -250,6 +270,10 @@ namespace FtpAdminClient
         public string getPortNoLabel()
         {
             return getLabelText("PortNoLabel") + ":";
+        }
+        public string getRemoveFtpServerLabel()
+        {
+            return getLabelText("RemoveThisFtpServerLabel");
         }
         public string getSaveChangeButtonLabel()
         {

@@ -6,7 +6,7 @@ using AdminServerObject;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace UIObject
+namespace FtpAdminClient
 {
     public class UIObjFactory
     {
@@ -16,17 +16,17 @@ namespace UIObject
         string json;
         public UIObjFactory()
         {
-            using (StreamReader streamReader = new StreamReader("MessageText.json"))
+            using (StreamReader streamReader = new StreamReader(@"json\MessageText.json"))
             {
                 json = streamReader.ReadToEnd();
                 messageTextList = JObject.Parse(json);
             }
-            using (StreamReader streamReader = new StreamReader("Label.json"))
+            using (StreamReader streamReader = new StreamReader(@"json\Label.json"))
             {
                 json = streamReader.ReadToEnd();
                 labelList = JObject.Parse(json);
             }
-            using (StreamReader streamReader = new StreamReader("UIObject.json"))
+            using (StreamReader streamReader = new StreamReader(@"json\UIObject.json"))
             {
                 json = streamReader.ReadToEnd();
                 objectList = JObject.Parse(json);

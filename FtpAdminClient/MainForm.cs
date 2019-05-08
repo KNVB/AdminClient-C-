@@ -1,7 +1,6 @@
 ﻿using AdminServerObject;
 using System;
 using System.Windows.Forms;
-using UIObject;
 namespace FtpAdminClient
 {
     public partial class MainForm : Form
@@ -93,7 +92,7 @@ namespace FtpAdminClient
                     uiManager.popupConnectToAdminServerDiaglog(splitContainer, Panel1Tree,  imageList1);
                     break;
                 case ListItemType.AddFTPServerItem:
-                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree, listItem);
+                    uiManager.popupAddFTPServerDiaglog(splitContainer, Panel1Tree, imageList1, listItem);
                     break;
                 default:
                     splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);

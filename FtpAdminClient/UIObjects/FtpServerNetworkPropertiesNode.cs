@@ -1,6 +1,6 @@
 ﻿using AdminServerObject;
 using Newtonsoft.Json.Linq;
-namespace UIObject
+namespace FtpAdminClient
 {
     public class FtpServerNetworkPropertiesNode:Node
     {

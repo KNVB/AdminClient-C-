@@ -2,20 +2,19 @@
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 
-namespace UIObject
+namespace FtpAdminClient
 {
     public class FtpServerNode:Node
     {
-        public DeleteFTPServerNode deleteFTPServerNode;
+        public ListItem deleteFTPServerItem;
         private FtpUserListNode ftpUsersListNode=null;
         private FtpUserGroupsListNode ftpUserGroupsListNode=null;
         private FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode = null;
         public FtpServerNode(JToken token, AdminServer adminServer, string serverDesc,string serverId) : base(token, adminServer)
         {
             nodeType = NodeType.FTPServerNode;
-            deleteFTPServerNode=new DeleteFTPServerNode(token["deleteFTPServerNode"], adminServer, serverId);
-            deleteFTPServerNode.adminServer = adminServer;
-         
+            deleteFTPServerItem=new ListItem(token["deleteFTPServerItem"]);
+            deleteFTPServerItem.ListItemType = ListItemType.DeleteFTPServerItem;
             ftpUsersListNode = new FtpUserListNode(token["ftpUsersListNode"], adminServer,serverId);
             ftpUserGroupsListNode =new FtpUserGroupsListNode(token["ftpUserGroupsListNode"], adminServer, serverId);
             ftpServerNetworkPropertiesNode = new FtpServerNetworkPropertiesNode(token["ftpServerNetworkPropertiesNode"], adminServer, serverId);
@@ -24,7 +23,6 @@ namespace UIObject
             this.Nodes.Add(ftpServerNetworkPropertiesNode);
             this.Nodes.Add(ftpUsersListNode);
             this.Nodes.Add(ftpUserGroupsListNode);
-            this.Nodes.Add(deleteFTPServerNode);
         }       
         public void handleSelectEvent(ListView listView)
         {
@@ -58,13 +56,7 @@ namespace UIObject
             listItem.ImageIndex = ftpUserGroupsListNode.ImageIndex;
             listView.Items.Add(listItem);
 
-            listItem = new ListItem();
-            listItem.Text = deleteFTPServerNode.Text;
-            listItem.Name = listItem.Text;
-            listItem.relatedNode = deleteFTPServerNode;
-            listItem.SubItems.Add(deleteFTPServerNode.description);
-            listItem.ImageIndex = deleteFTPServerNode.ImageIndex;
-            listView.Items.Add(listItem);
+            listView.Items.Add(this.deleteFTPServerItem);
 
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }

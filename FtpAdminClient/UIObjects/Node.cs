@@ -3,7 +3,7 @@ using AdminServerObject;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
-namespace UIObject
+namespace FtpAdminClient
 {
     public class Node : TreeNode
     {

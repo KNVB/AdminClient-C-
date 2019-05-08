@@ -36,12 +36,11 @@
         "colunmNameList": [ "Configuration Item", "Item Description" ],
         "ImageIndex": 8,
         "SelectedImageIndex": 8,
-        "deleteFTPServerNode": {
+        "deleteFTPServerItem": {
             "Text": "Remove This FTP Server",
             "Name": "Remove This FTP Server",
             "description": "Remove this FTP server instance",
-            "ImageIndex": 9,
-            "SelectedImageIndex":9
+            "ImageIndex": 9            
         },
         "ftpServerNetworkPropertiesNode": {
             "Text": "Edit Network Properties",

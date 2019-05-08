@@ -1,8 +1,8 @@
-﻿using System;
+﻿
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
-namespace UIObject
+namespace FtpAdminClient
 {
     public class ListItem : ListViewItem
     {

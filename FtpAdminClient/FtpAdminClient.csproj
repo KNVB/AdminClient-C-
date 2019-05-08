@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,34 +49,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFtpForm.cs">
+    <Compile Include="Forms\AddFtpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddFtpForm.Designer.cs">
+    <Compile Include="Forms\AddFtpForm.Designer.cs">
       <DependentUpon>AddFtpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminUserForm.cs">
+    <Compile Include="Forms\AdminUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminUserForm.Designer.cs">
+    <Compile Include="Forms\AdminUserForm.Designer.cs">
       <DependentUpon>AdminUserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectToAdminServerForm.cs">
+    <Compile Include="Forms\ConnectToAdminServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectToAdminServerForm.Designer.cs">
+    <Compile Include="Forms\ConnectToAdminServerForm.Designer.cs">
       <DependentUpon>ConnectToAdminServerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetailSetting.cs">
+    <Compile Include="Forms\DetailSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetailSetting.Designer.cs">
+    <Compile Include="Forms\DetailSetting.Designer.cs">
       <DependentUpon>DetailSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditFtpServerNetworkPropertiesForm.cs">
+    <Compile Include="Forms\EditFtpServerNetworkPropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditFtpServerNetworkPropertiesForm.Designer.cs">
+    <Compile Include="Forms\EditFtpServerNetworkPropertiesForm.Designer.cs">
       <DependentUpon>EditFtpServerNetworkPropertiesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -81,25 +85,41 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NetworkPropertiesForm.cs">
+    <Compile Include="Forms\NetworkPropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NetworkPropertiesForm.Designer.cs">
+    <Compile Include="Forms\NetworkPropertiesForm.Designer.cs">
       <DependentUpon>NetworkPropertiesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIManager.cs" />
-    <EmbeddedResource Include="ConnectToAdminServerForm.resx">
+    <Compile Include="UIObjects\AdminServerAdministrationNode.cs" />
+    <Compile Include="UIObjects\AdminServerNode.cs" />
+    <Compile Include="UIObjects\AdminUserAdministrationNode.cs" />
+    <Compile Include="UIObjects\DeleteFTPServerNode.cs" />
+    <Compile Include="UIObjects\FtpServerListNode.cs" />
+    <Compile Include="UIObjects\FtpServerNetworkPropertiesNode.cs" />
+    <Compile Include="UIObjects\FtpServerNode.cs" />
+    <Compile Include="UIObjects\FtpUserGroupsListNode.cs" />
+    <Compile Include="UIObjects\FtpUserListNode.cs" />
+    <Compile Include="UIObjects\ItemObject.cs" />
+    <Compile Include="UIObjects\ListItem.cs" />
+    <Compile Include="UIObjects\ListItemType.cs" />
+    <Compile Include="UIObjects\Node.cs" />
+    <Compile Include="UIObjects\NodeType.cs" />
+    <Compile Include="UIObjects\RootNode.cs" />
+    <Compile Include="UIObjects\UIObjFactory.cs" />
+    <EmbeddedResource Include="Forms\ConnectToAdminServerForm.resx">
       <DependentUpon>ConnectToAdminServerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DetailSetting.resx">
+    <EmbeddedResource Include="Forms\DetailSetting.resx">
       <DependentUpon>DetailSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NetworkPropertiesForm.resx">
+    <EmbeddedResource Include="Forms\NetworkPropertiesForm.resx">
       <DependentUpon>NetworkPropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -112,6 +132,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +142,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="json\Label.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="json\MessageText.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="json\UIObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -130,11 +160,8 @@
       <Project>{e28b709f-e4d7-4cb2-b45c-0fe90ea8053b}</Project>
       <Name>AdminServerObject</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UIObject\UIObject.csproj">
-      <Project>{7654b780-3075-4e4e-be4b-95d081daba6f}</Project>
-      <Name>UIObject</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

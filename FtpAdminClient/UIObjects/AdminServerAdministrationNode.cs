@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using AdminServerObject;
-namespace UIObject
+namespace FtpAdminClient
 {
     public class AdminServerAdministrationNode:Node
     {

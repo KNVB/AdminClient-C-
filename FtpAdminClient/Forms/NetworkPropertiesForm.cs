@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using AdminServerObject;
 using System.Windows.Forms;
-using UIObject;
 
 namespace FtpAdminClient
 {

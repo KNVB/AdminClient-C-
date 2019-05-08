@@ -18,6 +18,7 @@
     "PasswordLabel": "Password",
     "PassiveModePortRangeLabel": "Passive Mode Port Range",
     "PortNoLabel": "Port No.",
+    "RemoveThisFtpServerLabel":"Remove This FTP Server",
     "SaveChangeButtonLabel": "Save Change",
     "ServerNameLabel": "Server Name",
     "SoftwareName": "My FTP server admin. console",

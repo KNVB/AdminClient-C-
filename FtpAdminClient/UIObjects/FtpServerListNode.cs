@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace UIObject
+namespace FtpAdminClient
 {
     public class FtpServerListNode : Node
     {
@@ -26,7 +26,10 @@ namespace UIObject
             this.addFTPServerItem.relatedNode = this;
             this.addFTPServerItem.ListItemType = ListItemType.AddFTPServerItem;
         }
-
+        public FtpServerNode genFtpServerNode(string description, string serverId)
+        {
+            return new FtpServerNode(this.token["ftpServerNode"], adminServer, description, serverId); 
+        }
         public void handleSelectEvent(ListView listView)
         {
             FtpServerInfo ftpServerInfo;
@@ -62,22 +65,6 @@ namespace UIObject
             }
             listView.Items.Add(this.addFTPServerItem);
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-        public void rebuildFtpServerTree(TreeView treeView)
-        {
-            FtpServerNode ftpServerNode;
-            SortedDictionary<string, FtpServerInfo> ftpServerList = adminServer.getFTPServerList();
-            this.Nodes.Clear();
-            foreach (FtpServerInfo ftpServerInfo in ftpServerList.Values)
-            {
-                ftpServerNode = new FtpServerNode(this.token["ftpServerNode"], adminServer, ftpServerInfo.description, ftpServerInfo.serverId);
-                this.Nodes.Add(ftpServerNode);
-                if (adminServer.lastServerId.Equals(ftpServerInfo.serverId))
-                {
-                    treeView.SelectedNode = ftpServerNode;
-                    this.Expand();
-                }
-            }
-        }
+        }       
     }
 }
