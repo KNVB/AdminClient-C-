@@ -60,7 +60,7 @@ namespace FtpAdminClient
             {
                 splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
                 //ftpServerListNode.rebuildFtpServerTree(treeView);
-                rebuildFTPServerTree(ftpServerListNode,treeView, imageList);
+                rebuildFTPServerTree(ftpServerListNode,treeView);
             }
         }
 
@@ -95,13 +95,14 @@ namespace FtpAdminClient
             rootNode.Nodes.Clear();
             foreach (string key in adminServerManager.adminServerList.Keys)
             {
-                adminServerNode = uiObjFactory.getAdminServerNode(adminServerManager.adminServerList[key]);
+                adminServerNode = uiObjFactory.getAdminServerNode(adminServerManager.adminServerList[key], imageList1);
+                /*
                 ToolStripMenuItem disconnect = new ToolStripMenuItem();
                 disconnect.Text = getDeconnectFromAdminServerLabel();
                 disconnect.Click += new EventHandler((sender, e) => disconnectServer(key));
                 disconnect.Image = imageList1.Images[5];
                 adminServerNode.ContextMenuStrip.Items.Add(disconnect);
-
+                */
                 rootNode.Nodes.Add(adminServerNode);
                 if (key == adminServerManager.lastServerKey)
                 {
@@ -110,7 +111,7 @@ namespace FtpAdminClient
                 }
             }
         }
-        private void rebuildFTPServerTree(FtpServerListNode ftpServerListNode,TreeView treeView, ImageList imageList1)
+        private void rebuildFTPServerTree(FtpServerListNode ftpServerListNode,TreeView treeView)
         {
             FtpServerNode ftpServerNode;
             AdminServer adminServer = ftpServerListNode.adminServer;
@@ -118,11 +119,6 @@ namespace FtpAdminClient
             foreach (FtpServerInfo ftpServerInfo in adminServer.getFTPServerList().Values)
             {
                 ftpServerNode = ftpServerListNode.genFtpServerNode(ftpServerInfo.description, ftpServerInfo.serverId);
-                ToolStripMenuItem removeServerToolStrip = new ToolStripMenuItem();
-                removeServerToolStrip.Text = getRemoveFtpServerLabel();
-                removeServerToolStrip.Image = imageList1.Images[9];
-
-                ftpServerNode.ContextMenuStrip.Items.Add(removeServerToolStrip);
                 ftpServerListNode.Nodes.Add(ftpServerNode);
                 if (adminServer.lastServerId.Equals(ftpServerInfo.serverId))
                 {

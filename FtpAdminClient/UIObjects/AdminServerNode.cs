@@ -1,17 +1,28 @@
 ﻿using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using AdminServerObject;
+using System.Collections.Generic;
+
 namespace FtpAdminClient
 {
     public class AdminServerNode : Node
     {
         public AdminServerAdministrationNode adminServerAdministrationNode;
         public FtpServerListNode ftpServerListNode;
-        public AdminServerNode(JToken token, AdminServer adminServer) : base(token, adminServer)
+        private SortedDictionary<string, dynamic> toolStripItemList;
+        public AdminServerNode(JToken token, AdminServer adminServer, ImageList imageList) : base(token, adminServer,imageList)
         {
             nodeType = NodeType.AdminServerNode;
-            adminServerAdministrationNode =new AdminServerAdministrationNode(token["adminServerAdministrationNode"],adminServer);
-            ftpServerListNode=new FtpServerListNode(token["ftpServerListNode"], adminServer);
+            adminServerAdministrationNode =new AdminServerAdministrationNode(token["adminServerAdministrationNode"],adminServer,imageList);
+            ftpServerListNode=new FtpServerListNode(token["ftpServerListNode"], adminServer,imageList);
+            toolStripItemList = token["ToolStripItemList"].ToObject<SortedDictionary<string, dynamic>>();
+            foreach (string key in toolStripItemList.Keys)
+            {
+                ToolStripMenuItem tSI = toolStripItemList[key].ToObject<ToolStripMenuItem>();
+                tSI.Click += (sender, e) => MessageBox.Show(adminServer.serverName+":"+adminServer.portNo);
+                this.ContextMenuStrip.Items.Add(tSI);
+            }
+            this.ContextMenuStrip.ImageList = imageList;
             this.Text = adminServer.serverName + ":" + adminServer.portNo;
             this.Name = this.Text;
             this.Nodes.Add(adminServerAdministrationNode);

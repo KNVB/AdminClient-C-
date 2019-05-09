@@ -11,7 +11,7 @@ namespace FtpAdminClient
         private FtpServerNode ftpServerNode;
         private JToken token;
         private SortedDictionary<string, FtpServerInfo> ftpServerList;
-        public FtpServerListNode(JToken token, AdminServer adminServer) : base(token, adminServer)
+        public FtpServerListNode(JToken token, AdminServer adminServer, ImageList imageList) : base(token, adminServer,imageList)
         {
             nodeType = NodeType.FTPServerListNode;
             ftpServerList = adminServer.getFTPServerList();
@@ -19,7 +19,7 @@ namespace FtpAdminClient
             this.Nodes.Clear();
             foreach (FtpServerInfo ftpServerInfo in ftpServerList.Values)
             {
-                ftpServerNode = new FtpServerNode(this.token["ftpServerNode"], adminServer, ftpServerInfo.description, ftpServerInfo.serverId);
+                ftpServerNode = new FtpServerNode(this.token["ftpServerNode"], adminServer,imageList, ftpServerInfo.description, ftpServerInfo.serverId);
                 this.Nodes.Add(ftpServerNode);
             }
             this.addFTPServerItem = new ListItem(this.token["addFTPServerItem"]);
@@ -28,7 +28,7 @@ namespace FtpAdminClient
         }
         public FtpServerNode genFtpServerNode(string description, string serverId)
         {
-            return new FtpServerNode(this.token["ftpServerNode"], adminServer, description, serverId); 
+            return new FtpServerNode(this.token["ftpServerNode"], adminServer,imageList, description, serverId); 
         }
         public void handleSelectEvent(ListView listView)
         {

@@ -7,14 +7,16 @@ namespace FtpAdminClient
 {
     public class Node : TreeNode
     {
-        public AdminServer adminServer=null;
-        public int nodeType=-1;
+        internal AdminServer adminServer=null;
+        internal ImageList imageList;
+        internal int nodeType=-1;
         internal List<string> colunmNameList { get; set; }
         internal string description { get; set; }
         internal dynamic obj= null;
-        public Node(JToken token,AdminServer adminServer)
+        public Node(JToken token,AdminServer adminServer,ImageList imageList)
         {
             this.adminServer = adminServer;
+            this.imageList = imageList;
             init(token);
         }
         public Node(JToken token)

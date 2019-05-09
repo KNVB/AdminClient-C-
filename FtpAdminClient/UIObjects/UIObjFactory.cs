@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Forms;
 using System.IO;
 using AdminServerObject;
 using Newtonsoft.Json;
@@ -32,9 +32,9 @@ namespace FtpAdminClient
                 objectList = JObject.Parse(json);
             }
         }
-        public AdminServerNode getAdminServerNode(AdminServer adminServer)
+        public AdminServerNode getAdminServerNode(AdminServer adminServer,ImageList imageList)
         {
-            AdminServerNode adminServerNode=new AdminServerNode(getObj("adminServerNode"),adminServer);
+            AdminServerNode adminServerNode=new AdminServerNode(getObj("adminServerNode"),adminServer,imageList);
             return adminServerNode;
         }
         public string getMessageText(string key)

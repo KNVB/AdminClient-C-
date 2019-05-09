@@ -6,10 +6,10 @@ namespace FtpAdminClient
     public class AdminServerAdministrationNode:Node
     {
         public AdminUserAdministrationNode adminUserAdministrationNode;
-        public AdminServerAdministrationNode(JToken token, AdminServer adminServer) : base(token, adminServer)
+        public AdminServerAdministrationNode(JToken token, AdminServer adminServer, ImageList imageList) : base(token, adminServer,imageList)
         {
             nodeType = NodeType.AdminServerAdministrationNode;
-            adminUserAdministrationNode = new AdminUserAdministrationNode(token["adminUserAdministrationNode"], adminServer);
+            adminUserAdministrationNode = new AdminUserAdministrationNode(token["adminUserAdministrationNode"], adminServer,imageList);
             this.Nodes.Add(adminUserAdministrationNode);
         }
         public void handleSelectEvent(ListView listView)

@@ -3,6 +3,12 @@
     "ImageIndex": 2,
     "SelectedImageIndex": 2,
     "colunmNameList": [ "Item", "Item Description" ],
+    "ToolStripItemList": {
+        "DiscoonectAdminServer": {
+            "Text": "Disconnect from the admin. server",
+            "ImageIndex": 5
+        }
+    },
     "adminServerAdministrationNode": {
       "Text": "Administration",
       "Name": "Administration",
@@ -36,6 +42,20 @@
         "colunmNameList": [ "Configuration Item", "Item Description" ],
         "ImageIndex": 8,
         "SelectedImageIndex": 8,
+        "ToolStripItemList": {
+            "StartFTPServer": {
+                "Text": "Go online",
+                "ImageIndex": 11
+            },
+            "StopFTPServer": {
+                "Text": "Go offline",
+                "ImageIndex": 12
+            },
+            "DelFTPServer": {
+                "Text": "Delete this FTP Server instance",
+                "ImageIndex": 5
+            }
+        }, 
         "ftpServerNetworkPropertiesNode": {
             "Text": "Edit Network Properties",
             "Name": "Edit Network Properties",
