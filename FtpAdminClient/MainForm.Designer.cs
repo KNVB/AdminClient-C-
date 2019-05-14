@@ -118,18 +118,20 @@ namespace FtpAdminClient
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "win7_ico_shell32_dll-216.jpg");
-            this.imageList1.Images.SetKeyName(1, "icons8-root-server-24.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-root-server-48.png");
-            this.imageList1.Images.SetKeyName(3, "1_-_Data_Center-512.png");
-            this.imageList1.Images.SetKeyName(4, "Button Add.png");
-            this.imageList1.Images.SetKeyName(5, "Button Close.png");
-            this.imageList1.Images.SetKeyName(6, "win7_ico_shell32_dll-170.jpg");
-            this.imageList1.Images.SetKeyName(7, "Admin-icon.png");
-            this.imageList1.Images.SetKeyName(8, "Home-Server-icon.png");
-            this.imageList1.Images.SetKeyName(9, "Button Delete.png");
-            this.imageList1.Images.SetKeyName(10, "icons8-edit-property-24.png");
-            this.imageList1.Images.SetKeyName(11, "Button Play.png");
-            this.imageList1.Images.SetKeyName(12, "Button Stop.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-edit-property-24.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-root-server-24.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-root-server-48.png");
+            this.imageList1.Images.SetKeyName(4, "1_-_Data_Center-512.png");
+            this.imageList1.Images.SetKeyName(5, "Home-Server-icon.png");
+            this.imageList1.Images.SetKeyName(6, "Button Add.png");
+            this.imageList1.Images.SetKeyName(7, "Button Close.png");
+            this.imageList1.Images.SetKeyName(8, "Button Delete.png");
+            this.imageList1.Images.SetKeyName(9, "Button Play.png");
+            this.imageList1.Images.SetKeyName(10, "Button Stop.png");
+            this.imageList1.Images.SetKeyName(11, "win7_ico_shell32_dll-170.jpg");
+            this.imageList1.Images.SetKeyName(12, "Admin-icon.png");
+            this.imageList1.Images.SetKeyName(13, "ftp-user-icon.png");
+            this.imageList1.Images.SetKeyName(14, "ftp-user-group-icon.png");
             // 
             // settingList
             // 

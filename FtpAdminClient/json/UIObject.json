@@ -1,26 +1,26 @@
 ﻿{
   "adminServerNode": {
-    "ImageIndex": 2,
-    "SelectedImageIndex": 2,
+    "ImageIndex": 3,
+    "SelectedImageIndex": 3,
     "colunmNameList": [ "Item", "Item Description" ],
     "ToolStripItemList": {
         "DiscoonectAdminServer": {
             "Text": "Disconnect from the admin. server",
-            "ImageIndex": 5
+            "ImageIndex": 7
         }
     },
     "adminServerAdministrationNode": {
       "Text": "Administration",
       "Name": "Administration",
-      "ImageIndex": 7,
-      "SelectedImageIndex": 7,
+      "ImageIndex": 12,
+      "SelectedImageIndex": 12,
       "colunmNameList": [ "Item", "Item Description" ],
       "description": "Manage admin. server",
       "adminUserAdministrationNode": {
         "Text": "Admin. Users",
         "Name": "Admin. Users",
-        "ImageIndex": 6,
-        "SelectedImageIndex": 6,
+        "ImageIndex": 11,
+        "SelectedImageIndex": 11,
         "colunmNameList": [ "Item Name", "Description" ],
         "description": "Manage admin. user"
       }
@@ -28,53 +28,65 @@
     "ftpServerListNode": {
       "Text": "FTP Server List",
       "Name": "FTP Server List",
-      "ImageIndex": 3,
-      "SelectedImageIndex": 3,
+      "ImageIndex": 4,
+      "SelectedImageIndex": 4,
       "colunmNameList": [ "Description", "User Connection", "Status" ],
       "description": "All FTP server that under the remote server administration.",
       "addFTPServerItem": {
         "Text": "Add FTP Server",
         "Name": "Add FTP Server",
         "description": "Add a FTP server instance",
-        "ImageIndex": 4
+        "ImageIndex": 6
       },
     "ftpServerNode": {
         "colunmNameList": [ "Configuration Item", "Item Description" ],
-        "ImageIndex": 8,
-        "SelectedImageIndex": 8,
+        "ImageIndex": 5,
+        "SelectedImageIndex": 5,
         "ToolStripItemList": {
             "StartFTPServer": {
                 "Text": "Go online",
-                "ImageIndex": 11
+                "ImageIndex": 9
             },
             "StopFTPServer": {
                 "Text": "Go offline",
-                "ImageIndex": 12
+                "ImageIndex": 10
             },
             "DelFTPServer": {
                 "Text": "Delete this FTP Server instance",
-                "ImageIndex": 5
+                "ImageIndex": 7
             }
         }, 
         "ftpServerNetworkPropertiesNode": {
             "Text": "Edit Network Properties",
             "Name": "Edit Network Properties",
-            "ImageIndex": 10,
-            "SelectedImageIndex": 10,
+            "ImageIndex": 1,
+            "SelectedImageIndex": 1,
             "description": "Edit FTP server network related propperties."
         },
         "ftpUserGroupsListNode": {
+            "addFtpUserGroupItem": {
+                "Text": "Add an user group",
+                "Name": "Add an user group",
+                "description": "Add a FTP server user group",
+                "ImageIndex": 6
+            },
             "Text": "Groups",
             "Name": "Groups",
-            "ImageIndex": 7,
-            "SelectedImageIndex": 7,
+            "ImageIndex": 14,
+            "SelectedImageIndex": 14,
             "description": "FTP server user group administration."
         },
         "ftpUsersListNode": {
+            "addFtpUserItem": {
+                "Text": "Add an user",
+                "Name": "Add an user",
+                "description": "Add a FTP server user",
+                "ImageIndex": 6
+            },
             "Text": "Users",
             "Name": "Users",
-            "ImageIndex": 6,
-            "SelectedImageIndex": 6,
+            "ImageIndex": 13,
+            "SelectedImageIndex": 13,
             "description": "FTP server user administration."
         }
     }
@@ -87,7 +99,7 @@
     "addAdminServerItem": {
       "Text": "Add Admin. Server",
       "Name": "Add Admin. Server",
-      "ImageIndex": 4
+      "ImageIndex": 6
     }
   }
 }
