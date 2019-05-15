@@ -1,14 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using AdminServerObject;
-using System.Windows.Forms;
+﻿using AdminServerObject;
 
 namespace FtpAdminClient
 {
-    public class AdminUserAdministrationNode : Node
+    internal class AdminUserAdministrationNode : Node
     {
-        public AdminUserAdministrationNode(JToken token, AdminServer adminServer, ImageList imageList) : base(token, adminServer,imageList)
+        internal AdminUserAdministrationNode(AdminServer adminServer, UIManager uiManager) : base(adminServer, uiManager)
         {
-            this.nodeType = NodeType.AdminUserAdministrationNode;
         }
     }
 }

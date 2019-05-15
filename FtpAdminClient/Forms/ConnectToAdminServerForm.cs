@@ -11,7 +11,7 @@ namespace FtpAdminClient
         private string adminUserName = "", adminUserPassword = "";
         private AdminServerManager adminServerManager;
         private UIManager uiManager;
-        public ConnectToAdminServerForm(UIManager uiManager, AdminServerManager adminServerManager)
+        internal ConnectToAdminServerForm(UIManager uiManager, AdminServerManager adminServerManager)
         {
             InitializeComponent();
             this.uiManager = uiManager;

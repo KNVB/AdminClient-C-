@@ -1,26 +1,39 @@
 ﻿using AdminServerObject;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+
 namespace FtpAdminClient
 {
     internal class FtpServerListNode : Node
     {
-        internal AddFtpServerItem addFTPServerItem;
-        internal FtpServerListNode(AdminServer adminServer, UIManager uiManager) : base(adminServer, uiManager)
+        public AddFtpServerItem addFTPServerItem;
+        internal JToken token;
+        internal SortedDictionary<string, FtpServerInfo> ftpServerList;
+        internal FtpServerListNode(JToken token,AdminServer adminServer, UIManager uiManager) : base(token, adminServer,uiManager)
         {
+            this.token= token; 
+            updateFtpServerList();
+            this.addFTPServerItem = new AddFtpServerItem(token["addFTPServerItem"]);
+            this.addFTPServerItem.adminServer=adminServer;
+            this.addFTPServerItem.ftpServerListNode = this;
+            this.token= token;
+
         }
-        internal void init(JToken token)
+        internal void updateFtpServerList()
         {
-            base.init(token);
-            addFTPServerItem = new AddFtpServerItem(token["addFTPServerItem"]);
-            this.addFTPServerItem.relatedNode = this;
-            uiManager.refreshFtpServerListNode(adminServer, this);
+            this.Nodes.Clear();
+            ftpServerList = adminServer.getFTPServerList();
+            foreach (FtpServerInfo ftpServerInfo in ftpServerList.Values)
+            {
+                FtpServerNode ftpServerNode = new FtpServerNode(token["ftpServerNode"], adminServer, uiManager, ftpServerInfo.description, ftpServerInfo.serverId);
+                this.Nodes.Add(ftpServerNode);
+            }
         }
         internal override void doSelect()
         {
-            SortedDictionary<string, FtpServerInfo> ftpServerList = adminServer.getFTPServerList();
             List<ListItem> itemList = new List<ListItem>();
-            foreach (string serverId in ftpServerList.Keys)
+            this.addFTPServerItem.adminServer = this.adminServer;
+            foreach(string serverId in ftpServerList.Keys)
             {
                 ListItem ftpServerItem = new ListItem();
                 FtpServerNode ftpServerNode = ((FtpServerNode)Nodes.Find(serverId, true)[0]);

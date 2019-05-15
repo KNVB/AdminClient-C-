@@ -13,7 +13,7 @@ namespace FtpAdminClient
             InitializeComponent();
         }
       
-        public EditFtpServerNetworkPropertiesForm(AdminServer adminServer, UIManager uiManager,string serverId) : base(adminServer, uiManager)
+        internal EditFtpServerNetworkPropertiesForm(AdminServer adminServer, UIManager uiManager,string serverId) : base(adminServer, uiManager)
         {
             InitializeComponent();
             bool value;

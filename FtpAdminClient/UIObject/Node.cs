@@ -1,26 +1,33 @@
-﻿using AdminServerObject;
+﻿using System.Collections.Generic;
+using AdminServerObject;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FtpAdminClient
 {
-    internal class Node:TreeNode
+    internal abstract class Node : TreeNode
     {
         internal List<string> colunmNameList { get; set; }
         internal string description { get; set; }
-        internal AdminServer adminServer=null;
-        internal UIManager uiManager=null;
+
+        internal AdminServer adminServer;
+        internal UIManager uiManager;
+        internal Node(JToken token, UIManager uiManager)
+        {
+            this.uiManager = uiManager;
+            init(token);
+        }
+        internal Node(JToken token, AdminServer adminServer, UIManager uiManager)
+        {
+            this.adminServer = adminServer;
+            this.uiManager = uiManager;
+            init(token);
+        }
         internal virtual void doSelect()
         {
 
         }
-        internal Node(AdminServer adminServer, UIManager uiManager)
-        {
-            this.adminServer = adminServer;
-            this.uiManager = uiManager;
-        }
-        internal void init (JToken token)
+        private void init(JToken token)
         {
             dynamic obj = (dynamic)token;
             this.SelectedImageIndex = obj.SelectedImageIndex;

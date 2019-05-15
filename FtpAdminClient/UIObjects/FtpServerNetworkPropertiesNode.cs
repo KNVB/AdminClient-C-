@@ -1,16 +1,20 @@
 ﻿using AdminServerObject;
 using Newtonsoft.Json.Linq;
-using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace FtpAdminClient
 {
-    public class FtpServerNetworkPropertiesNode:Node
+    internal class FtpServerNetworkPropertiesNode : Node
     {
-       public string serverId;
-       public FtpServerNetworkPropertiesNode(JToken token, AdminServer adminServer, ImageList imageList, string serverId) : base(token, adminServer,imageList)
-       {
-            nodeType = NodeType.FTPServerNetworkPropertiesNode;
+        string serverId;
+        internal FtpServerNetworkPropertiesNode(AdminServer adminServer, UIManager uiManager, string serverId) : base(adminServer, uiManager)
+        {
             this.serverId = serverId;
+        }
+        internal override void doSelect()
+        {
+           // List<ListItem> itemList = new List<ListItem>();
+           // uiManager.updateListView(this.colunmNameList, itemList);
         }
     }
 }

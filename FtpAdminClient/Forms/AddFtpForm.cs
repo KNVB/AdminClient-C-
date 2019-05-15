@@ -9,7 +9,7 @@ namespace FtpAdminClient
         {
             InitializeComponent();
         }
-        public AddFtpForm(AdminServer adminServer, UIManager uiManager):base(adminServer, uiManager)
+        internal AddFtpForm(AdminServer adminServer, UIManager uiManager):base(adminServer, uiManager)
         {
             InitializeComponent();
             ipAddressList.SetItemChecked(0, true);

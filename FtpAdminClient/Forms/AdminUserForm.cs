@@ -10,7 +10,7 @@ namespace FtpAdminClient
 {
     public partial class AdminUserForm : DetailSetting
     {
-        public AdminUserForm(AdminServer  adminServer,UIManager uiManager)
+        internal AdminUserForm(AdminServer  adminServer,UIManager uiManager)
         {
             InitializeComponent();
             this.Text +=uiManager.getAdminUserFormLabel()+adminServer.serverName+":"+adminServer.portNo;

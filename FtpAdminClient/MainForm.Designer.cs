@@ -111,7 +111,7 @@ namespace FtpAdminClient
             this.Panel1Tree.Size = new System.Drawing.Size(132, 233);
             this.Panel1Tree.TabIndex = 0;
             this.Panel1Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Panel1Tree_AfterSelect);
-            this.Panel1Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
+           // this.Panel1Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
             // 
             // imageList1
             // 
@@ -171,14 +171,14 @@ namespace FtpAdminClient
               
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.TreeView Panel1Tree;
-        private System.Windows.Forms.ImageList imageList1;
-        private ListView settingList;
+        internal System.Windows.Forms.MenuStrip menuStrip1;
+        internal System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        internal System.Windows.Forms.SplitContainer splitContainer;
+        internal System.Windows.Forms.TreeView Panel1Tree;
+        internal System.Windows.Forms.ImageList imageList1;
+        internal ListView settingList;
     }
 }
 

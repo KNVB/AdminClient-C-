@@ -49,6 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ItemObject.cs" />
+    <Compile Include="UIObjects\AddFtpServerItem.cs" />
+    <Compile Include="UIObjects\AddFtpUserGroupItem.cs" />
+    <Compile Include="UIObjects\AddFtpUserItem.cs" />
+    <Compile Include="UIObjects\AdminUserAdministrationNode.cs" />
+    <Compile Include="UIObjects\FtpServerNetworkPropertiesNode.cs" />
+    <Compile Include="UIObjects\FtpServerNode.cs" />
+    <Compile Include="UIObjects\AddAdminServerItem.cs" />
     <Compile Include="Forms\AddFtpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,21 +101,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="UIManager.cs.old" />
     <Compile Include="UIManager.cs" />
     <Compile Include="UIObjects\AdminServerAdministrationNode.cs" />
     <Compile Include="UIObjects\AdminServerNode.cs" />
-    <Compile Include="UIObjects\AdminUserAdministrationNode.cs" />
-    <Compile Include="UIObjects\DeleteFTPServerNode.cs" />
     <Compile Include="UIObjects\FtpServerListNode.cs" />
-    <Compile Include="UIObjects\FtpServerNetworkPropertiesNode.cs" />
-    <Compile Include="UIObjects\FtpServerNode.cs" />
     <Compile Include="UIObjects\FtpUserGroupsListNode.cs" />
     <Compile Include="UIObjects\FtpUserListNode.cs" />
-    <Compile Include="UIObjects\ItemObject.cs" />
     <Compile Include="UIObjects\ListItem.cs" />
-    <Compile Include="UIObjects\ListItemType.cs" />
     <Compile Include="UIObjects\Node.cs" />
-    <Compile Include="UIObjects\NodeType.cs" />
     <Compile Include="UIObjects\RootNode.cs" />
     <Compile Include="UIObjects\UIObjFactory.cs" />
     <EmbeddedResource Include="Forms\ConnectToAdminServerForm.resx">

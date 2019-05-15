@@ -17,7 +17,7 @@ namespace FtpAdminClient
         {
             InitializeComponent();
         }
-        public NetworkPropertiesForm(AdminServer adminServer, UIManager uiManager)
+        internal NetworkPropertiesForm(AdminServer adminServer, UIManager uiManager)
         {
             this.adminServer = adminServer;
             this.uiManager = uiManager;

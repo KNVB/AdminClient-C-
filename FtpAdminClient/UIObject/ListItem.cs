@@ -1,13 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
+
 namespace FtpAdminClient
 {
-    internal class ListItem:ListViewItem
+    internal class ListItem : ListViewItem
     {
         internal Node relatedNode { get; set; } = null;
         internal ListItem()
-        { 
-}
+        {
+
+        }
         internal ListItem(JToken token)
         {
             dynamic obj = (dynamic)token;
@@ -15,6 +17,7 @@ namespace FtpAdminClient
             this.Text = obj.Text;
             this.Name = obj.Name;
         }
+
         internal virtual void doClick(UIManager uiManager)
         {
             uiManager.selectNode(relatedNode);

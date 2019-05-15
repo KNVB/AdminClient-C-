@@ -1,76 +1,74 @@
 ﻿using AdminServerObject;
-using System.Windows.Forms;
-using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace FtpAdminClient
 {
-    internal class UIManager
+    public class UIManager
     {
         private AdminServerManager adminServerManager;
-        private MainForm mainForm;
         private ListView listView;
         private ImageList imageList;
         private RootNode rootNode;
         private SplitContainer splitContainer;
         private TreeView treeView;
         private UIObjFactory uiObjFactory = null;
-
-
-
-        internal UIManager(MainForm mainForm)
+        public UIManager(TreeView treeView, ListView listView, SplitContainer splitContainer, ImageList imageList, AdminServerManager adminServerManager)
         {
-            adminServerManager = new AdminServerManager();
-            uiObjFactory = new UIObjFactory();
-            this.mainForm = mainForm;
-            this.treeView = mainForm.Panel1Tree;
-            this.listView = mainForm.settingList;
-            this.imageList = mainForm.imageList1;
-            this.splitContainer = mainForm.splitContainer;
-            mainForm.serverToolStripMenuItem.Text = getAdminServerLabel();
-            mainForm.addToolStripMenuItem.Text = getAddLabel();
-            mainForm.exitToolStripMenuItem.Text = getExitLabel();
+            this.adminServerManager = adminServerManager;
+            this.treeView = treeView;
+            this.listView = listView;
+            this.imageList = imageList;
+            this.splitContainer = splitContainer;
+            uiObjFactory = new UIObjFactory(this);
+            rootNode = uiObjFactory.getRootNode();
         }
-
-
-        internal void close()
+        /*
+        public void deleteFtpServer(DeleteFTPServerNode deleteFTPServerNode, TreeView treeView1)
         {
-            adminServerManager.disconnectAllAdminServer();
+            DialogResult dialogResult = MessageBox.Show(getConfirmDelFTPServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AdminServer adminServer = deleteFTPServerNode.adminServer;
+                //adminServer.removeFtpServer(deleteFTPServerNode.ftpServerId);
+                treeView1.Nodes.Remove(deleteFTPServerNode.Parent);
+            }
         }
-        private string getMessageText(string key)
+        */
+        private void disconnectServer(string key)
+        {
+            DialogResult dialogResult = MessageBox.Show(getConfirmDisconnectFromAdminServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                adminServerManager.disconnectServer(key);
+                rootNode.Nodes.Remove(rootNode.Nodes.Find(key, true)[0]);
+            }
+        }
+        public string getMessageText(string key)
         {
             return uiObjFactory.getMessageText(key);
         }
-        private string getLabelText(string key)
+        public string getLabelText(string key)
         {
             return (uiObjFactory.getLabel(key));
         }
-        internal void initMainForm()
+        internal RootNode getRootNode()
         {
-            rootNode = new RootNode(null, this);
-            rootNode.init(uiObjFactory.getObj("RootNode"));
-            rootNode.addAdminServerItem = new AddAdminServerItem(uiObjFactory.getObj("RootNode")["addAdminServerItem"]);
-            rootNode.setAdminServerManager(adminServerManager);
-            this.mainForm.Text = uiObjFactory.getLabel("AppName");
-            rootNode.Text = this.mainForm.Text;
-            treeView.BeginUpdate();
-            treeView.Nodes.Add(rootNode);
-            treeView.EndUpdate();
+            return rootNode;
         }
-        internal void popupAddFtpServerDiaglog(FtpServerListNode ftpServerListNode)
+        internal void popupAdminUserAdministrationForm(AdminServer adminServer)
         {
-            AddFtpForm addFtpForm = new AddFtpForm(ftpServerListNode.adminServer, this);
-            DialogResult dialogresult = addFtpForm.ShowDialog();
-            if (dialogresult.Equals(DialogResult.OK))
-            {
-                refreshFtpServerListNode(ftpServerListNode.adminServer, ftpServerListNode);
-            }
+            AdminUserForm adminUserForm = new AdminUserForm(adminServer, this);
+            adminUserForm.ShowDialog();
+
         }
+
         public void popupAlertBox(string message)
         {
-            MessageBox.Show(message, getAlertLabel(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        internal void popupConnectToAdminServerDiaglog()
+
+        public void popupConnectToAdminServerDiaglog()
         {
             ConnectToAdminServerForm ctsf = new ConnectToAdminServerForm(this, adminServerManager);
             DialogResult dialogresult = ctsf.ShowDialog();
@@ -81,17 +79,14 @@ namespace FtpAdminClient
         }
         public void popupMessageBox(string message)
         {
-            MessageBox.Show(message, getMessageLabel(), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
-        internal void refreshFtpServerListNode(AdminServer adminServer, FtpServerListNode ftpServerListNode)
+        internal void refreshFtpServerListNode(FtpServerListNode ftpServerListNode)
         {
-            SortedDictionary<string, FtpServerInfo> ftpServerList = adminServer.getFTPServerList();
             ftpServerListNode.Nodes.Clear();
-            foreach (string serverId in ftpServerList.Keys)
+            foreach (FtpServerInfo fI in ftpServerListNode.ftpServerList.Values)
             {
-                FtpServerNode ftpServerNode = new FtpServerNode(adminServer, this, serverId);
-                FtpServerInfo fI = ftpServerList[serverId];
-                ftpServerNode.init(uiObjFactory.getObj("ftpServerNode"));
+                FtpServerNode ftpServerNode = new FtpServerNode(ftpServerListNode.token["ftpServerNode"], ftpServerListNode.adminServer, this, fI.description, fI.serverId);
                 foreach (string key in ftpServerNode.toolStripItemList.Keys)
                 {
                     ToolStripMenuItem tSI = ftpServerNode.toolStripItemList[key].ToObject<ToolStripMenuItem>();
@@ -99,30 +94,27 @@ namespace FtpAdminClient
                     ftpServerNode.ContextMenuStrip.Items.Add(tSI);
                 }
                 ftpServerNode.ContextMenuStrip.ImageList = imageList;
-                ftpServerNode.Text = fI.description;
-                ftpServerNode.Name = serverId;
                 ftpServerListNode.Nodes.Add(ftpServerNode);
             }
-            selectNode(ftpServerListNode);
         }
-        
         internal void refreshRootNode()
         {
             splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
             treeView.BeginUpdate();
-
             rootNode.Nodes.Clear();
             foreach (string key in adminServerManager.adminServerList.Keys)
             {
                 AdminServer adminServer = adminServerManager.adminServerList[key];
-                AdminServerNode adminServerNode = new AdminServerNode(adminServer, this);
-                adminServerNode.init(uiObjFactory.getObj("adminServerNode"), key);
+                AdminServerNode adminServerNode = uiObjFactory.getAdminServerNode(adminServer, this);
+                adminServerNode.Text = key;
+                adminServerNode.Name = key;
                 foreach (string id in adminServerNode.toolStripItemList.Keys)
                 {
                     ToolStripMenuItem tSI = adminServerNode.toolStripItemList[id].ToObject<ToolStripMenuItem>();
                     tSI.Click += (sender, e) => MessageBox.Show(adminServer.serverName + ":" + adminServer.portNo);
                     adminServerNode.ContextMenuStrip.Items.Add(tSI);
                 }
+
                 adminServerNode.ContextMenuStrip.ImageList = imageList;
                 rootNode.Nodes.Add(adminServerNode);
                 if (key == adminServerManager.lastServerKey)
@@ -134,34 +126,28 @@ namespace FtpAdminClient
             }
             treeView.EndUpdate();
         }
-        internal void selectNode(Node relatedNode)
+        internal void selectNode(Node n)
         {
-            treeView.SelectedNode = relatedNode;
+            treeView.SelectedNode = n;
         }
-        internal void updateListView(List<string> colunmNameList, List<ListItem> itemList)
+        internal void updateListView(List<string> colunmNameList, List<ListItem> ItemList)
         {
             splitContainer.SelectNextControl((Control)splitContainer, true, true, true, true);
-            if ((colunmNameList != null) && (colunmNameList.Count > 0))
+            this.listView.Items.Clear();
+            this.listView.Columns.Clear();
+            foreach (string headerString in colunmNameList)
             {
-                this.listView.Columns.Clear();
-                foreach (string headerString in colunmNameList)
-                {
-                    ColumnHeader header;
-                    header = new ColumnHeader();
-                    header.Text = headerString;
-                    listView.Columns.Add(header);
-                }
+                ColumnHeader header;
+                header = new ColumnHeader();
+                header.Text = headerString;
+                listView.Columns.Add(header);
             }
-            if ((itemList != null) && (itemList.Count > 0))
-            {
-                this.listView.Items.Clear();
-                foreach (ListItem item in itemList)
-                    listView.Items.Add(item);
-            }
+            foreach (ListItem item in ItemList)
+                listView.Items.Add(item);
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        //-----------------------Get Message Text Start-----------------------------
+//-----------------------Get Message Text Start-----------------------------
         public string getAddFTPServerSuccessMsg()
         {
             return getMessageText("AddFTPServerSuccess");
@@ -182,6 +168,14 @@ namespace FtpAdminClient
         {
             return getMessageText("ConfirmDisconnectFromAdminServer");
         }
+        public string getFtpServerNetworkPropertiesSaveSuccessMsg()
+        {
+            return getMessageText("FtpServerNetworkPropertiesSaveSuccess");
+        }
+        public string getGetFtPServerNetworkPropertiesFailureMsg()
+        {
+            return getMessageText("GetFtPServerNetworkPropertiesFailure");
+        }
         public string getInvalidAdminServerNameOrPortNoMsg()
         {
             return getMessageText("InvalidAdminServerNameOrPortNo");
@@ -198,7 +192,7 @@ namespace FtpAdminClient
         {
             return getMessageText("InvalidPassivePortRange");
         }
-
+         
         public string getMissingAdminPortNoMsg()
         {
             return getMessageText("MissingAdminPortNo");
@@ -223,8 +217,12 @@ namespace FtpAdminClient
         {
             return getMessageText("MissingFTPServerDesc");
         }
-        //-----------------------Get Message Text End-------------------------------
-        //-----------------------Get Label Start-------------------------------------
+        public string getSomeNetworkSettingNotAvailableMsg()
+        {
+            return getMessageText("SomeNetworkSettingNotAvailable");
+        }
+//-----------------------Get Message Text End-------------------------------
+//-----------------------Get Label Start-------------------------------------
         public string getAddLabel()
         {
             return getLabelText("AddLabel");
@@ -240,11 +238,7 @@ namespace FtpAdminClient
         public string getAdminUserFormLabel()
         {
             return getLabelText("AdminUserFormLabel");
-        }
-        public string getAlertLabel()
-        {
-            return getLabelText("AlertLable");
-        }
+        }        
         public string getAllIPAddressLabel()
         {
             return getLabelText("AllIPAddressLabel");
@@ -252,11 +246,11 @@ namespace FtpAdminClient
         public string getCancelButtonLabel()
         {
             return getLabelText("CancelButtonLabel");
-        }
+        }       
         public string getConfirmLabel()
         {
             return getLabelText("ConfirmLabel");
-        }
+        }   
         public string getConnectLabel()
         {
             return getLabelText("ConnectLabel");
@@ -289,10 +283,6 @@ namespace FtpAdminClient
         {
             return getLabelText("FtpServerBindingAddressLabel") + ":";
         }
-        public string getMessageLabel()
-        {
-            return getLabelText("MessageLabel");
-        }
         public string getNoAnswerLabel()
         {
             return getLabelText("NoAnswerLabel");
@@ -317,10 +307,6 @@ namespace FtpAdminClient
         {
             return getLabelText("SaveChangeButtonLabel");
         }
-        public string getServerLabel()
-        {
-            return getLabelText("ServerLabel");
-        }
         public string getServerNameLabel()
         {
             return getLabelText("ServerNameLabel") + ":";
@@ -341,7 +327,7 @@ namespace FtpAdminClient
         {
             return getLabelText("YesAnswerLabel");
         }
-        //-----------------------Get Label End-------------------------------------
+//-----------------------Get Label End-------------------------------------
 
     }
 }

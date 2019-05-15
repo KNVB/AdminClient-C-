@@ -5,10 +5,42 @@ namespace FtpAdminClient
 {
     public partial class MainForm : Form
     {
-        private AdminServerManager adminServerManager;
-        private RootNode rootNode;
         private UIManager uiManager;
-        
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            uiManager.close();
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            uiManager = new UIManager(this);
+            uiManager.initMainForm();
+        }
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            uiManager.popupConnectToAdminServerDiaglog();
+        }
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+        }
+        private void Panel1Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Node n = ((Node)e.Node);
+            n.doSelect();
+        }
+        private void settingList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListItem listItem = (ListItem)settingList.SelectedItems[0];
+            listItem.doClick(uiManager);
+            listItem.Selected = false;
+        }
+        /*
         public MainForm()
         {
             InitializeComponent();
@@ -21,6 +53,7 @@ namespace FtpAdminClient
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             adminServerManager.disconnectAllAdminServer();
             uiManager = null;
         }
@@ -109,6 +142,7 @@ namespace FtpAdminClient
                     }                   
                     break;
             }
-        }       
+        }
+        */
     }    
 }

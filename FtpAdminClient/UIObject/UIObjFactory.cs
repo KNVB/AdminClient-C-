@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.IO;
 using AdminServerObject;
-using Newtonsoft.Json;
+using FtpAdminClient;
 using Newtonsoft.Json.Linq;
 
 namespace FtpAdminClient
@@ -14,8 +12,10 @@ namespace FtpAdminClient
         JObject labelList;
         JObject objectList;
         string json;
-        public UIObjFactory()
+        UIManager uiManager;
+        public UIObjFactory(UIManager uiManager)
         {
+            this.uiManager = uiManager;
             using (StreamReader streamReader = new StreamReader(@"json\MessageText.json"))
             {
                 json = streamReader.ReadToEnd();
@@ -32,7 +32,11 @@ namespace FtpAdminClient
                 objectList = JObject.Parse(json);
             }
         }
-        
+        internal AdminServerNode getAdminServerNode(AdminServer adminServer,UIManager uiManager)
+        {
+            AdminServerNode adminServerNode=new AdminServerNode(getObj("adminServerNode"),adminServer, uiManager);
+            return adminServerNode;
+        }
         public string getMessageText(string key)
         {
             return (string)messageTextList[key];
@@ -41,7 +45,11 @@ namespace FtpAdminClient
         {
             return (string)labelList[key];
         }
-        
+        internal RootNode getRootNode()
+        {
+            RootNode rootNode = new RootNode(getObj("RootNode"),uiManager);
+            return rootNode;
+        }
         public JToken getObj(string key)
         {
             return objectList[key];

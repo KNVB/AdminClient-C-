@@ -1,15 +1,17 @@
-﻿using AdminServerObject;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+using AdminServerObject;
+
 namespace FtpAdminClient
 {
-    internal class RootNode : Node
+    internal class RootNode:Node
     {
         private AdminServerManager adminServerManager;
-        internal AddAdminServerItem addAdminServerItem;
-        internal RootNode(AdminServer adminServer, UIManager uiManager) : base(adminServer, uiManager)
+        private AddAdminServerItem addAdminServerItem;
+        public RootNode(JToken token, UIManager uiManager) : base(token, uiManager)
         {
-            
+            addAdminServerItem = new AddAdminServerItem(token["addAdminServerItem"]);
+
         }
         internal override void doSelect()
         {
@@ -21,18 +23,13 @@ namespace FtpAdminClient
                 listItem.relatedNode = (Node)Nodes.Find(key, true)[0];
                 listItem.Text = key;
                 listItem.Name = listItem.Text;
-                listItem.ImageIndex = listItem.relatedNode.ImageIndex;
+                listItem.ImageIndex = 2;
                 itemList.Add(listItem);
             }
             itemList.Add(this.addAdminServerItem);
             uiManager.updateListView(this.colunmNameList, itemList);
         }
-        internal void init(JToken token)
-        {
-            base.init(token);
-        }
-
-        internal void setAdminServerManager(AdminServerManager adminServerManager)
+        public void setAdminServerManager(AdminServerManager adminServerManager)
         {
             this.adminServerManager = adminServerManager;
             addAdminServerItem.setAdminServerManager(adminServerManager);
