@@ -12,7 +12,7 @@ namespace FtpAdminClient
         }
         internal override void doClick(UIManager uiManager)
         {
-            uiManager.popupAddFtpServerDiaglog((FtpServerListNode)relatedNode);
+            uiManager.popupAddFtpServerDiaglog(adminServer,(FtpServerListNode)relatedNode);
         }
     }
 }

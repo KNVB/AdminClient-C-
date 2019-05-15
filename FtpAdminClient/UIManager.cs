@@ -37,6 +37,11 @@ namespace FtpAdminClient
         {
             adminServerManager.disconnectAllAdminServer();
         }
+        internal void disConnectAdminServer(string key)
+        {
+            adminServerManager.disconnectServer(key);
+            refreshRootNode();
+        }
         private string getMessageText(string key)
         {
             return uiObjFactory.getMessageText(key);
@@ -57,13 +62,13 @@ namespace FtpAdminClient
             treeView.Nodes.Add(rootNode);
             treeView.EndUpdate();
         }
-        internal void popupAddFtpServerDiaglog(FtpServerListNode ftpServerListNode)
+        internal void popupAddFtpServerDiaglog(AdminServer adminServer,FtpServerListNode ftpServerListNode)
         {
-            AddFtpForm addFtpForm = new AddFtpForm(ftpServerListNode.adminServer, this);
+            AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);
             DialogResult dialogresult = addFtpForm.ShowDialog();
             if (dialogresult.Equals(DialogResult.OK))
             {
-                refreshFtpServerListNode(ftpServerListNode.adminServer, ftpServerListNode);
+                refreshFtpServerListNode(adminServer, ftpServerListNode);
             }
         }
         public void popupAlertBox(string message)
@@ -120,7 +125,7 @@ namespace FtpAdminClient
                 foreach (string id in adminServerNode.toolStripItemList.Keys)
                 {
                     ToolStripMenuItem tSI = adminServerNode.toolStripItemList[id].ToObject<ToolStripMenuItem>();
-                    tSI.Click += (sender, e) => MessageBox.Show(adminServer.serverName + ":" + adminServer.portNo);
+                    tSI.Click += (sender, e) => disConnectAdminServer(adminServer.serverName + ":" + adminServer.portNo);
                     adminServerNode.ContextMenuStrip.Items.Add(tSI);
                 }
                 adminServerNode.ContextMenuStrip.ImageList = imageList;
@@ -133,10 +138,14 @@ namespace FtpAdminClient
                 }
             }
             treeView.EndUpdate();
+            selectNode(rootNode);
         }
         internal void selectNode(Node relatedNode)
         {
-            treeView.SelectedNode = relatedNode;
+            if (treeView.SelectedNode != relatedNode)
+                treeView.SelectedNode = relatedNode;
+            else
+                relatedNode.doSelect();
         }
         internal void updateListView(List<string> colunmNameList, List<ListItem> itemList)
         {

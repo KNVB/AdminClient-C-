@@ -14,6 +14,7 @@ namespace FtpAdminClient
             base.init(token);
             addFTPServerItem = new AddFtpServerItem(token["addFTPServerItem"]);
             this.addFTPServerItem.relatedNode = this;
+            this.addFTPServerItem.adminServer = adminServer;
             uiManager.refreshFtpServerListNode(adminServer, this);
         }
         internal override void doSelect()
