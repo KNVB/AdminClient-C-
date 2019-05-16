@@ -51,7 +51,6 @@ namespace FtpAdminClient
             ftpUsersListNode = new FtpUserListNode(adminServer, uiManager, serverId);
             ftpUserGroupsListNode =new FtpUserGroupsListNode(adminServer, uiManager, serverId);
 
-
             ftpUsersListNode.init(token["ftpUsersListNode"]);
             ftpUserGroupsListNode.init(token["ftpUserGroupsListNode"]);
             ftpServerNetworkPropertiesNode.init(token["ftpServerNetworkPropertiesNode"]);

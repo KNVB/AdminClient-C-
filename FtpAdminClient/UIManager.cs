@@ -42,6 +42,14 @@ namespace FtpAdminClient
             adminServerManager.disconnectServer(key);
             refreshRootNode();
         }
+        internal void disConnectAdminServerWithConfirmMsg(string key)
+        {
+            DialogResult dialogResult = MessageBox.Show(getConfirmDisconnectFromAdminServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                disConnectAdminServer(key);
+            }
+        }
         private string getMessageText(string key)
         {
             return uiObjFactory.getMessageText(key);
@@ -84,6 +92,11 @@ namespace FtpAdminClient
                 refreshRootNode();
             }
         }
+        internal void popupEditFtpServerNetworkPropertiesForm(FtpServerNetworkPropertiesNode ftpServerNetworkPropertiesNode)
+        {
+            EditFtpServerNetworkPropertiesForm efsf = new EditFtpServerNetworkPropertiesForm(ftpServerNetworkPropertiesNode.adminServer, this, ftpServerNetworkPropertiesNode.serverId);
+            DialogResult dialogresult = efsf.ShowDialog();
+        }
         public void popupMessageBox(string message)
         {
             MessageBox.Show(message, getMessageLabel(), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -91,18 +104,33 @@ namespace FtpAdminClient
         internal void refreshFtpServerListNode(AdminServer adminServer, FtpServerListNode ftpServerListNode)
         {
             SortedDictionary<string, FtpServerInfo> ftpServerList = adminServer.getFTPServerList();
+            ToolStripMenuItem startServerItem,stopServerItem,deleteServerItem;
             ftpServerListNode.Nodes.Clear();
             foreach (string serverId in ftpServerList.Keys)
             {
                 FtpServerNode ftpServerNode = new FtpServerNode(adminServer, this, serverId);
                 FtpServerInfo fI = ftpServerList[serverId];
                 ftpServerNode.init(uiObjFactory.getObj("ftpServerNode"));
-                foreach (string key in ftpServerNode.toolStripItemList.Keys)
+                startServerItem = ftpServerNode.toolStripItemList["StartFTPServer"].ToObject<ToolStripMenuItem>();
+                stopServerItem= ftpServerNode.toolStripItemList["StopFTPServer"].ToObject<ToolStripMenuItem>();
+
+                if (fI.status== FtpServerStatus.STARTED)
                 {
-                    ToolStripMenuItem tSI = ftpServerNode.toolStripItemList[key].ToObject<ToolStripMenuItem>();
-                    tSI.Click += (sender, e) => MessageBox.Show(fI.serverId);
-                    ftpServerNode.ContextMenuStrip.Items.Add(tSI);
+                    startServerItem.Enabled = false;
+                    stopServerItem.Click += (sender, e) => MessageBox.Show(fI.serverId);
                 }
+                else
+                {
+                    stopServerItem.Enabled = false;
+                    startServerItem.Click += (sender, e) => MessageBox.Show(fI.serverId);
+                }
+                deleteServerItem = ftpServerNode.toolStripItemList["DelFTPServer"].ToObject<ToolStripMenuItem>();
+                deleteServerItem.Click += (sender, e) => MessageBox.Show(fI.serverId);
+
+                ftpServerNode.ContextMenuStrip.Items.Add(startServerItem);
+                ftpServerNode.ContextMenuStrip.Items.Add(stopServerItem);
+                ftpServerNode.ContextMenuStrip.Items.Add(deleteServerItem);
+
                 ftpServerNode.ContextMenuStrip.ImageList = imageList;
                 ftpServerNode.Text = fI.description;
                 ftpServerNode.Name = serverId;
@@ -125,7 +153,7 @@ namespace FtpAdminClient
                 foreach (string id in adminServerNode.toolStripItemList.Keys)
                 {
                     ToolStripMenuItem tSI = adminServerNode.toolStripItemList[id].ToObject<ToolStripMenuItem>();
-                    tSI.Click += (sender, e) => disConnectAdminServer(adminServer.serverName + ":" + adminServer.portNo);
+                    tSI.Click += (sender, e) => disConnectAdminServerWithConfirmMsg(adminServer.serverName + ":" + adminServer.portNo);
                     adminServerNode.ContextMenuStrip.Items.Add(tSI);
                 }
                 adminServerNode.ContextMenuStrip.ImageList = imageList;
@@ -142,10 +170,8 @@ namespace FtpAdminClient
         }
         internal void selectNode(Node relatedNode)
         {
-            if (treeView.SelectedNode != relatedNode)
-                treeView.SelectedNode = relatedNode;
-            else
-                relatedNode.doSelect();
+            treeView.SelectedNode = null;
+            treeView.SelectedNode = relatedNode;
         }
         internal void updateListView(List<string> colunmNameList, List<ListItem> itemList)
         {
@@ -231,6 +257,10 @@ namespace FtpAdminClient
         public string getMissingFTPServerDescMsg()
         {
             return getMessageText("MissingFTPServerDesc");
+        }
+        public string getTheFtpServerNetworkPropertiesSaveSuccess()
+        {
+            return getMessageText("TheFtpServerNetworkPropertiesSaveSuccess");
         }
         //-----------------------Get Message Text End-------------------------------
         //-----------------------Get Label Start-------------------------------------

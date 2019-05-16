@@ -34,6 +34,14 @@ namespace FtpAdminClient
             Node n = ((Node)e.Node);
             n.doSelect();
         }
+        private void Panel1Tree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Panel1Tree.SelectedNode == e.Node)
+            {
+                Panel1Tree.SelectedNode = null;
+                Panel1Tree.SelectedNode = e.Node;
+            }
+        }
         private void settingList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListItem listItem = (ListItem)settingList.SelectedItems[0];

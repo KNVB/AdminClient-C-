@@ -22,7 +22,6 @@ namespace FtpAdminClient
             this.adminServer = adminServer;
             this.uiManager = uiManager;
             InitializeComponent();
-            
             label1.Text = uiManager.getFtpServerDescLabel();
             label2.Text = uiManager.getFtpServerBindingAddressLabel();
             label3.Text = uiManager.getControlPortDefault21Label();
@@ -31,7 +30,7 @@ namespace FtpAdminClient
 
             List<string> ipList = adminServer.getIPAddressList();
             ItemObject listItem = new ItemObject();
-            listItem.Text= "("+ uiManager.getAllIPAddressLabel() + ")";
+            listItem.Text = "(" + uiManager.getAllIPAddressLabel() + ")";
             listItem.Value = "*";
             ipAddressList.Items.Add(listItem);
             foreach (var ip in ipList)
@@ -51,7 +50,6 @@ namespace FtpAdminClient
             supportPassiveMode.Items.Insert(1, listItem);
             supportPassiveMode.SelectedIndex = 0; //default not support passive mode
             cancelButton.Text = uiManager.getCancelButtonLabel();
-            
         }
         private void NetworkPropertiesForm_Load(object sender, EventArgs e)
         {

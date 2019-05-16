@@ -111,7 +111,7 @@ namespace FtpAdminClient
             this.Panel1Tree.Size = new System.Drawing.Size(132, 233);
             this.Panel1Tree.TabIndex = 0;
             this.Panel1Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Panel1Tree_AfterSelect);
-           // this.Panel1Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
+            this.Panel1Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Panel1Tree_NodeMouseClick);
             // 
             // imageList1
             // 

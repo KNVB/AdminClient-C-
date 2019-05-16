@@ -63,6 +63,7 @@ namespace FtpAdminClient
             {
                 Cursor.Current = Cursors.WaitCursor;
                 ftpServerInfo = new FtpServerInfo();
+                ftpServerInfo.serverId = this.serverId;
                 ftpServerInfo.description = serverDesc.Text;
                 ftpServerInfo.controlPort = controlPortNo;
                 ftpServerInfo.bindingAddresses = bindingAddressList;
@@ -75,16 +76,16 @@ namespace FtpAdminClient
                 }
                 try
                 {
-                    ServerResponse response = adminServer.saveFtpServerNetworkProperties(ftpServerInfo, this.serverId);
+                    ServerResponse response = adminServer.saveFtpServerNetworkProperties(ftpServerInfo);
                     switch (response.responseCode)
                     {
                         case 0:
-                            uiManager.popupMessageBox("FTP Server network properties are saved successfully.");
+                            uiManager.popupMessageBox(uiManager.getTheFtpServerNetworkPropertiesSaveSuccess());
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
                         case 1:
-                            uiManager.popupAlertBox("Some of the specified address and port combination is/are not available.");
+                            uiManager.popupAlertBox(uiManager.getAddressOrPortNotAvailableMsg());
                             break;
                     }
                 }

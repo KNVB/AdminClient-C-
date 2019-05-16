@@ -13,5 +13,6 @@
     "MissingAdminUserName": "Please enter the admin. user name.",
     "MissingAdminUserPassword": "Please enter the admin. user password.",
     "MissingBindingAddress": "Please select at least one binding address.",
-    "MissingFTPServerDesc": "Please enter the FTP server description."
+    "MissingFTPServerDesc": "Please enter the FTP server description.",
+    "TheFtpServerNetworkPropertiesSaveSuccess":"FTP Server network properties are saved successfully."
 }
