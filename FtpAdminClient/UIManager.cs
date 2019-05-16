@@ -16,8 +16,6 @@ namespace FtpAdminClient
         private TreeView treeView;
         private UIObjFactory uiObjFactory = null;
 
-
-
         internal UIManager(MainForm mainForm)
         {
             adminServerManager = new AdminServerManager();
@@ -31,11 +29,20 @@ namespace FtpAdminClient
             mainForm.addToolStripMenuItem.Text = getAddLabel();
             mainForm.exitToolStripMenuItem.Text = getExitLabel();
         }
-
-
+        
         internal void close()
         {
             adminServerManager.disconnectAllAdminServer();
+        }
+        internal void deleteFtpServer(AdminServer adminServer, FtpServerListNode ftpServerListNode,FtpServerInfo fI)
+        {
+            DialogResult dialogResult = MessageBox.Show(getConfirmDelFTPServerMsg(), getConfirmLabel(), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ServerResponse response = adminServer.deleteFtpServer(fI.serverId);
+                if (response.responseCode == 0)
+                    refreshFtpServerListNode(adminServer, ftpServerListNode);
+            }
         }
         internal void disConnectAdminServer(string key)
         {
@@ -125,7 +132,7 @@ namespace FtpAdminClient
                     startServerItem.Click += (sender, e) => MessageBox.Show(fI.serverId);
                 }
                 deleteServerItem = ftpServerNode.toolStripItemList["DelFTPServer"].ToObject<ToolStripMenuItem>();
-                deleteServerItem.Click += (sender, e) => MessageBox.Show(fI.serverId);
+                deleteServerItem.Click += (sender, e) => deleteFtpServer(adminServer, ftpServerListNode, fI);
 
                 ftpServerNode.ContextMenuStrip.Items.Add(startServerItem);
                 ftpServerNode.ContextMenuStrip.Items.Add(stopServerItem);

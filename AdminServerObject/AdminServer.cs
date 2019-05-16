@@ -92,6 +92,31 @@ namespace AdminServerObject
             }
             return result;
         }
+        public ServerResponse deleteFtpServer(string serverId)
+        {
+            errorMessage = "";
+            Request request = new Request();
+            ServerResponse response = null;
+            request.action = "DelFTPServer";
+            request.ObjectMap["ftpServerId"] = serverId;
+            _websocket.Send(messageCoder.aesEncode(jss.Serialize(request)));
+            _messageReceivedEvent.WaitOne();
+            if (String.IsNullOrEmpty(errorMessage))
+            {
+                response = jss.Deserialize<ServerResponse>(jss.Serialize(serverResponse));
+                if (response.responseCode == 0)
+                {
+                    ftpServerList.Remove(serverId);
+                }
+            }
+            else
+            {
+                disConnect();
+                websocketException = new Exception("An exception occurs when deleting ftp server instance.");
+                throw websocketException;
+            }
+            return response;
+        }
         public void disConnect()
         {
             if (_websocket.State == WebSocketState.Open)
@@ -153,7 +178,7 @@ namespace AdminServerObject
             errorMessage = "";
             Request request = new Request();
             ServerResponse response = null;
-            request.action = "SaveFtpServerNetworkProperties";
+            request.action = "SaveFTPServerNetworkProperties";
             List<string> bindingAddresses = new List<string>();
             foreach (string address in ftpServerInfo.bindingAddresses)
             {
