@@ -77,6 +77,34 @@ namespace FtpAdminClient
             treeView.Nodes.Add(rootNode);
             treeView.EndUpdate();
         }
+        internal string passivePortRangeToString(List<String> portRanges)
+        {
+            string result="";
+            int startPort, endPort;
+            string[] temp;
+            foreach(string portRange in portRanges)
+            {
+                temp = portRange.Split('-');
+                startPort = Convert.ToInt32(temp[0]);
+                endPort = Convert.ToInt32(temp[1]);
+                if (startPort == endPort)
+                    result += startPort + ",";
+                else
+                    result += portRange + ",";
+            }
+            result = result.Substring(0, result.Length-1);
+            return result;
+        }
+        internal List<string> passivePortRangeToList(string portRanges)
+        {
+            List<string> result = new List<string>();
+            string[] temp=portRanges.Split(',');
+            foreach (string portRange in temp)
+            {
+                result.Add(portRange);   
+            }            
+            return result;
+        }
         internal void popupAddFtpServerDiaglog(AdminServer adminServer,FtpServerListNode ftpServerListNode)
         {
             AddFtpForm addFtpForm = new AddFtpForm(adminServer, this);

@@ -29,7 +29,7 @@ namespace FtpAdminClient
                 serverDesc.ForeColor = Color.Black;
                 if (ftpServerInfo.passiveModeEnabled)
                 {
-                    passiveModePortRange.Text = ftpServerInfo.passiveModePortRange;
+                    passiveModePortRange.Text = uiManager.passivePortRangeToString(ftpServerInfo.passiveModePortRange);
                     passiveModePortRangeLabel.Visible = true;
                     passiveModePortRange.Visible = true;
                 }
@@ -72,7 +72,7 @@ namespace FtpAdminClient
                 else
                 {
                     ftpServerInfo.passiveModeEnabled = true;
-                    ftpServerInfo.passiveModePortRange = passiveModePortRange.Text;
+                    ftpServerInfo.passiveModePortRange = uiManager.passivePortRangeToList(passiveModePortRange.Text);
                 }
                 try
                 {

@@ -28,7 +28,7 @@ namespace FtpAdminClient
                 else
                 {
                     ftpServerInfo.passiveModeEnabled = true;
-                    ftpServerInfo.passiveModePortRange = passiveModePortRange.Text;
+                    ftpServerInfo.passiveModePortRange = uiManager.passivePortRangeToList(passiveModePortRange.Text);
                 }
                 try
                 {
